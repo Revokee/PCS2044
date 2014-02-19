@@ -27,8 +27,7 @@ public class ListActivity extends Activity {
 		
 		// Initialize UI elements
 		listPedidos = (ListView) findViewById(R.id.listView1);
-		
-		
+				
 		// Link UI elements to actions in code	
 		
 			
