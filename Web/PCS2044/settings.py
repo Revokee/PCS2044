@@ -1,6 +1,6 @@
 # Django settings for PCS2044 project.
 import os
-PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+CURRENT_PATH = os.getcwd() 
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -111,7 +111,7 @@ ROOT_URLCONF = 'PCS2044.urls'
 WSGI_APPLICATION = 'PCS2044.wsgi.application'
 
 TEMPLATE_DIRS = (
-    PROJECT_PATH + '/templates/',
+    CURRENT_PATH + '/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
