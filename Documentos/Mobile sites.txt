@@ -1,0 +1,3 @@
+Site de API de localização
+http://developer.android.com/google/play-services/location.html
+
