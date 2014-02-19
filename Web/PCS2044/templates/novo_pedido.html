@@ -9,7 +9,7 @@
 				</div>
 			</div> 
 				<div class="portlet-body form">
-					<form method="POST" action="/novo_pedido/" class="horizontal" >
+					<form method="POST" action="/novo_pedido/" class="horizontal" >{%csrf_token%}
 						<div class="form-body">
 							{%for field in create_order_form%}
 								<div class="form-group">

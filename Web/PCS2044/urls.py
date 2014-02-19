@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^novo_pedido/','orderGrouping.views.create_order'),
+    url(r'^pedidos/','orderGrouping.views.orders'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
     # url(r'^PCS2044/', include('PCS2044.foo.urls')),

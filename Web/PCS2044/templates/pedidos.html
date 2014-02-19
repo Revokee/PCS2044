@@ -1,5 +1,10 @@
-<html>
-	<head>
-		<title>Pedidos</title>
-	</head>
-</html>
+{% extends "base.html" %}
+{% load extra_order %}
+	{% block content %}
+		{%for order in orders%}
+			<p>id: {{order.id}}</p>
+			<p>Latitude:{{order.latitude}}</p>
+		{%empty%}
+			<h1>Lista Vazia Dammit</h1>
+		{%endfor%}
+	{%endblock%}
