@@ -2,9 +2,11 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^novo_pedido/','orderGrouping.views.create_order'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
     # url(r'^PCS2044/', include('PCS2044.foo.urls')),
@@ -14,4 +16,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^novo_pedido/','orderGrouping.views.create_order'),
 )

@@ -68,10 +68,11 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/PCS2044/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    CURRENT_PATH + '/PCS2044/static',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -111,7 +112,7 @@ ROOT_URLCONF = 'PCS2044.urls'
 WSGI_APPLICATION = 'PCS2044.wsgi.application'
 
 TEMPLATE_DIRS = (
-    CURRENT_PATH + '/templates/',
+    CURRENT_PATH + '/PCS2044/templates/',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
