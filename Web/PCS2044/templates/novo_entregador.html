@@ -5,7 +5,7 @@
             <div class="col-md-12">
                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                <h3 class="page-title">
-                  Pedidos <small>novo</small>
+                  Entregador <small>novo</small>
                </h3>
                <ul class="page-breadcrumb breadcrumb">
                   <li>
@@ -14,10 +14,10 @@
                      <i class="icon-angle-right"></i>
                   </li>
                   <li>
-                     <a href="/pedidos">Pedidos</a>
+                     <a href="/entregadores">Entregadores</a>
                      <i class="icon-angle-right"></i>
                   </li>
-                  <li><a href="#">Cadastrar Pedido</a></li>
+                  <li><a href="#">Cadastrar Entregador</a></li>
                </ul>
                <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -26,13 +26,13 @@
 		<div class="portlet box red">
 			<div class="portlet-title">
 				<div class="caption">
-					Cadastrar Pedido
+					Cadastrar Entregador
 				</div>
 			</div> 
 				<div class="portlet-body form">
-					<form method="POST" action="/pedidos/novo" class="horizontal" >{%csrf_token%}
+					<form method="POST" action="/entregadores/novo" class="horizontal" >{%csrf_token%}
 						<div class="form-body">
-							{%for field in create_order_form%}
+							{%for field in create_deliver_form%}
 								<div class="form-group">
 									</br><!--:before-->
 									<label class="col-md-3 control-label">

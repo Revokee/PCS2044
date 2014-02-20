@@ -6,8 +6,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^novo_pedido/','orderGrouping.views.create_order'),
-    url(r'^pedidos/','orderGrouping.views.orders'),
+    #URLS de Entregadores
+    url(r'^entregadores/novo','deliverDetails.views.create_deliver'),
+    url(r'^entregadores','deliverDetails.views.index'),
+    
+    #URLS de Pedidos
+    url(r'^pedidos/novo','orderGrouping.views.create_order'),
+    url(r'^pedidos/','orderGrouping.views.index'),
     url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'orderGrouping.views.delete_order'),
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     #url(r'', 'staticPages.views.home'),

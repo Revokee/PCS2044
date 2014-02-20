@@ -31,6 +31,6 @@ def delete_order(request, order_id):
 
 
 #Funcao para listar todos os pedidos
-def orders(request):
+def index(request):
 	orders = Order.objects.values()
 	return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))

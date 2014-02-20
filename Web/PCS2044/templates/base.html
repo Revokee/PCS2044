@@ -1,4 +1,5 @@
  <!DOCTYPE html>
+ {% load my_delivers_menu %}
  <html>
     <head>
 	 <meta charset="utf-8" />
@@ -55,10 +56,38 @@
                </a>
                <ul class="sub-menu">
                   <li>
-                     <a href="/novo_pedido">Cadastrar</a>
+                     <a href="/pedidos/novos">Cadastrar</a>
                   </li>
                   <li>
                      <a href="/pedidos">Visualizar Todos</a>
+                  </li>
+               </ul>
+            </li>
+            <li class="">
+               <a class="active" href="javascript:;">
+               <i class="icon-user"></i> 
+               <span class="title">Entregadores</span>
+               <span class="arrow"></span>
+               </a>
+               <ul class="sub-menu" style="display: none;">
+                  <li>
+                     <a href="/entregadores/novo">
+                     Cadastrar
+                     </a>
+                  </li>
+                  <li>
+                     <a href="/entregadores">
+                     Visualizar Todos
+                     </a>
+                  </li>
+                  <li>
+                     <a href="javascript:;">
+                     Meus Entregadores
+                     <span class="arrow"></span>
+                     </a>
+                     <ul class="sub-menu">
+                        {% my_delivers %}
+                     </ul>
                   </li>
                </ul>
             </li>
