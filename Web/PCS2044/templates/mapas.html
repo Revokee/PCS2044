@@ -29,7 +29,7 @@
                <!-- BEGIN BASIC PORTLET-->
                <div class="portlet solid blue">
                   <div class="portlet-title">
-                     <div class="caption"><i class="icon-reorder"></i>Basic</div>
+                     <div class="caption"><i class="icon-reorder"></i>Localizacao do Entregador X</div>
                      <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
                         <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -38,7 +38,7 @@
                      </div>
                   </div>
                   <div class="portlet-body">
-                     <div id="gmap_basic" class="gmaps"></div>
+                     <div id="map-canvas" class="gmaps"></div>
                   </div>
                </div>
                <!-- END BASIC PORTLET-->
@@ -46,4 +46,28 @@
          </div>
          <!-- END PAGE CONTENT-->
 		<img src="/PCS2044/static/img/avatar3.jpg"/>
+
+      <script type="text/javascript"
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm7rYia73cSfqcl5bBtRsk9fjU-E8B5ak&sensor=false">
+      </script>
+      
+      <script type="text/javascript">
+         function initialize() {
+            var myLatlng = new google.maps.LatLng(-23.57327,-46.638878);
+            var mapOptions = {
+               zoom: 16,
+               center: myLatlng
+            }
+  
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var marker = new google.maps.Marker({
+               position: myLatlng,
+               map: map,
+               title: 'Entregador Aqui!'
+            });
+         }
+
+google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
 	{%endblock%}
