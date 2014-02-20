@@ -16,18 +16,21 @@ def create_order(request):
 	else:
 		create_order_form = CreateOrderForm(request.POST)
 		if create_order_form.is_valid():
-			#order.pizzas_number = instance.pizzas_number
-			#pizzas_number = create_order_form.cleaned_data['pizzas_number']
-			#latitude = create_order_form.cleaned_data['latitude']
-			#longitude = create_order_form.cleaned_data['longitude']
-			#order = Order(pizzas_number = pizzas_number, longitude=longitude, latitude=latitude)
 			new_order = create_order_form.save()
 			messages.success(request, 'Pedido Cadastrado com sucesso')
 			return HttpResponseRedirect('/pedidos/')
 		messages.info(request, 'Formulario Nao OK')
 		return render_to_response('novo_pedido.html', locals(), context_instance=RequestContext(request))
 
+#Funcao para demover um pedido
+def delete_order(request, order_id):
+	order = Order.objects.get(pk=order_id)
+	order.delete()
+	messages.warning(request,'Pedido Deletado com sucesso')
+	return HttpResponseRedirect('/pedidos/')
 
+
+#Funcao para listar todos os pedidos
 def orders(request):
 	orders = Order.objects.values()
 	return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))

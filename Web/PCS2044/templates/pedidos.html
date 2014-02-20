@@ -1,10 +1,75 @@
 {% extends "base.html" %}
 {% load extra_order %}
 	{% block content %}
-		{%for order in orders%}
-			<p>id: {{order.id}}</p>
-			<p>Latitude:{{order.latitude}}</p>
-		{%empty%}
-			<h1>Lista Vazia Dammit</h1>
-		{%endfor%}
+	<div class="row">
+	    <div class="col-md-12">
+	       <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+	       <h3 class="page-title">
+	          Pedidos <small>cadastrados</small>
+	       </h3>
+	       <ul class="page-breadcrumb breadcrumb">
+	          <li>
+	             <i class="icon-home"></i>
+	             <a href="/">Home</a> 
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li>
+	             <a href="/pedidos">Pedidos</a>
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li><a href="#">Cadastrados</a></li>
+	       </ul>
+	       {%if messages%}
+            {%for message in messages%}
+                <div  class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %}
+         {% endif %}
+	       <!-- END PAGE TITLE & BREADCRUMB-->
+	    </div>
+	 </div>
+     <div class="row">
+        <div class="col-md-12">
+           <!-- BEGIN SAMPLE TABLE PORTLET-->
+           <div class="portlet box purple">
+              <div class="portlet-title">
+                 <div class="caption"><i class="icon-comments"></i>Pedidos</div>
+              </div>
+              <div class="portlet-body">
+                 <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                    <thead>
+                       <tr>
+                          <th>#</th>
+                          <th>Qte.</th>
+                          <th>Latitude</th>
+                          <th>Longitude</th>
+                          <th>Status</th>
+                          <th></th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    	{%for order in orders%}
+                       		<tr>
+                          		<td>{{order.id}}</td>
+                          		<td>{{order.pizzas_number}}</td>
+		                        <td>{{order.latitude}}</td>
+		                        <td>{{order.longitude}}</td>
+		              	    	<td><span class="label label-sm label-success">Approved</span></td>
+		              	    	<td><a href="/deletar_pedido/{{order.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
+		                	</tr>
+                       {%empty%}
+	                       <tr>
+	                          <td>Nao</td>
+	                          <td>ha</td>
+	                          <td>dados</td>
+	                          <td><span class="label label-sm label-danger">Blocked</span></td>
+	                       </tr>
+                       {%endfor%}
+                    </tbody>
+                    </table>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
 	{%endblock%}

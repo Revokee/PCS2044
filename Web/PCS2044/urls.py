@@ -8,6 +8,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^novo_pedido/','orderGrouping.views.create_order'),
     url(r'^pedidos/','orderGrouping.views.orders'),
+    url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'orderGrouping.views.delete_order'),
+    url(r'^', include('staticPages.urls', namespace="staticPages")),
+    #url(r'', 'staticPages.views.home'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
     # url(r'^PCS2044/', include('PCS2044.foo.urls')),
