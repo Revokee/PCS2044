@@ -6,3 +6,8 @@ register = template.Library()
 def my_delivers():
 	delivers = Deliver.objects.values()
 	return {'delivers':delivers}
+
+@register.inclusion_tag('meus_entregadores_local.html')
+def my_delivers_local():
+	delivers = Deliver.objects.values()
+	return {'delivers':delivers}

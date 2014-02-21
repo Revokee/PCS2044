@@ -22,7 +22,7 @@ def create_order(request):
 		messages.info(request, 'Formulario Nao OK')
 		return render_to_response('novo_pedido.html', locals(), context_instance=RequestContext(request))
 
-#Funcao para demover um pedido
+#Funcao para remover um pedido
 def delete_order(request, order_id):
 	order = Order.objects.get(pk=order_id)
 	order.delete()

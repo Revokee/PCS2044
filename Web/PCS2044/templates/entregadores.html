@@ -45,6 +45,8 @@
                           <th>Latitude</th>
                           <th>Longitude</th>
                           <th>Atualizado em</th>
+                          <th></th>
+                          <th></th>
                        </tr>
                     </thead>
                     <tbody>
@@ -56,6 +58,8 @@
 		                      <td>{{deliver.latitude}}</td>
 		                      <td>{{deliver.longitude}}</td>
                           <td>{{deliver.updated_at}}</td>
+                          <td><a href="/entregadores/editar/{{deliver.id}}" class="btn btn-sm yellow"><i class="icon-edit"></i> Editar</a></td>
+                          <td><a href="/entregadores/deletar/{{deliver.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
 		                	   </tr>
                       {%empty%}
 	                       <tr>

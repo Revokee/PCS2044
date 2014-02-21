@@ -50,12 +50,12 @@
                     <tbody>
                     	{%for order in orders%}
                        		<tr>
-                          		<td>{{order.id}}</td>
-                          		<td>{{order.pizzas_number}}</td>
+                            <td>{{order.id}}</td>
+                            <td>{{order.pizzas_number}}</td>
 		                        <td>{{order.latitude}}</td>
 		                        <td>{{order.longitude}}</td>
-		              	    	<td><span class="label label-sm label-success">Approved</span></td>
-		              	    	<td><a href="/deletar_pedido/{{order.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
+		              	    	  <td><span class="label label-sm label-success">Approved</span></td>
+		              	    	  <td><a href="/deletar_pedido/{{order.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
 		                	</tr>
                        {%empty%}
 	                       <tr>

@@ -11,3 +11,8 @@ class CreateDeliverForm(forms.ModelForm):
 		super(CreateDeliverForm, self).__init__(*args, **kwargs)
 		self.fields['name'].label = 'Nome do Entregador'
 		self.fields['pizzaria_id'].label = 'ID da Pizzaria'
+
+class EditDeliverForm(forms.ModelForm):
+	class Meta:
+		model = Deliver
+		fields = ('latitude','longitude')
