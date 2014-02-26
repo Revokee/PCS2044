@@ -23,8 +23,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		// Initialize UI elements
-		//final Button routeBtn = (Button) findViewById(R.id.buttonRoute);
 		final Button listBtn = (Button) findViewById(R.id.buttonList);
+		final Button routeBtn = (Button) findViewById(R.id.buttonRoute);
 		
 		// Link UI elements to actions in code	
 		listBtn.setOnClickListener(new Button.OnClickListener() {			
@@ -33,7 +33,14 @@ public class MainActivity extends Activity {
 				startListActivity();				
 			}		
 			
-		});		
+		});
+		
+		routeBtn.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startRouteActivity();
+			}
+		});
 		
 	}
 	
@@ -57,14 +64,16 @@ public class MainActivity extends Activity {
 	}
 	
 	//Start the RouteActivity
-	/*
+	
 	private void startRouteActivity() {
 		try {
+			Intent routeIntent = new Intent(this, RouteActivity.class);
+			startActivity(routeIntent);
 			
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
 		}
 	}
-	*/
+	
 	
 }
