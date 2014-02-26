@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^entregadores/$','deliverDetails.views.index'),
     
     #URLS de Pedidos
-    url(r'^pedidos/novo/$','orderGrouping.views.create_order'),
+    url(r'^pedidos/novo$','orderGrouping.views.create_order'),
     url(r'^pedidos/$','orderGrouping.views.index'),
     url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'orderGrouping.views.delete_order'),
     url(r'^', include('staticPages.urls', namespace="staticPages")),

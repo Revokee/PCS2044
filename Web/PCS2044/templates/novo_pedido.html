@@ -30,7 +30,7 @@
 				</div>
 			</div> 
 				<div class="portlet-body form">
-					<form method="POST" action="/pedidos/novo" class="horizontal" >{%csrf_token%}
+					<form method="POST" action="/pedidos/novo" class="horizontal" >
 						<div class="form-body">
 							{%for field in create_order_form%}
 								<div class="form-group">
