@@ -5,33 +5,33 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.template import Context, loader
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from deliverDetails.forms import *
-from deliverDetails.models import *
+from funcionario.forms import *
+from funcionario.models import *
 
 #Funcao para criar um novo entregador
-def create_deliver(request):
+def create_funcionario(request):
 	if request.method=='GET':
-		create_deliver_form = CreateDeliverForm()
+		create_funcionario_form = CreateFuncionarioForm()
 		return render_to_response('novo_entregador.html', locals(), context_instance=RequestContext(request))
 	else:
-		create_deliver_form = CreateDeliverForm(request.POST)
-		if create_deliver_form.is_valid():
-			new_deliver = create_deliver_form.save()
+		create_funcionario_form = CreateFuncionarioForm(request.POST)
+		if create_funcionario_form.is_valid():
+			new_funcionario = create_funcionario_form.save()
 			messages.success(request, 'Entregador Cadastrado com sucesso')
 			return HttpResponseRedirect('/entregadores/')
 		messages.info(request, 'Formulario Nao OK')
 		return render_to_response('novo_entregador.html', locals(), context_instance=RequestContext(request))
 
 #Funcao para editar a posicao de um entregador
-def edit_deliver(request, deliver_id):
-	deliver = Deliver.objects.get(id=deliver_id)
+def edit_Funcionario(request, funcionario_id):
+	funcionario = Funcionario.objects.get(id=funcionario_id)
 	if request.method=='GET':
-		edit_deliver_form = EditDeliverForm(instance=deliver)
+		edit_funcionario_form = EditFuncionarioForm(instance=funcionario)
 		return render_to_response('editar_entregador.html', locals(),context_instance=RequestContext(request)) 
 	elif request.method=='POST':
-		edit_deliver_form = EditDeliverForm(request.POST,instance=deliver)
-		if edit_deliver_form.is_valid():
-			edit_deliver_form.save()
+		edit_funcionario_form = EditFuncionarioForm(request.POST,instance=funcionario)
+		if edit_funcionario_form.is_valid():
+			edit_funcionario_form.save()
 			messages.success(request,'Entregador atualizado com sucesso')
 			return HttpResponseRedirect('/entregadores/')
 		else:
@@ -41,17 +41,17 @@ def edit_deliver(request, deliver_id):
 
 #Funcao para listar todos os entregadores
 def index(request):
-	delivers = Deliver.objects.values()
+	funcionarios = Funcionario.objects.values()
 	return render_to_response('entregadores.html', locals(), context_instance=RequestContext(request))
 
 #Funcao para localizar um entregador no mapa
-def deliver_detail(request, deliver_id):
-	deliver = Deliver.objects.get(id=deliver_id)
+def Funcionario_detail(request, Funcionario_id):
+	funcionario = Funcionario.objects.get(id=funcionario_id)
 	return render_to_response('mapas.html', locals(),context_instance=RequestContext(request))
 
 #Funcao para remover um entregador
-def delete_deliver(request, deliver_id):
-	deliver = Deliver.objects.get(pk=deliver_id)
-	deliver.delete()
+def delete_Funcionario(request, funcionario_id):
+	funcionario = Funcionario.objects.get(pk=funcionario_id)
+	funcionario.delete()
 	messages.warning(request,'Entregador Deletado com sucesso')
-	return HttpResponseRedirect('/entregadores/')
+	return HttpResponseRedirect('/entregadores/')# Create your views here.
