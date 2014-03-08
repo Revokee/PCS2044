@@ -1,18 +1,18 @@
 from django import forms
 from django.forms import ModelForm
-from deliverDetails.models import *
+from funcionario.models import *
 
-class CreateDeliverForm(forms.ModelForm):
+class CreateFuncionarioForm(forms.ModelForm):
 	class Meta:
-		model = Deliver
+		model = Funcionario
 		fields = ('pizzaria_id', 'name')
 
 	def __init__(self, *args, **kwargs):
-		super(CreateDeliverForm, self).__init__(*args, **kwargs)
+		super(CreateFuncionarioForm, self).__init__(*args, **kwargs)
 		self.fields['name'].label = 'Nome do Entregador'
 		self.fields['pizzaria_id'].label = 'ID da Pizzaria'
 
-class EditDeliverForm(forms.ModelForm):
+class EditFuncionarioForm(forms.ModelForm):
 	class Meta:
-		model = Deliver
+		model = Funcionario
 		fields = ('latitude','longitude')

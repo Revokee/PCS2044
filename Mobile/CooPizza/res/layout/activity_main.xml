@@ -6,10 +6,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     
     tools:context=".MainActivity" >
     
-
     <Button
         android:id="@+id/buttonList"
         android:layout_width="wrap_content"
@@ -17,6 +17,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:background="@android:drawable/btn_default"
         android:text="@string/show_list" />
 
     <Button
@@ -27,6 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="23dp"
+        android:background="@android:drawable/btn_default"
         android:text="@string/show_route" />
 
 </RelativeLayout>

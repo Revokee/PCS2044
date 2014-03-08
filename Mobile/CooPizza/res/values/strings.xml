@@ -7,5 +7,6 @@
     <string name="show_route">Rota de Entrega</string>
     <string name="show_list">Lista de Entregas</string>
     <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_route">CooPizza</string>
 
 </resources>

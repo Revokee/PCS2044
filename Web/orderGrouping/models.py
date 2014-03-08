@@ -2,10 +2,12 @@ from django.db import models
 
 # Model que representa um pedido de um cliente
 class Order(models.Model):
-	pizzas_number = models.IntegerField(default=1)
+	rua = models.CharField(max_length=1024)
+	numero = models.IntegerField(default=1)
+	cidade =  models.CharField(max_length=1024)
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
-
+	pizzaria_id = models.IntegerField(default=1)
 	#def __unicode__(self):
 	#	return self.str(latitude)
     #pizzaria = models.ForeignKey('users.Pizzaria')

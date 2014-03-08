@@ -1,11 +1,13 @@
 from django import forms
 from django.contrib import messages
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, loader
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from orderGrouping.forms import *
 from orderGrouping.models import *
+from pygeocoder import Geocoder
 
 from pyvirtualdisplay import Display
 from selenium import webdriver
@@ -84,6 +86,7 @@ class OrderManager():
 		return route
 
 # Funcao para cadastrar um pedido
+@csrf_exempt 
 def create_order(request):
 	if request.method=='GET':
 		create_order_form = CreateOrderForm()
@@ -91,7 +94,13 @@ def create_order(request):
 	else:
 		create_order_form = CreateOrderForm(request.POST)
 		if create_order_form.is_valid():
-			new_order = create_order_form.save()
+			new_order = create_order_form.save(commit=False)
+			address = ''+create_order_form.cleaned_data['rua']+','+str(create_order_form.cleaned_data['numero'])+','+create_order_form.cleaned_data['cidade']
+			results = Geocoder.geocode(address)
+			latitude, longitude = results[0].coordinates
+			new_order.latitude = latitude
+			new_order.longitude = longitude
+			new_order.save()
 			messages.success(request, 'Pedido Cadastrado com sucesso')
 			return HttpResponseRedirect('/pedidos/')
 		messages.info(request, 'Formulario Nao OK')
