@@ -5,8 +5,8 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.template import Context, loader
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from funcionario.forms import *
-from funcionario.models import *
+from rh.forms import *
+from rh.models import *
 
 #Funcao para criar um novo entregador
 def create_funcionario(request):
@@ -23,7 +23,7 @@ def create_funcionario(request):
 		return render_to_response('novo_entregador.html', locals(), context_instance=RequestContext(request))
 
 #Funcao para editar a posicao de um entregador
-def edit_Funcionario(request, funcionario_id):
+def edit_funcionario(request, funcionario_id):
 	funcionario = Funcionario.objects.get(id=funcionario_id)
 	if request.method=='GET':
 		edit_funcionario_form = EditFuncionarioForm(instance=funcionario)
@@ -45,12 +45,12 @@ def index(request):
 	return render_to_response('entregadores.html', locals(), context_instance=RequestContext(request))
 
 #Funcao para localizar um entregador no mapa
-def Funcionario_detail(request, Funcionario_id):
+def funcionario_detail(request, Funcionario_id):
 	funcionario = Funcionario.objects.get(id=funcionario_id)
 	return render_to_response('mapas.html', locals(),context_instance=RequestContext(request))
 
 #Funcao para remover um entregador
-def delete_Funcionario(request, funcionario_id):
+def delete_funcionario(request, funcionario_id):
 	funcionario = Funcionario.objects.get(pk=funcionario_id)
 	funcionario.delete()
 	messages.warning(request,'Entregador Deletado com sucesso')

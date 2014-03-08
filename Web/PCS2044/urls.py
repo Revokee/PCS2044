@@ -7,16 +7,16 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     #URLS de Entregadores
-    url(r'^entregadores/novo$','deliverDetails.views.create_deliver'),
-    url(r'^entregadores/editar/(?P<deliver_id>[0-9]+)/$','deliverDetails.views.edit_deliver'),
-    url(r'^entregadores/mapa/(?P<deliver_id>[0-9]+)/$','deliverDetails.views.deliver_detail'),
-    url(r'^entregadores/deletar/(?P<deliver_id>[0-9]+)/$','deliverDetails.views.delete_deliver'),
-    url(r'^entregadores/$','deliverDetails.views.index'),
+    url(r'^entregadores/novo$','rh.views.create_funcionario'),
+    url(r'^entregadores/editar/(?P<entregador_id>[0-9]+)/$','rh.views.edit_funcionario'),
+    url(r'^entregadores/mapa/(?P<entregador_id>[0-9]+)/$','rh.views.funcionario_detail'),
+    url(r'^entregadores/deletar/(?P<entregador_id>[0-9]+)/$','rh.views.delete_funcionario'),
+    url(r'^entregadores/$','rh.views.index'),
     
     #URLS de Pedidos
-    url(r'^pedidos/novo$','orderGrouping.views.create_order'),
-    url(r'^pedidos/$','orderGrouping.views.index'),
-    url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'orderGrouping.views.delete_order'),
+    url(r'^pedidos/novo$','pedido.views.create_pedido'),
+    url(r'^pedidos/$','pedido.views.index'),
+    url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     #url(r'', 'staticPages.views.home'),
     # Examples:

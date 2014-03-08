@@ -1,16 +1,19 @@
 from django import forms
 from django.forms import ModelForm
-from funcionario.models import *
+from rh.models import *
 
 class CreateFuncionarioForm(forms.ModelForm):
 	class Meta:
 		model = Funcionario
-		fields = ('pizzaria_id', 'name')
+		fields = ('nome', 'idade', 'sexo', 'cargo', 'telefone')
 
 	def __init__(self, *args, **kwargs):
 		super(CreateFuncionarioForm, self).__init__(*args, **kwargs)
-		self.fields['name'].label = 'Nome do Entregador'
-		self.fields['pizzaria_id'].label = 'ID da Pizzaria'
+		self.fields['nome'].label = 'Nome do Entregador'
+		self.fields['idade'].label = 'Idade'
+		self.fields['sexo'].label = 'Sexo'
+		self.fields['cargo'].label = 'Entregador'
+		self.fields['telefone'].label = 'Entregador'
 
 class EditFuncionarioForm(forms.ModelForm):
 	class Meta:
