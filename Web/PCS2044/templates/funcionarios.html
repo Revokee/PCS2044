@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load extra_order %}
+	{% block content %}
+	<div class="row">
+	    <div class="col-md-12">
+	       <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+	       <h3 class="page-title">
+	          Funcionários <small>cadastrados</small>
+	       </h3>
+	       <ul class="page-breadcrumb breadcrumb">
+	          <li>
+	             <i class="icon-home"></i>
+	             <a href="/">Home</a> 
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li>
+	             <a href="/funcionarios">Funcionarios</a>
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li><a href="#">Cadastrados</a></li>
+	       </ul>
+	       {%if messages%}
+            {%for message in messages%}
+                <div  class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %}
+         {% endif %}
+	       <!-- END PAGE TITLE & BREADCRUMB-->
+	    </div>
+	 </div>
+     <div class="row">
+        <div class="col-md-12">
+           <!-- BEGIN SAMPLE TABLE PORTLET-->
+           <div class="portlet box purple">
+              <div class="portlet-title">
+                 <div class="caption"><i class="icon-comments"></i>Funcionários</div>
+              </div>
+              <div class="portlet-body">
+                 <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                    <thead>
+                       <tr>
+                          <th>#</th>
+                          <th>Pizzaria</th>
+                          <th>Nome</th>
+                          <th>Latitude</th>
+                          <th>Longitude</th>
+                          <th>Atualizado em</th>
+                          <th></th>
+                          <th></th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                      {%for funcionario in funcionarios%}
+                        <tr>
+                          <td>{{funcionario.id}}</td>
+                          <td>{{funcionario.pizzaria_id}}</td>
+                          <td>{{funcionario.nome}}</td>
+		                      <td>{{funcionario.latitude}}</td>
+		                      <td>{{funcionario.longitude}}</td>
+                          <td>{{funcionario.atualizado_em}}</td>
+                          <td><a href="/funcionarios/editar/{{deliver.id}}" class="btn btn-sm yellow"><i class="icon-edit"></i> Editar</a></td>
+                          <td><a href="/funcionarios/deletar/{{deliver.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
+		                	   </tr>
+                      {%empty%}
+	                       <tr>
+	                         <td>Nao</td>
+	                         <td>ha</td>
+	                         <td>dados</td>
+	                         <td><span class="label label-sm label-danger">Blocked</span></td>
+	                       </tr>
+                      {%endfor%}
+                    </tbody>
+                    </table>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+	{%endblock%}

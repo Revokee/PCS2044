@@ -4,10 +4,10 @@ register = template.Library()
 
 @register.inclusion_tag('meus_entregadores_menu.html')
 def my_delivers():
-	delivers = Funcionario.objects.values()
-	return {'delivers':delivers}
+	funcionarios = Funcionario.objects.values()
+	return {'funcionarios':funcionarios}
 
 @register.inclusion_tag('meus_entregadores_local.html')
 def my_delivers_local():
-	delivers = Funcionario.objects.values()
-	return {'delivers':delivers}
+	funcionarios = Funcionario.objects.values()
+	return {'funcionarios':funcionarios}

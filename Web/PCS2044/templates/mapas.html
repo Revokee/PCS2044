@@ -29,7 +29,7 @@
                <!-- BEGIN BASIC PORTLET-->
                <div class="portlet solid blue">
                   <div class="portlet-title">
-                     <div class="caption"><i class="icon-reorder"></i>Localizacao do {{deliver.name}} as {{deliver.updated_at|date:'G:i'}}</div>
+                     <div class="caption"><i class="icon-reorder"></i>Localização do {{funcionario.nome}} às {{funcionario.atualizado_em|date:'G:i'}}</div>
                      <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
                         <a href="javascript:;" class="reload"></a>
@@ -50,7 +50,7 @@
       
       <script type="text/javascript">
          function initialize() {
-            var myLatlng = new google.maps.LatLng({{deliver.latitude}},{{deliver.longitude}});
+            var myLatlng = new google.maps.LatLng({{funcionario.latitude}},{{funcionario.longitude}});
             var mapOptions = {
                zoom: 16,
                center: myLatlng
