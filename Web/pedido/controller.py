@@ -35,7 +35,8 @@ class OrderController:
 
 	def bestRoute(self, addresses):
 		for i in range(len(addresses)):
-			addresses[i] = unidecode(unicode(addresses[i], 'utf-8'))
+			#addresses[i] = unidecode(unicode(addresses[i], 'utf-8'))
+			addresses[i] = unidecode(addresses[i])
 		download = True
 		if download:	
 			display = Display(visible=0, size=(800, 600))

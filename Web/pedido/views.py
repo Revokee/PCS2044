@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from pedido.forms import *
 from pedido.models import *
 from pygeocoder import Geocoder
+import pedido.controller as Ordenar
 
 # Funcao para cadastrar um pedido
 @csrf_exempt 
@@ -40,5 +41,15 @@ def delete_pedido(request, pedido_id):
 
 #Funcao para listar todos os pedidos
 def index(request):
-	orders = Order.objects.values()
+	pedidos = Order.objects.values()
 	return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))
+
+
+#Funcao de planejamento de pedidos
+def planejamento(request):
+	pedidos = Order.objects.values()
+	addresses = [pedido["rua"] + ", " + str(pedido["numero"]) + ", " + pedido["cidade"] for pedido in pedidos]
+	#Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
+	rotas = Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
+	return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
+	

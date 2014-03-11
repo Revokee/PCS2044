@@ -16,6 +16,8 @@ class Order(models.Model):
 	rua = models.CharField(max_length=1024)
 	numero = models.IntegerField(default=1)
 	cidade =  models.CharField(max_length=1024)
+	#Adicionar para verificar se o pedido foi entregue
+	#entregue = models.BooleanField()
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
 	pizzaria_id = models.IntegerField(default=1)
