@@ -51,5 +51,10 @@ def planejamento(request):
 	addresses = [pedido["rua"] + ", " + str(pedido["numero"]) + ", " + pedido["cidade"] for pedido in pedidos]
 	#Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
 	rotas = Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
+	for address in rotas["addresses"]:
+		results = Geocoder.geocode(address)
+		latitude, longitude = results[0].coordinates
+		address = {"address": address, "latitude":latitude,"longitude":latitude}
+	#print rotas["addresses"]
 	return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
 	
