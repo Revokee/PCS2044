@@ -43,25 +43,32 @@
 			<p>Não há rota a ser planejada</p>
 		{%endfor%}
 
-
+	<script type="text/javascript"
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm7rYia73cSfqcl5bBtRsk9fjU-E8B5ak&sensor=false">
+     </script>
 
 	<script type="text/javascript">
          function initialize() {        	
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-         	{%for latitude,longitude in rotas.addresses%}
-         		var myLatlng{{forloop.counter}} = new google.maps.LatLng(latitude,longitude);
+         	{%for plano in planejamento%}
+         		var myLatlng{{forloop.counter}} = new google.maps.LatLng({{plano.1}},{{plano.2}});
          		var img{{forloop.counter}} = '/PCS2044/static/img/google/iconr{{forloop.counter}}.png';
-         		var marker = new google.maps.Marker({
-               		position: myLatlng{{forloop.counter}},
-               		map: map
-               		icon: img{{forloop.counter}}
-            	});
          	{%endfor%}
 
          	var mapOptions = {
-               zoom: 12,
+               zoom: 14,
                center: myLatlng1
-            }    
+            }
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            {%for plano in planejamento%}
+            	var marker = new google.maps.Marker({
+               		position: myLatlng{{forloop.counter}},
+               		icon: img{{forloop.counter}},
+               		map: map
+               	 });
+            {%endfor%}
+    
          }
 
 		google.maps.event.addDomListener(window, 'load', initialize);

@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     #URLS de Pedidos
     url(r'^pedidos/novo$','pedido.views.create_pedido'),
     url(r'^pedidos/$','pedido.views.index'),
-    url(r'^deletar_pedido/(?P<order_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
+    url(r'^deletar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
     url(r'^planejamento/$','pedido.views.planejamento'),
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     #url(r'', 'staticPages.views.home'),
