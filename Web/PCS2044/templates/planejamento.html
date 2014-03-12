@@ -37,11 +37,11 @@
 
 		{%for address in rotas.addresses%}
 			<p>{{ forloop.counter }} - {{address}}</p>
-		{{rotas.time}}
-		{{rotas.distance}}
 		{%empty%}
 			<p>Não há rota a ser planejada</p>
 		{%endfor%}
+		{{rotas.time}}
+		{{rotas.distance}}
 
 	<script type="text/javascript"
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm7rYia73cSfqcl5bBtRsk9fjU-E8B5ak&sensor=false">
