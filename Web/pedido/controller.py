@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from unidecode import unidecode
 import lxml.html
+import math # math needed for sqrt
 
 class OrderController:
 	def __init__(self, home):
@@ -73,3 +74,8 @@ class OrderController:
 			driver.quit()
 			display.stop()
 		return route
+	
+	def clustering(self, addresses):
+		#Clustering:recebe uma lista de endereços no formato de pares (latitude,longitude) e 			#gera uma lista de listas com os pares (latitude, longitude) que podem ser agrupados
+		#e serem envolvidos em uma mesma entrega
+		return addresses
