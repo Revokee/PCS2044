@@ -10,6 +10,9 @@ from pedido.models import *
 from pygeocoder import Geocoder
 import pedido.controller as Ordenar
 
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import permission_required, login_required
+
 # Funcao para cadastrar um pedido
 @csrf_exempt 
 def create_pedido(request):
@@ -39,10 +42,17 @@ def delete_pedido(request, pedido_id):
 	return HttpResponseRedirect('/pedidos/')
 
 
+
 #Funcao para listar todos os pedidos
 def index(request):
-	pedidos = Order.objects.values()
-	return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))
+	if request.user.is_authenticated():
+		if request.user.has_perm('pedido.change_order'):
+			pedidos = Order.objects.values()
+			return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))
+		else:
+			return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+	else:
+		return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
 
 #Funcao de planejamento de pedidos

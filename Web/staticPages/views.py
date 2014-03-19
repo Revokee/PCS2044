@@ -10,5 +10,11 @@ def index(request):
 def mapas(request):
 	return render_to_response('mapas.html', locals(), context_instance=RequestContext(request))
 
-def login(request):
+def login_failed(request):
 	return render_to_response('login.html', locals(), context_instance=RequestContext(request))
+
+def login_account_disabled(request):
+	return render_to_response('login.html', locals(), context_instance=RequestContext(request))
+
+def lock(request):
+	return render_to_response('lock.html', locals(), context_instance=RequestContext(request))

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load extra_order %}
 	{% block content %}
-		<h1> Home page</h1>
+		<h1> Home</h1>
+		{% if user.is_authenticated %}
+		    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+		{% else %}
+		    <p>Welcome, new user. Please log in.</p>
+		{% endif %}
 	{%endblock%}

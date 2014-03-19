@@ -18,8 +18,10 @@ urlpatterns = patterns('',
     url(r'^pedidos/$','pedido.views.index'),
     url(r'^deletar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
     url(r'^planejamento/$','pedido.views.planejamento'),
+    #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
-    url(r'', 'staticPages.views.login'),
+    #URLS login
+    url(r'^login', 'login.views.login'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
     # url(r'^PCS2044/', include('PCS2044.foo.urls')),
