@@ -10,70 +10,94 @@ import android.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class GetLocationActivity extends FragmentActivity {
-	
-/**
-	private final static int
-    CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-	
-	// Define a DialogFragment that displays the error dialog
-    public static class ErrorDialogFragment extends DialogFragment {
-        // Global field to contain the error dialog
-        private Dialog mDialog;
-        // Default constructor. Sets the dialog field to null
-        public ErrorDialogFragment() {
-            super();
-            mDialog = null;
-        }
-        // Set the dialog to display
-        public void setDialog(Dialog dialog) {
-            mDialog = dialog;
-        }
-        // Return a Dialog to the DialogFragment.
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return mDialog;
-        }
-    }
-        
+public class GetLocationActivity extends Activity {
+
+	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
     
-    private boolean servicesConnected() {
-        // Check that Google Play services is available
-        int resultCode =
-                GooglePlayServicesUtil.
-                        isGooglePlayServicesAvailable(this);
-        // If Google Play services is available
-        if (ConnectionResult.SUCCESS == resultCode) {
-            // In debug mode, log the status
-            Log.d("Location Updates",
-                    "Google Play services is available.");
-            // Continue
-            return true;
-        // Google Play services was not available for some reason
-        } else {
-            // Get the error code
-            int errorCode = connectionResult.getErrorCode();
-            // Get the error dialog from Google Play services
-            Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-                    errorCode,
-                    this,
-                    CONNECTION_FAILURE_RESOLUTION_REQUEST);
+    protected LocationManager locationManager;
+    
+    protected Button retrieveLocationButton;
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_get_location);
 
-            // If Google Play services can provide an error dialog
-            if (errorDialog != null) {
-                // Create a new DialogFragment for the error dialog
-                ErrorDialogFragment errorFragment =
-                        new ErrorDialogFragment();
-                // Set the dialog in the DialogFragment
-                errorFragment.setDialog(errorDialog);
-                // Show the error dialog in the DialogFragment
-                errorFragment.show(getSupportFragmentManager(),
-                        "Location Updates");
+        retrieveLocationButton = (Button) findViewById(R.id.retriveLocationButton);
+        
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 
+                MINIMUM_TIME_BETWEEN_UPDATES, 
+                MINIMUM_DISTANCE_CHANGE_FOR_UPDATES,
+                new MyLocationListener()
+        );
+        
+    retrieveLocationButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCurrentLocation();
             }
+    });        
+        
+    }    
+
+    protected void showCurrentLocation() {
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        if (location != null) {
+            String message = String.format(
+                    "Current Location \n Longitude: %1$s \n Latitude: %2$s",
+                    location.getLongitude(), location.getLatitude()
+            );
+            Toast.makeText(GetLocationActivity.this, message,
+                    Toast.LENGTH_LONG).show();
         }
+
+    }   
+
+    private class MyLocationListener implements LocationListener {
+
+        public void onLocationChanged(Location location) {
+            String message = String.format(
+                    "New Location \n Longitude: %1$s \n Latitude: %2$s",
+                    location.getLongitude(), location.getLatitude()
+            );
+            Toast.makeText(GetLocationActivity.this, message, Toast.LENGTH_LONG).show();
+        }
+
+        public void onStatusChanged(String s, int i, Bundle b) {
+            Toast.makeText(GetLocationActivity.this, "Provider status changed",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        public void onProviderDisabled(String s) {
+            Toast.makeText(GetLocationActivity.this,
+                    "Provider disabled by the user. GPS turned off",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        public void onProviderEnabled(String s) {
+            Toast.makeText(GetLocationActivity.this,
+                    "Provider enabled by the user. GPS turned on",
+                    Toast.LENGTH_LONG).show();
+        }
+
     }
-**/
+	
 }
 
 	
