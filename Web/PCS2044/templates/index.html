@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% load extra_order %}
 	{% block content %}
+	{%if messages%}
+        	{%for message in messages%}
+            <div  class="alert alert-{{message.tags}}">	
+            	{{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
 		<h1> Home</h1>
 		{% if user.is_authenticated %}
-		    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+		    <p>Ola, {{ user.username }}.</p>
 		{% else %}
-		    <p>Welcome, new user. Please log in.</p>
+		    <p>Bem vindo, novo usuario. Faca login.</p>
 		{% endif %}
 	{%endblock%}

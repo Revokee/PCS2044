@@ -1,0 +1,69 @@
+{% extends "index_financeiro.html" %}
+		
+		{% load staticfiles %}
+
+		{% block stylesheets %}
+			{{ block.super }}
+
+			<link href="{% static "css/financeiro/entradas_list.css" %}" rel="stylesheet">
+		
+		{% endblock %}
+
+		{% block title %}
+				Entradas Financeiras - Pizza5
+		{% endblock %}
+
+		{% block content %}
+
+		<div class="above-table">
+	    
+	    <div class="element title">
+		    <h2>Entradas</h2>
+		  </div>  
+		  
+		  <div class="element">
+		    <!-- add -->
+		    <a type="button" href="{% url 'entrada_create' %}" class="btn btn-lg btn-success btn-add">
+		    	Adicionar
+		    </a>
+		  </div>
+    
+    </div>
+
+    <!-- tabela de entradas -->
+    <table class="table table-striped table-hover">
+    	<tr>
+    		<th>Id</th>
+    		<th>Valor</th>
+    		<th>Data</th>
+    		<th>Origem</th>
+    		<th>Descrição</th>
+    		<th>Responsável</th>
+    		<th></th>
+    	</tr>
+        
+      {% for entrada in lista_entradas %}
+      	<tr>
+        	<td>{{ entrada.id }}</td>
+        	<td>{{ entrada.valor }}</td>
+        	<td>{{ entrada.data_entrada }}</td>
+        	<td>{{ entrada.origem }}</td>
+        	<td>{{ entrada.descricao }}</td>
+        	<td>{{ entrada.responsavel.username }}</td>
+        	<td>
+        		<!-- edit -->
+        		<a type="button" class="btn btn-small btn-primary" href="{% url 'entrada_update' entrada.id %}">
+  					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+				<!-- delete -->
+        		<a type="button" class="btn btn-small btn-danger" href="{% url 'entrada_delete' entrada.id %}">
+  					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+        	</td>
+        </tr>	
+      {% endfor %}
+    
+    </table>
+
+    {% endblock %}
+

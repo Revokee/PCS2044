@@ -1,0 +1,67 @@
+{% extends "index_financeiro.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	Remover Entrada Financeira - Pizza5
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/financeiro/entrada_delete.css" %}">
+{% endblock %}
+
+{% block content %}
+	
+	<h1>Remover Entrada</h1>
+	<hr>
+
+	<p>Tem certeza que deseja remover essa Entrada ?</p>
+
+	<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Valor</p>
+				{{object.valor}}
+			</div>
+			<div class="field">
+				<p class="field-label">Data de Entrada</p>
+				{{object.data_entrada}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Origem</p>
+				{{object.origem}}
+			</div>	
+			<div class="field">
+				<p class="field-label">Responsável</p>
+				{{object.responsavel}}
+			</div>	
+		</div>
+		<div class="field-line">
+			<div class="field single-child">
+				<p class="field-label">Descrição</p>
+				{{object.descricao}}
+			</div>	
+		</div>
+
+	</div>	
+
+	<br>
+
+	<form method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+
+	</form>
+
+
+{% endblock %}

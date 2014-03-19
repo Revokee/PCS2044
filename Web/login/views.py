@@ -7,7 +7,7 @@ from django.template import Context, loader
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 
-from django.contrib.auth import authenticate, login as django_login
+from django.contrib.auth import authenticate, logout as django_logout, login as django_login
 
 @csrf_exempt
 def login(request):
@@ -21,11 +21,22 @@ def login(request):
 		if user is not None:
 			if user.is_active:
 				django_login(request, user)
-                		return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+				messages.success(request,'Bem vindo ao CooPizza!')
+				return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 				# Redirect to a success page.
 			else:
-                		return render_to_response('login_account_disabled.html', locals(), context_instance=RequestContext(request))
+				messages.warning(request, 'Conta desativada')
+				return render_to_response('login_account_disabled.html', locals(), context_instance=RequestContext(request))
 				# Return a 'disabled account' error message
 		else:
-                	return render_to_response('login_failed.html', locals(), context_instance=RequestContext(request))
+			messages.warning(request, 'Senha invalida')
+			return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 			# Return an 'invalid login' error message.
+
+def logout(request):
+	if request.user.is_authenticated():
+		django_logout(request)
+		messages.success(request,'Tchau!')
+		return render_to_response('login.html', locals(), context_instance=RequestContext(request))
+	else:
+		return render_to_response('index.html', locals(), context_instance=RequestContext(request))

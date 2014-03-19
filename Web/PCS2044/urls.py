@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+from tastypie.api import Api
+from api import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,8 +22,11 @@ urlpatterns = patterns('',
     url(r'^planejamento/$','pedido.views.planejamento'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
+    url(r'^', include('rh.urls')),
+    url(r'^', include('financeiro.urls')),
     #URLS login
     url(r'^login', 'login.views.login'),
+    url(r'^logout', 'login.views.logout'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
     # url(r'^PCS2044/', include('PCS2044.foo.urls')),

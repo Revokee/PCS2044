@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from forms import *
 from django import forms
+from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib import messages
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import Context, loader
@@ -61,3 +62,96 @@ def delete_funcionario(request, funcionario_id):
 	funcionario.delete()
 	messages.warning(request,'Funcionário Deletado com sucesso')
 	return HttpResponseRedirect('/funcionarios/')# Create your views here.
+
+
+#Funcoes do Grupo do Rodrigo
+
+# CRUD funcionario
+class FuncionarioList(ListView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_list.html'
+    context_object_name = 'lista_funcionarios'
+
+class FuncionarioCreate(CreateView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_form.html'
+    fields = ['nome','sexo','endereco','telefone']
+
+class FuncionarioUpdate(UpdateView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_form.html'
+    fields = ['endereco','telefone']
+
+# CRUD cargo
+class CargoList(ListView):
+    model = Cargo
+    template_name = 'cargos/cargos_list.html'
+    context_object_name = 'lista_cargos'
+
+class CargoCreate(CreateView):
+    model = Cargo
+    template_name = 'cargos/cargos_form.html'
+    fields = ['nome_cargo','nivel','salario']
+
+class CargoUpdate(UpdateView):
+    model = Cargo
+    template_name = 'cargos/cargos_form.html'
+    fields = ['nome_cargo','nivel','salario']
+
+# CRUD contrato
+class ContratoList(ListView):
+    model = Contrato
+    template_name = 'contratos/contratos_list.html'
+    context_object_name = 'lista_contratos'
+
+class ContratoCreate(CreateView):
+    model = Contrato
+    template_name = 'contratos/contratos_form.html'
+    fields = ['funcionario','cargo','data_contratacao','turno',
+    'nome_contratante','observacoes','status_contrato',
+    'data_demissao','motivo_demissao']
+
+class ContratoUpdate(UpdateView):
+    model = Contrato
+    template_name = 'contratos/contratos_form.html'
+    fields = ['funcionario','cargo','data_contratacao','turno',
+    'nome_contratante','observacoes','status_contrato',
+    'data_demissao','motivo_demissao']
+
+# CRUD ferias
+class FeriasList(ListView):
+    model = Ferias
+    template_name = 'ferias/ferias_list.html'
+    context_object_name = 'lista_ferias'
+
+class FeriasCreate(CreateView):
+    model = Ferias
+    template_name = 'ferias/ferias_form.html'
+    fields = ['funcionario','ano','data_inicio_ferias', 'numero_dias']
+
+class FeriasUpdate(UpdateView):
+    model = Ferias
+    template_name = 'ferias/ferias_form.html'
+    fields = ['ano','data_inicio_ferias', 'numero_dias']
+
+# CRUD licenca
+class LicencasList(ListView):
+    model = Licencas
+    template_name = 'licencas/licencas_list.html'
+    context_object_name = 'lista_licencas'
+
+class LicencasCreate(CreateView):
+    model = Licencas
+    template_name = 'licencas/licencas_form.html'
+    fields = ['funcionario','data_inicio_licenca','numero_dias', 'remunerado', 'motivo']
+
+class LicencasUpdate(UpdateView):
+    model = Licencas
+    template_name = 'licencas/licencas_form.html'
+    fields = ['data_inicio_licenca','numero_dias', 'remunerado', 'motivo']
+
+# CRUD historico
+class Historico_PagamentosList(ListView):
+    model = Historico_Pagamentos
+    template_name = 'historico_pagamentos_list.html'
+    context_object_name = 'lista_historico_pagamentos'

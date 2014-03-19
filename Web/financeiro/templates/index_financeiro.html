@@ -1,0 +1,26 @@
+{% extends "base_styled.html" %}
+
+{% block title %}Financeiro - Pizza5{% endblock %}
+
+{% block navbar_links %}
+<li><a href="{% url 'index' %}">Principal</a></li>
+<li class="active"><a href="{% url 'index_financeiro' %}">Financeiro</a></li>
+<li><a href="{% url 'index_rh' %}">RH</a></li>
+<li><a href="{% url 'index_estoque' %}">Estoque/Compras</a></li>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        {% block sidebar_links %}
+        <li><a href="{% url 'entrada_list' %}">Entradas</a></li>
+        <li class="disabled"><a href="">Saídas</a></li>
+        <li class="disabled"><a href="">Caixa</a></li>
+        {% endblock %}
+      </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Bem Vindo ao Financeiro</h1>
+{% endblock %}

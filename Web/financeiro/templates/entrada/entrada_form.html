@@ -1,0 +1,123 @@
+{% extends "index_financeiro.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/financeiro/entrada_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		
+	{% if form.instance.pk == None %}
+		Criar Entrada Financeiras - Pizza5
+	{% else %}
+		Editar Entrada Financeiras - Pizza5
+	{% endif %}
+
+{% endblock title %}
+
+
+{% block content %}
+	{% if form.instance.pk == None %}
+		<!-- create title -->
+		<h1>Nova Entrada</h1>
+	{% else %}
+		<!-- edit title -->
+		<h1>Editar Entrada</h1>
+	{% endif %}
+	
+	<hr>
+
+	
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.valor.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_entrada.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.valor.label}}</p>
+					{{form.valor|add_class:"form-input"}}	
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.data_entrada.label}}</p>
+					{{form.data_entrada|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.origem.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.responsavel.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.origem.label}}</p>
+					{{form.origem|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.responsavel.label}}</p>
+					{{form.responsavel|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.descricao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.descricao.label}}</p>
+					{{form.descricao|add_class:"form-textarea"}}
+				</div>
+			</div>
+			
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

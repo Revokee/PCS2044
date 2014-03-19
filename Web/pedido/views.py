@@ -28,6 +28,7 @@ def create_pedido(request):
 			latitude, longitude = results[0].coordinates
 			new_pedido.latitude = latitude
 			new_pedido.longitude = longitude
+			new_pedido.entregue = False
 			new_pedido.save()
 			messages.success(request, 'Pedido Cadastrado com sucesso')
 			return HttpResponseRedirect('/pedidos/')

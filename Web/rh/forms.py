@@ -5,7 +5,6 @@ from django.forms.models import inlineformset_factory
 from rh.models import *
 
 
-
 class CreateFuncionarioForm(forms.ModelForm):
 	class Meta:
 		model = Funcionario

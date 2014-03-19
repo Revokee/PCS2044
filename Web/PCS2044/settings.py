@@ -133,11 +133,15 @@ INSTALLED_APPS = (
     'address',
     'feedback',
     'pedido',
+    'tastypie', # RESTful api building
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 LOGIN_URL = '/login'
+
+# TastyPie settings
+TASTYPIE_DATETIME_FORMATTING = 'iso-8601-strict'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

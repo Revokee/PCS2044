@@ -1,0 +1,12 @@
+<html><head></head>
+<body>
+
+    <h2>Saldo por Mês</h2>
+    <ul>
+        {% for saldo_mes in lista_saldomes %}
+            <li>{{ saldo_mes }} : {{ saldo_mes.saldo }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
