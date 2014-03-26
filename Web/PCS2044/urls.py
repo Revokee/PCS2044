@@ -25,7 +25,8 @@ urlpatterns = patterns('',
     url(r'^', include('rh.urls')),
     url(r'^', include('financeiro.urls')),
     #URLS login
-    url(r'^login', 'login.views.login'),
+    #url(r'^login/(?P<data=>$)', 'login.views.login'),
+    url(r'^login$', 'login.views.login'),
     url(r'^logout', 'login.views.logout'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
