@@ -17,8 +17,11 @@ urlpatterns = patterns('',
     
     #URLS de Pedidos
     url(r'^pedidos/novo$','pedido.views.create_pedido'),
-    url(r'^pedidos/$','pedido.views.index'),
+    url(r'^pedidos.json$','pedido.json.pedidos'),
+    url(r'^pedidos','pedido.views.index'),
     url(r'^deletar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
+    url(r'^pagar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.pagar_pedido'),
+    url(r'^fechar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.fechar_pedido'),
     url(r'^planejamento/$','pedido.views.planejamento'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),

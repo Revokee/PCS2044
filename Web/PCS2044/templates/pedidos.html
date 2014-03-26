@@ -45,7 +45,10 @@
                           <th>Cidade</th>
                           <th>Latitude</th>
                           <th>Longitude</th>
-                          <th>Status</th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
                           <th></th>
                        </tr>
                     </thead>
@@ -58,9 +61,41 @@
                             <td>{{pedido.cidade}}</td>
 		                        <td>{{pedido.latitude}}</td>
 		                        <td>{{pedido.longitude}}</td>
-		              	    	  <td><span class="label label-sm label-success">Approved</span></td>
-		              	    	  <td><a href="/deletar_pedido/{{pedido.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar</a></td>
-		                	</tr>
+                            {%if pedido.entregue%}
+                              <td>
+                                <span class="label label-sm label-success">Entregue</span>
+                              </td>
+                              {%if pedido.pago%}
+                                <td>
+                                  <span class="label label-sm label-success">Pago</span>
+                                </td>
+                              {%else%}
+                                <td>
+                                  <span class="label label-sm label-danger">Pendente
+                                  </span>
+                                </td>
+                                <td>
+                                  <a href="/pagar_pedido/{{pedido.id}}" class="btn green btn-xs">
+                                    <i class=" icon-long-arrow-down"></i> Pagar
+                                  </a>
+                                </td>                                
+                              {%endif%}
+                              {%else%}
+                                <td>
+                                  <span class="label label-sm label-danger">Pendente
+                                  </span>
+                                </td>
+                                <td>
+                                  <a href="/fechar_pedido/{{pedido.id}}" class="btn green btn-xs">
+                                    <i class="icon-long-arrow-down"></i> Entregar
+                                  </a>
+                               </td>
+                                <td>
+                                  <a href="/deletar_pedido/{{pedido.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar
+                                  </a>
+                                </td>
+		              	    	  {%endif%}
+		                	 </tr>
                        {%empty%}
 	                       <tr>
 	                          <td>Nao</td>

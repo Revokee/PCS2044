@@ -2,9 +2,11 @@ from django.shortcuts import render_to_response, get_object_or_404, get_list_or_
 from django.template import Context, loader
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
+from pedido.models import *
 
 # Views Estaticas!
 def index(request):
+	pedidos = Order.objects.filter(entregue=False).count
 	return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 
 def mapas(request):

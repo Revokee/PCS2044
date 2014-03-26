@@ -19,6 +19,7 @@ class Order(models.Model):
 	complemento = models.CharField(max_length=1024)
 	#Adicionar para verificar se o pedido foi entregue
 	entregue = models.BooleanField()
+	pago = models.BooleanField()
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
 	pizzaria_id = models.IntegerField(default=1)

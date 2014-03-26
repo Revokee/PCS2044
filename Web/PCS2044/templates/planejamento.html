@@ -17,6 +17,13 @@
 	             <a href="#">Planejamento de Rota</a>
 	          </li>
 	       </ul>
+	       {%if messages%}
+           	{%for message in messages%}
+            	<div  class="alert alert-{{message.tags}}">
+            		{{ message }}
+            	</div>
+            {% endfor %}
+           {% endif %}
 	       <div class="portlet solid blue">
                   <div class="portlet-title">
                      <div class="caption"><i class="icon-reorder"></i>Melhor rota</div>

@@ -29,6 +29,7 @@ def create_pedido(request):
 			new_pedido.latitude = latitude
 			new_pedido.longitude = longitude
 			new_pedido.entregue = False
+			new_pedido.pago = False
 			new_pedido.save()
 			messages.success(request, 'Pedido Cadastrado com sucesso')
 			return HttpResponseRedirect('/pedidos/')
@@ -42,13 +43,27 @@ def delete_pedido(request, pedido_id):
 	messages.warning(request,'Pedido Deletado com sucesso')
 	return HttpResponseRedirect('/pedidos/')
 
+#Atualiza o pedido para entregue = True
+def fechar_pedido(request, pedido_id):
+	pedido = Order.objects.get(pk=pedido_id)
+	pedido.entregue = True
+	pedido.save()
+	messages.success(request, 'Pedido entregue')
+	return HttpResponseRedirect('/pedidos/')
 
+#Atualiza o pedido para pago = True
+def pagar_pedido(request, pedido_id):
+	pedido = Order.objects.get(pk=pedido_id)
+	pedido.pago = True
+	pedido.save()
+	messages.success(request, 'Pedido entregue')
+	return HttpResponseRedirect('/pedidos/')
 
 #Funcao para listar todos os pedidos
 def index(request):
 	if request.user.is_authenticated():
 		if request.user.has_perm('pedido.change_order'):
-			pedidos = Order.objects.values()
+			pedidos = Order.objects.values().order_by('-id')
 			return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))
 		else:
 			return render_to_response('index.html', locals(), context_instance=RequestContext(request))
@@ -59,13 +74,22 @@ def index(request):
 #Funcao de planejamento de pedidos
 def planejamento(request):
 	pedidos = Order.objects.values()
-	addresses = [pedido["rua"] + ", " + str(pedido["numero"]) + ", " + pedido["cidade"] for pedido in pedidos]
-	#Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
-	rotas = Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
-	planejamento = []
-	for address in rotas["addresses"]:
-		results = Geocoder.geocode(address)
-		latitude, longitude = results[0].coordinates
-		planejamento.append((address, latitude, longitude))
-	return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
-
+	entregas = []
+	addresses = []
+	for pedido in pedidos:
+		if pedido["entregue"]== False:
+			entregas.append(pedido)
+	if len(entregas) > 0:
+		for entrega in entregas:
+			addresses.append(entrega["rua"] + ", " + str(entrega["numero"]) + ", " + entrega["cidade"])
+		#Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
+		rotas = Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
+		planejamento = []
+		for address in rotas["addresses"]:
+			results = Geocoder.geocode(address)
+			latitude, longitude = results[0].coordinates
+			planejamento.append((address, latitude, longitude))
+		return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
+	else:
+		messages.warning(request, 'Nao ha entregas para serem feitas')
+		return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
