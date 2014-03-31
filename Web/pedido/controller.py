@@ -76,34 +76,24 @@ class OrderController:
 			driver.quit()
 			display.stop()
 		return route
-	
-	def clustering(self, addresses):
-		'''Clustering:recebe uma lista de endereços no formato de pares (latitude,longitude) e 			gera uma lista de listas com os pares (latitude, longitude) que podem ser agrupados
-		e serem envolvidos em uma mesma entrega
-		Input: 
-		Planejamento: entre dois pontos temos a hipotenusa.'''
- 		for address in addresses:
-			latitude = address[0]
-			longitude = address[1]
+	def calculaDistancia(self, lat1,lat2, long1,long2):
+		i = 0
 		# Conversao de latitude e longitude de coordenadas esféricas para radianos
-    			degrees_to_radians = math.pi/180.0
-        	# phi = 90 - latitude
-	        	phi1 = (90.0 - lat1)*degrees_to_radians
-			phi2 = (90.0 - lat2)*degrees_to_radians
-	        # theta = longitude
-    			theta1 = long1*degrees_to_radians
-    			theta2 = long2*degrees_to_radians
-        
-    		# Cálculo da distância esférico a partir das coordenadas esféricas
-    		# Para duas localizações em coordenadas esféricas 
- 		# (1, theta, phi) e (1, theta, phi)
-    		# cosine( arc length ) = 
-    		#    sin phi sin phi' cos(theta-theta') + cos phi cos phi'
-    		# distance = rho * arc length
-		        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
-        	   math.cos(phi1)*math.cos(phi2))
- 		        arc = math.acos( cos )
+		degrees_to_radians = math.pi/180.0
+		# phi = 90 - latitude
+		phi1 = (90.0 - lat1)*degrees_to_radians
+		phi2 = (90.0 - lat2)*degrees_to_radians
+		# theta = longitude
+		theta1 = long1*degrees_to_radians
+		theta2 = long2*degrees_to_radians
+		cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1-theta2)+math.cos(phi1)*math.cos(phi2))
+		arc = math.acos(cos)		
+		return arc*6373
 
-    		# Multiplica-se o arco pelo raio da terra em km para obter a distancia nesta unidade de medida 
+	def clustering(self, lats, longs):
+		distancias = []
+		distancias.insert(1,self.calculaDistancia(lats[0],lats[1],longs[0],longs[1]))
+		return distancias
+    	# Multiplica-se o arco pelo raio da terra em km para obter a distancia nesta unidade de medida
 
-    		return arc*6373
+	

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+   <li>
+    <a href="#">Clustering</a>
+   </li>
+
+   <li>
+    	Pedidos
+   </li>
+
+  {%for pedido in pedidos%}
+         <p>{{pedido.latitude}}, {{pedido.longitude}}</p> 
+  {%endfor%}
+
+  <li>
+    	Clusters
+   </li>
+
+  {%for cluster in clusters%}
+            <p>{{cluster}}</p> 	
+  {%endfor%}
+{%endblock%}

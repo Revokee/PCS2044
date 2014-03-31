@@ -22,3 +22,4 @@ class Order(models.Model):
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
 	pizzaria_id = models.IntegerField(default=1)
+
