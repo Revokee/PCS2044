@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from unidecode import unidecode
 import lxml.html
+#Clustering
 import math # math needed for sqrt
 
 class OrderController:
@@ -60,7 +61,7 @@ class OrderController:
 		else:
 			page = open("testpage").read()
 		#print page
-		html = lxml.html.fromstring(page)
+		html = lxml.hr in longstml.fromstring(page)
 		route = {"time": None, "distance": None, "addresses": []}
 		for element in html.xpath('//div[@id="route-canvas"]//b'):
 			#print element.text
@@ -75,43 +76,41 @@ class OrderController:
 			driver.quit()
 			display.stop()
 		return route
-	
-	def clustering(self, addresses):
-		#Clustering:recebe uma lista de endereços no formato de pares (latitude,longitude) e 			#gera uma lista de listas com os pares (latitude, longitude) que podem ser agrupados
-		#e serem envolvidos em uma mesma entrega
-		#Recebe uma lista de endereços e a partir dessa lista de endereços,
-		#gera uma lista de listas de endereços 
-		#Verificar a possibilidade de utilizar culsteres utilizando alguma ferramenta 			#disponível (GoogleMaps...) para determinar os pontos de entrega próximos.
-		#Planejamento: entre dois pontos temos a hipotenusa.
- 		for address in addresses:
-			latitude = address[0]
-			longitude = address[1]
-			addresses[i] = unidecode(addresses[i])
-		download = True
-		# Conversao deConvert latitude and longitude to 
-	        # spherical coordinates in radians.
-    		degrees_to_radians = math.pi/180.0
-        
-   	        # phi = 90 - latitude
-	        phi1 = (90.0 - lat1)*degrees_to_radians
-		phi2 = (90.0 - lat2)*degrees_to_radians
-        
-	        # theta = longitude
-    		theta1 = long1*degrees_to_radians
-    		theta2 = long2*degrees_to_radians
-        
-    		# Cálculo da distância esférico a partir das coordenadas esféricas
-        
-    		# Para duas localizações em coordenadas esféricas 
- 		# (1, theta, phi) e (1, theta, phi)
-    		# cosine( arc length ) = 
-    		#    sin phi sin phi' cos(theta-theta') + cos phi cos phi'
-    		# distance = rho * arc length
-    
-	        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
-        	   math.cos(phi1)*math.cos(phi2))
- 	        arc = math.acos( cos )
 
-    		# Remember to multiply arc by the radius of the earth 
-    		# in your favorite set of units to get length.
-    		return arc*6373
+	def calculaDistancia(self, lat1,lat2, long1,long2):
+		i = 0
+		# Conversao de latitude e longitude de coordenadas esféricas para radianos
+		degrees_to_radians = math.pi/180.0
+		# phi = 90 - latitude
+		phi1 = (90.0 - lat1)*degrees_to_radians
+		phi2 = (90.0 - lat2)*degrees_to_radians
+		# theta = longitude
+		theta1 = long1*degrees_to_radians
+		theta2 = long2*degrees_to_radians
+		cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1-theta2)+math.cos(phi1)*math.cos(phi2))
+		arc = math.acos(cos)		
+		return arc*6373
+
+	def clustering(self, lats, longs):
+		raio = 3
+		qtEnd = len(lats)
+		i = 0
+		distancias = []
+		distanciasPorEnd = []
+		print qtEnd
+		while i < qtEnd:
+			j = 0
+			distancias = []
+			while j < qtEnd-1:
+				if i != j:
+					distancias.insert(j,self.calculaDistancia(lats[i],lats[j+1],longs[i],longs[j+1]))
+				else:
+					distancias.insert(j,0)
+				j=j+1
+			distanciasPorEnd.append(distancias)
+			i=i+1
+		return distanciasPorEnd
+    	# Multiplica-se o arco pelo raio da terra em km para obter a distancia nesta unidade de medida
+	
+
+	
