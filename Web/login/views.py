@@ -12,7 +12,6 @@ from django.contrib.auth import authenticate, logout as django_logout, login as 
 @csrf_exempt
 def login(request):
         if request.method=='GET':
-		nextUrl = request.GET.get('next', '/index')
                 return render_to_response('login.html', locals(), context_instance=RequestContext(request))
         else:
 		username = request.POST['username']
@@ -21,10 +20,9 @@ def login(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			if user.is_active:
-				nextUrl = request.GET.get('next', '/index')
 				django_login(request, user)
 				messages.success(request,'Bem vindo ao CooPizza!')
-				return render_to_response(nextUrl, locals(), context_instance=RequestContext(request))
+				return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 				# Redirect to a success page.
 			else:
 				messages.warning(request, 'Conta desativada')
