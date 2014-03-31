@@ -1,4 +1,6 @@
 *.sqlite3
 *.pyc
 *.swp
-*bin/classes/com/example/coopizza/*
+*CooPizza/bin*
+*CooPizza/.settings*
+*CooPizza/.classpath
