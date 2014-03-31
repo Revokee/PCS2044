@@ -61,7 +61,7 @@ class OrderController:
 		else:
 			page = open("testpage").read()
 		#print page
-		html = lxml.html.fromstring(page)
+		html = lxml.hr in longstml.fromstring(page)
 		route = {"time": None, "distance": None, "addresses": []}
 		for element in html.xpath('//div[@id="route-canvas"]//b'):
 			#print element.text
@@ -76,6 +76,7 @@ class OrderController:
 			driver.quit()
 			display.stop()
 		return route
+
 	def calculaDistancia(self, lat1,lat2, long1,long2):
 		i = 0
 		# Conversao de latitude e longitude de coordenadas esféricas para radianos
@@ -91,9 +92,25 @@ class OrderController:
 		return arc*6373
 
 	def clustering(self, lats, longs):
+		raio = 3
+		qtEnd = len(lats)
+		i = 0
 		distancias = []
-		distancias.insert(1,self.calculaDistancia(lats[0],lats[1],longs[0],longs[1]))
-		return distancias
+		distanciasPorEnd = []
+		print qtEnd
+		while i < qtEnd:
+			j = 0
+			distancias = []
+			while j < qtEnd-1:
+				if i != j:
+					distancias.insert(j,self.calculaDistancia(lats[i],lats[j+1],longs[i],longs[j+1]))
+				else:
+					distancias.insert(j,0)
+				j=j+1
+			distanciasPorEnd.append(distancias)
+			i=i+1
+		return distanciasPorEnd
     	# Multiplica-se o arco pelo raio da terra em km para obter a distancia nesta unidade de medida
+	
 
 	
