@@ -53,7 +53,8 @@ def index(request):
 		else:
 			return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 	else:
-		return render_to_response('login.html', locals(), context_instance=RequestContext(request))
+		return HttpResponseRedirect('/login?next=' + request.path)
+		#return render_to_response('login.html', locals(), context_instance=RequestContext(request))
 
 
 #Funcao de planejamento de pedidos
