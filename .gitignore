@@ -1,6 +1,7 @@
 *.sqlite3
 *.pyc
 *.swp
-*CooPizza/bin*
-*CooPizza/.settings*
-*CooPizza/.classpath
+Mobile/CooPizza/bin
+Mobile/CooPizza/gen
+Mobile/CooPizza/.settings
+Mobile/CooPizza/.classpath
