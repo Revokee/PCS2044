@@ -25,8 +25,9 @@ urlpatterns = patterns('',
     url(r'^planejamento/$','pedido.views.planejamento'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
-    url(r'^', include('rh.urls')),
-    url(r'^', include('financeiro.urls')),
+    url(r'^financeiro/', include('financeiro.urls')),
+    url(r'^rh/', include('rh.urls')),
+    
     #URLS login
     url(r'^login', 'login.views.login'),
     url(r'^logout', 'login.views.logout'),

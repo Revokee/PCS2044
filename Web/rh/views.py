@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
-from pizza5.rh.models import Funcionario
-from pizza5.rh.models import Cargo, Contrato, Ferias, Licencas, Historico_Pagamentos
+from rh.models import Funcionario
+from rh.models import Cargo, Contrato, Ferias, Licencas, Historico_Pagamentos
 from django.core.urlresolvers import reverse_lazy
 
 # CRUD funcionario

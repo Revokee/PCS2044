@@ -1,11 +1,11 @@
 from django.contrib import admin
-from pizza5.rh.models import Funcionario
-from pizza5.rh.models import Contrato
-from pizza5.rh.models import Cargo
-from pizza5.rh.models import Ferias
-from pizza5.rh.models import Licencas
-from pizza5.rh.models import Historico_Pagamentos
-"from pizza5.rh.models import Historico_Profissao"
+from rh.models import Funcionario
+from rh.models import Contrato
+from rh.models import Cargo
+from rh.models import Ferias
+from rh.models import Licencas
+from rh.models import Historico_Pagamentos
+"from rh.models import Historico_Profissao"
 
 admin.site.register(Funcionario)
 admin.site.register(Contrato)

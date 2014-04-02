@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.core.urlresolvers import reverse_lazy
-from pizza5.financeiro.models import Entrada, Saida, SaldoMes
+from financeiro.models import Entrada, Saida, SaldoMes
 from django.shortcuts import render
 
 import datetime

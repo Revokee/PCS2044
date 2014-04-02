@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from pizza5.estoque.models import Ingrediente, Inventario, ListaCompras, MedidaIngrediente
+from estoque.models import Ingrediente, Inventario, ListaCompras, MedidaIngrediente
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 

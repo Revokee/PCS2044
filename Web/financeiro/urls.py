@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, include, url
 from tastypie.api import Api
-from pizza5.api import *
-from pizza5.financeiro.views import *
+from api import *
+from financeiro.views import *
 from django.views.generic import TemplateView
-from pizza5.financeiro.api import *
+from financeiro.api import *
 
 # RESTful api
 api = Api(api_name='rest')

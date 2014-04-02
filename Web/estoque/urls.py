@@ -1,12 +1,12 @@
 from django.conf.urls import patterns, include, url
-from pizza5.estoque.views import IngredienteList, IngredienteCreate, IngredienteUpdate, IngredienteDelete 
-from pizza5.estoque.views import InventarioList, InventarioCreate, InventarioUpdate, InventarioDelete
-from pizza5.estoque.views import MedidaList, MedidaCreate, MedidaUpdate, MedidaDelete
-from pizza5.estoque.views import ListaComprasList, ListaComprasCreate
+from estoque.views import IngredienteList, IngredienteCreate, IngredienteUpdate, IngredienteDelete 
+from estoque.views import InventarioList, InventarioCreate, InventarioUpdate, InventarioDelete
+from estoque.views import MedidaList, MedidaCreate, MedidaUpdate, MedidaDelete
+from estoque.views import ListaComprasList, ListaComprasCreate
 from django.views.generic import TemplateView
 from tastypie.api import Api
-from pizza5.api import *
-from pizza5.estoque.api import *
+from api import *
+from estoque.api import *
 
 # RESTful api
 api = Api(api_name='rest')

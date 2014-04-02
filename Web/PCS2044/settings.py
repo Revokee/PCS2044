@@ -119,6 +119,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'widget_tweaks', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

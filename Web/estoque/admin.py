@@ -1,5 +1,5 @@
 from django.contrib import admin
-from pizza5.estoque.models import Ingrediente, MedidaIngrediente, Inventario, ListaCompras, HistoricoCompras
+from estoque.models import Ingrediente, MedidaIngrediente, Inventario, ListaCompras, HistoricoCompras
 
 # Register your models here.
 admin.site.register(Ingrediente)

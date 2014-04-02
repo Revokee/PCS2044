@@ -1,8 +1,8 @@
 # RESTful api for pizza5/financeiro 
 from tastypie import fields
 from tastypie.authorization import Authorization
-from pizza5.api import *
-from pizza5.financeiro.models import *
+from PCS2044.api import *
+from financeiro.models import *
 from django.contrib.auth.models import User
 
 # *******************
