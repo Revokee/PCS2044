@@ -1,67 +1,66 @@
 {% extends "index_financeiro.html" %}
 		
-		{% load staticfiles %}
+	{% load staticfiles %}
 
-		{% block stylesheets %}
-			{{ block.super }}
+	{% block stylesheets %}
+		{{ block.super }}
 
-			<link href="{% static "css/financeiro/entradas_list.css" %}" rel="stylesheet">
-		
-		{% endblock %}
+		<link href="{% static "css/financeiro/entradas_list.css" %}" rel="stylesheet">
+	
+	{% endblock %}
 
-		{% block title %}
-				Saídas Financeiras - Pizza5
-		{% endblock %}
+	{% block title %}
+			Saídas Financeiras - Pizza5
+	{% endblock %}
 
-		{% block content %}
+	{% block content %}
 
-		<div class="above-table">
-	    
-	    <div class="element title">
-		    <h2>Saídas</h2>
-		  </div>  
-		  
-		  <div class="element">
-		    <!-- add -->
-		    <a type="button" href="/financeiro/entrada/cria_saida" class="btn btn-lg btn-success btn-add">
-		    	Adicionar
-		    </a>
-		  </div>
+	<div class="above-table">
     
-    </div>
-
+    <div class="element title">
+	    <h2>Saídas</h2>
+	</div>  
+    <div class="portlet-body">
+        <div class="table-responsive">
     <!-- tabela de saidas -->
-    <table class="table table-striped table-hover">
-    	<tr>
-    		<th>Valor</th>
-    		<th>Data</th>
-    		<th>Destino</th>
-    		<th></th>
-    	</tr>
-        
-      {% for saida in lista_saidas %}
-      	<tr>
-        	<td>{{ saida.valor }}</td>
-        	<td>{{ saida.data_saida }}</td>
-        	<td>{{ saida.destino }}</td>
-        	<td>
-                <!-- detail -->
-                <a type="button" class="btn btn-small btn-info" href="{% url 'saida_detail' saida.id %}">
-                    <span class="glyphicon glyphicon-th-list"></span>
-                </a>
-        		<!-- edit -->
-        		<a type="button" class="btn btn-small btn-primary" href="{% url 'saida_update' saida.id %}">
-  					<span class="glyphicon glyphicon-pencil"></span>
-				</a>
-				<!-- delete -->
-        		<a type="button" class="btn btn-small btn-danger" href="{% url 'saida_delete' saida.id %}">
-  					<span class="glyphicon glyphicon-remove"></span>
-				</a>
-        	</td>
-        </tr>	
-      {% endfor %}
-    
-    </table>
-
-    {% endblock %}
+            <table class="table table-striped table-hover">
+            	<tr>
+            		<th>Valor</th>
+            		<th>Data</th>
+            		<th>Destino</th>
+            		<th></th>
+            	</tr>
+                
+              {% for saida in lista_saidas %}
+              	<tr>
+                	<td>{{ saida.valor }}</td>
+                	<td>{{ saida.data_saida }}</td>
+                	<td>{{ saida.destino }}</td>
+                	<td>
+                        <!-- detail -->
+                        <a type="button" class="btn btn-small btn-info" href="{% url 'saida_detail' saida.id %}">
+                            <span class="glyphicon glyphicon-th-list"></span>
+                        </a>
+                		<!-- edit -->
+                		<a type="button" class="btn btn-small btn-primary" href="{% url 'saida_update' saida.id %}">
+          					<span class="glyphicon glyphicon-pencil"></span>
+        				</a>
+        				<!-- delete -->
+                		<a type="button" class="btn btn-small btn-danger" href="{% url 'saida_delete' saida.id %}">
+          					<span class="glyphicon glyphicon-remove"></span>
+        				</a>
+                	</td>
+                </tr>	
+              {% endfor %}
+            
+            </table>
+        </div>
+        <div class="element">
+        <!-- add -->
+            <a type="button" href="/financeiro/saida/cria_saida" class="btn btn-lg btn-success btn-add">
+                Adicionar
+            </a>
+      </div>
+    </div>
+{% endblock %}
 

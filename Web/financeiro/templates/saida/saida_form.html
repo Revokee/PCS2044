@@ -16,96 +16,123 @@
 
 {% block content %}
 	
-	<h1>Nova Saída</h1>
-	<hr>
-
+<div class="row">
+    <div class="col-md-12">
+       <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+       <h3 class="page-title">
+          Saida <small>cadastrar</small>
+       </h3>
+       <ul class="page-breadcrumb breadcrumb">
+          <li>
+             <i class="icon-home"></i>
+             <a href="/">Home</a> 
+             <i class="icon-angle-right"></i>
+          </li>
+          <li>
+             <a href="/financeiros/saidas/lista_saida">Saidas</a>
+             <i class="icon-angle-right"></i>
+          </li>
+          <li><a href="#">Nova Saida</a></li>
+       </ul>
+       <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+ </div>
+	<div class="tab-content">
+		<div class="portlet box red">
+			<div class="portlet-title">
+				<div class="caption">
+					Nova Saida
+				</div>
+			</div> 
+			<div class="portlet-body form">
 	
-	<form method="POST">
-		{% csrf_token %}
+				<form method="POST">
+					{% csrf_token %}
 
-			<div class="form-line error-line">
-				<div class="form-element">
-					<ul class="form-errors">
-						{% for error in form.valor.errors %}
-							<li>{{error}}</li>
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="form-element">
-					<ul class="form-errors">
-						{% for error in form.data_saida.errors %}
-							<li>{{error}}</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
+						<div class="form-line error-line">
+							<div class="form-element">
+								<ul class="form-errors">
+									{% for error in form.valor.errors %}
+										<li>{{error}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+							<div class="form-element">
+								<ul class="form-errors">
+									{% for error in form.data_saida.errors %}
+										<li>{{error}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
 
-			<div class="form-line">
-				<div class="form-element">
-					<p class="form-label">{{form.valor.label}}</p>
-					{{form.valor|add_class:"form-input"}}	
-				</div>
-				<div class="form-element">
-					<p class="form-label">{{form.data_saida.label}}</p>
-					{{form.data_saida|add_class:"form-input"}}
-				</div>
-			</div>
-			
-			<div class="form-line error-line">
-				<div class="form-element">
-					<ul class="form-errors">
-						{% for error in form.destino.errors %}
-							<li>{{error}}</li>
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="form-element">
-					<ul class="form-errors">
-						{% for error in form.responsavel.errors %}
-							<li>{{error}}</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
+						<div class="form-line">
+							<div class="form-element">
+								<p class="form-label">{{form.valor.label}}</p>
+								{{form.valor|add_class:"form-input"}}	
+							</div>
+							<div class="form-element">
+								<p class="form-label">{{form.data_saida.label}}</p>
+								{{form.data_saida|add_class:"form-input"}}
+							</div>
+						</div>
+						
+						<div class="form-line error-line">
+							<div class="form-element">
+								<ul class="form-errors">
+									{% for error in form.destino.errors %}
+										<li>{{error}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+							<div class="form-element">
+								<ul class="form-errors">
+									{% for error in form.responsavel.errors %}
+										<li>{{error}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
 
-			<div class="form-line">
-				<div class="form-element">
-					<p class="form-label">{{form.destino.label}}</p>
-					{{form.destino|add_class:"form-input"}}
-				</div>
-				<div class="form-element">
-					<p class="form-label">{{form.responsavel.label}}</p>
-					{{form.responsavel|add_class:"form-input"}}
-				</div>
-			</div>
-			
-			<div class="form-line error-line">
-				<div class="form-element single-child">
-					<ul class="form-errors">
-						{% for error in form.descricao.errors %}
-							<li>{{error}}</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
+						<div class="form-line">
+							<div class="form-element">
+								<p class="form-label">{{form.destino.label}}</p>
+								{{form.destino|add_class:"form-input"}}
+							</div>
+							<div class="form-element">
+								<p class="form-label">{{form.responsavel.label}}</p>
+								{{form.responsavel|add_class:"form-input"}}
+							</div>
+						</div>
+						
+						<div class="form-line error-line">
+							<div class="form-element single-child">
+								<ul class="form-errors">
+									{% for error in form.descricao.errors %}
+										<li>{{error}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
 
-			<div class="form-line">
-				<div class="form-element single-child">
-					<p class="form-label">{{form.descricao.label}}</p>
-					{{form.descricao|add_class:"form-textarea"}}
-				</div>
-			</div>
-			
-			<div class="form-btn-holder">
-				{% if form.instance.pk == None %}
-					<!-- create button -->
-					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
-				{% else %}
-					<!-- edit button -->
-					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
-				{% endif %}
-			</div>	
+						<div class="form-line">
+							<div class="form-element single-child">
+								<p class="form-label">{{form.descricao.label}}</p>
+								{{form.descricao|add_class:"form-textarea"}}
+							</div>
+						</div>
+						
+						<div class="form-btn-holder">
+							{% if form.instance.pk == None %}
+								<!-- create button -->
+								<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+							{% else %}
+								<!-- edit button -->
+								<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+							{% endif %}
+						</div>	
 
-	</form>
+				</form>
+			</div>
 
 {% endblock content %}

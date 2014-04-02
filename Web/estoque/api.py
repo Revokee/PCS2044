@@ -1,7 +1,7 @@
 # RESTful api for pizza5/estoque
 from tastypie import fields
 from tastypie.authorization import Authorization
-from api import *
+from PCS2044.api import *
 from estoque.models import *
 
 class IngredienteResource(BaseModelResource):		

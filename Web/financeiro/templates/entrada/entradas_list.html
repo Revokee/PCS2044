@@ -20,47 +20,49 @@
 	    <div class="element title">
 		    <h2>Entradas</h2>
 		</div>  
-		  
-		<div class="element">
-		    <!-- add -->
+    
+    </div>
+    <div class="portlet-body">
+        <div class="table-responsive">
+            <!-- tabela de entradas -->
+            <table class="table table-striped table-hover">
+            	<tr>
+            		<th>Valor</th>
+            		<th>Data</th>
+            		<th>Origem</th>
+            		<th></th>
+            	</tr>
+                
+                {% for entrada in lista_entradas %}
+                    <tr>
+                    	<td>{{ entrada.valor }}</td>
+                    	<td>{{ entrada.data_entrada }}</td>
+                    	<td>{{ entrada.origem }}</td>
+                    	<td>
+                            <!-- detail -->
+                            <a type="button" class="btn btn-small btn-info" href="{% url 'entrada_detail' entrada.id %}">
+                                <span class="glyphicon glyphicon-th-list"></span>
+                            </a>
+                    		<!-- edit -->
+                    		<a type="button" class="btn btn-small btn-primary" href="{% url 'entrada_update' entrada.id %}">
+              					<span class="glyphicon glyphicon-pencil"></span>
+            				</a>
+            				<!-- delete -->
+                    		<a type="button" class="btn btn-small btn-danger" href="{% url 'entrada_delete' entrada.id %}">
+              					<span class="glyphicon glyphicon-remove"></span>
+            				</a>
+                    	</td>
+                    </tr>
+              {% endfor %}
+            
+            </table>
+        </div>
+        <div class="element">
+            <!-- add -->
             <a type="button" href="/financeiro/entrada/cria_entrada" class="btn btn-lg btn-success btn-add">
                 Adicionar
             </a>
-		</div>
-    
+        </div>
     </div>
-
-    <!-- tabela de entradas -->
-    <table class="table table-striped table-hover">
-    	<tr>
-    		<th>Valor</th>
-    		<th>Data</th>
-    		<th>Origem</th>
-    		<th></th>
-    	</tr>
-        
-        {% for entrada in lista_entradas %}
-            <tr>
-            	<td>{{ entrada.valor }}</td>
-            	<td>{{ entrada.data_entrada }}</td>
-            	<td>{{ entrada.origem }}</td>
-            	<td>
-                    <!-- detail -->
-                    <a type="button" class="btn btn-small btn-info" href="{% url 'entrada_detail' entrada.id %}">
-                        <span class="glyphicon glyphicon-th-list"></span>
-                    </a>
-            		<!-- edit -->
-            		<a type="button" class="btn btn-small btn-primary" href="{% url 'entrada_update' entrada.id %}">
-      					<span class="glyphicon glyphicon-pencil"></span>
-    				</a>
-    				<!-- delete -->
-            		<a type="button" class="btn btn-small btn-danger" href="{% url 'entrada_delete' entrada.id %}">
-      					<span class="glyphicon glyphicon-remove"></span>
-    				</a>
-            	</td>
-            </tr>
-      {% endfor %}
-    
-    </table>
 
     {% endblock %}
