@@ -56,8 +56,17 @@ public class LocationService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO: Return the communication channel to the service.
+		Log.e(TAG,"onBind");
 		return null;
 	}
+	
+	@Override
+	  public int onStartCommand(Intent intent, int flags, int startId) {
+	    //TODO do something useful
+		Log.e(TAG,"onStartCommand");
+	    return Service.START_NOT_STICKY;
+	  }
+	
 	@Override
 	public void onCreate()
 	{
@@ -98,6 +107,8 @@ public class LocationService extends Service {
 	    }
 	} 
 	
+	
+	
 
 	private void initializeLocationManager() {
 	    Log.e(TAG, "initializeLocationManager");
@@ -112,6 +123,7 @@ public class LocationService extends Service {
                 "New Location \n Longitude: %1$s \n Latitude: %2$s",
                 myLocation.getLongitude(), myLocation.getLatitude()
         );
-        //Toast.makeText(GetLocationActivity.this, message, Toast.LENGTH_LONG).show();
+		Log.e(TAG, message);
+		//TODO Implementar função de mandar as cordenadas para o banco de dados
 	}
 }

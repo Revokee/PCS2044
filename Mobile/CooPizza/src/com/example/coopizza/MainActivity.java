@@ -15,7 +15,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	private final String TAG = "cooPizza";
+	private final String TAG = "CooPizza";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		Log.e(TAG, "Antes do Serviço");
 		// Starting Location Service with AlarmManager
 		Calendar cal = Calendar.getInstance();
 
@@ -54,8 +55,9 @@ public class MainActivity extends Activity {
 		PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
 
 		AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-				// Start every 15 seconds
-		alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 15*1000, pintent);
+				// Start every 10 seconds
+		alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 10*1000, pintent);
+		Log.e(TAG, "Depois do Sserviço");
 		
 	}
 	
