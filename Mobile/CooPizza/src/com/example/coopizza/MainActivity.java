@@ -1,7 +1,12 @@
 package com.example.coopizza;
 
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +46,16 @@ public class MainActivity extends Activity {
 				startRouteActivity();
 			}
 		});
+		
+		// Starting Location Service with AlarmManager
+		Calendar cal = Calendar.getInstance();
+
+		Intent intent = new Intent(this, LocationService.class);
+		PendingIntent pintent = PendingIntent.getService(this, 0, intent, 0);
+
+		AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+				// Start every 15 seconds
+		alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 15*1000, pintent);
 		
 	}
 	
