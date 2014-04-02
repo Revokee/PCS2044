@@ -12,12 +12,20 @@ public class MainActivity extends Activity {
 
 	private final String TAG = "cooPizza";
 	
+	Intent pushLocation = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 				
 		
 		// Restore any saved state 
 		super.onCreate(savedInstanceState);
+		
+		// Activate push location
+		pushLocation = new Intent(this, PushLocationService.class);
+		Log.w("CooPizza", pushLocation.toURI());
+		startService(pushLocation);
+		Log.w("CooPizza", "Passou");
 		
 		// Set content view
 		setContentView(R.layout.activity_main);
@@ -42,6 +50,10 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+	}
+	
+	public void onDestroy() {
+		stopService(pushLocation);
 	}
 	
 	@Override
@@ -74,9 +86,6 @@ public class MainActivity extends Activity {
 			Log.e(TAG, e.toString());
 		}
 	}
-	
-	
-	
-	
+
 	
 }
