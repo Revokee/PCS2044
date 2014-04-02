@@ -9,11 +9,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     #URLS de Entregadores
-    url(r'^funcionarios/novo$','rh.views.create_funcionario'),
-    url(r'^funcionarios/editar/(?P<funcionario_id>[0-9]+)/$','rh.views.edit_funcionario'),
-    url(r'^funcionarios/mapa/(?P<funcionario_id>[0-9]+)/$','rh.views.funcionario_detail'),
-    url(r'^funcionarios/deletar/(?P<funcionario_id>[0-9]+)/$','rh.views.delete_funcionario'),
-    url(r'^funcionarios/$','rh.views.index'),
+    #url(r'^funcionarios/novo$','rh.views.create_funcionario'),
+    #url(r'^funcionarios/editar/(?P<funcionario_id>[0-9]+)/$','rh.views.edit_funcionario'),
+    #url(r'^funcionarios/mapa/(?P<funcionario_id>[0-9]+)/$','rh.views.funcionario_detail'),
+    #url(r'^funcionarios/deletar/(?P<funcionario_id>[0-9]+)/$','rh.views.delete_funcionario'),
+    #url(r'^funcionarios/$','rh.views.index'),
     
     #URLS de Pedidos
     url(r'^pedidos/novo$','pedido.views.create_pedido'),
