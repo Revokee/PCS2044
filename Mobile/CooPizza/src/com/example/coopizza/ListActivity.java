@@ -36,14 +36,6 @@ public class ListActivity extends Activity {
 		ArrayAdapter<String> codeLearnArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, codeLearnChapters);
 				
 		listPedidos.setAdapter(codeLearnArrayAdapter);
-		// Link UI elements to actions in code	
-		
-			
-		
-		
-		
+		// Link UI elements to actions in code		
 	}
-
-	
-
 }
