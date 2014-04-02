@@ -87,7 +87,5 @@ def planejamento(request):
 #Funcao clustering de pedidos
 def clustering(request):
 	pedidos = Order.objects.values()
-	latitudes = [pedido["latitude"] for pedido in pedidos]
-	longitudes = [pedido["longitude"] for pedido in pedidos]
-	clusters = Ordenar.OrderController("").clustering(latitudes,longitudes)
+	clusters = Ordenar.OrderController("").clustering(pedidos)
 	return render_to_response('clustering.html', locals(), context_instance=RequestContext(request))
