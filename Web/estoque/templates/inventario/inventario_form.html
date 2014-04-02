@@ -1,0 +1,65 @@
+{% extends "index_estoque.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/estoque/estoque_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		Adicionar Ingrediente ao Inventário - Pizza5
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Adicionar Ingrediente</h1>
+	<hr>
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.ingrediente.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.quantidade.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.ingrediente.label}}</p>
+					{{form.ingrediente|add_class:"form-input"}}	
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.quantidade.label}}</p>
+					{{form.quantidade|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

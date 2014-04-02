@@ -1,0 +1,97 @@
+{% extends "index_rh.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+	{% if form.instance.pk == None %}
+		Criar Ferias - Pizza5
+	{% else %}
+		Editar Ferias - Pizza5
+	{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Novas Ferias</h1>
+	<hr>
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.funcionario.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.ano.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.funcionario.label}}</p>
+					{{form.funcionario|add_class:"form-input"}}	
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.ano.label}}</p>
+					{{form.ano|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_inicio_ferias.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.numero_dias.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.data_inicio_ferias.label}}</p>
+					{{form.data_inicio_ferias|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.numero_dias.label}}</p>
+					{{form.numero_dias|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

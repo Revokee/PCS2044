@@ -1,0 +1,110 @@
+{% extends "index_rh.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		Criar Licença - Pizza5
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Nova Licença</h1>
+	<hr>
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.funcionario.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_inicio_licenca.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.funcionario.label}}</p>
+					{{form.funcionario|add_class:"form-input"}}	
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.data_inicio_licenca.label}}</p>
+					{{form.data_inicio_licenca|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.numero_dias.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.remunerado.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.numero_dias.label}}</p>
+					{{form.numero_dias|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.remunerado.label}}</p>
+					{{form.remunerado|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.motivo.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.motivo.label}}</p>
+					{{form.motivo|add_class:"form-textarea"}}
+				</div>
+			</div>
+
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

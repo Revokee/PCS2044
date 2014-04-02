@@ -66,7 +66,7 @@
 			<div class="form-line error-line">
 				<div class="form-element">
 					<ul class="form-errors">
-						{% for error in form.origem.errors %}
+						{% for error in form.forma_pagamento.errors %}
 							<li>{{error}}</li>
 						{% endfor %}
 					</ul>
@@ -82,12 +82,29 @@
 
 			<div class="form-line">
 				<div class="form-element">
-					<p class="form-label">{{form.origem.label}}</p>
-					{{form.origem|add_class:"form-input"}}
+					<p class="form-label">{{form.forma_pagamento.label}}</p>
+					{{form.forma_pagamento|add_class:"form-input"}}
 				</div>
 				<div class="form-element">
 					<p class="form-label">{{form.responsavel.label}}</p>
 					{{form.responsavel|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.origem.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.origem.label}}</p>
+					{{form.origem|add_class:"form-input"}}
 				</div>
 			</div>
 			

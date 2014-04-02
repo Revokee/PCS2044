@@ -1,0 +1,82 @@
+{% extends "index_rh.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	{% if is_detail %}
+		Detalhes da Licença - Pizza5
+	{% else %}
+		Remover Licença - Pizza5
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_delete.css" %}">
+{% endblock %}
+
+{% block content %}
+
+	{% if not is_detail %}
+		<h1>Remover Licença</h1>
+		<hr>
+		<p>Tem certeza que deseja remover essa Licença ?</p>
+	{% else %}
+		<h1>Detalhes da Licença</h1>	
+	{% endif %}
+
+	<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Nome do Funcionário</p>
+				{{object.funcionario}}
+			</div>
+			<div class="field">
+				<p class="field-label">Data de Início</p>
+				{{object.data_inicio_licenca}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Numero de Dias</p>
+				{{object.numero_dias}}
+			</div>	
+			<div class="field">
+				<p class="field-label">Remunerado</p>
+				{% if object.remunerado %}
+                    Sim 
+                {% else %}
+                    Não
+                {% endif %}
+			</div>	
+		</div>
+		<div class="field-line">
+			<div class="field single-child">
+				<p class="field-label">Motivo</p>
+				{{object.motivo}}
+			</div>	
+		</div>
+
+	</div>	
+
+	<br>
+
+	{% if is_detail %}
+		<a href="{% url 'licencas_list' %}" type="button" class="btn btn-lg btn-success">Voltar</a>
+	{% else %}
+		<form method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+
+		</form>
+	{% endif %}
+
+
+{% endblock %}

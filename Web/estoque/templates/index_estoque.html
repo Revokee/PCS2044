@@ -1,0 +1,26 @@
+{% extends "base_styled.html" %}
+
+{% block title %}Estoque/Compras - Pizza5{% endblock %}
+
+{% block navbar_links %}
+<li><a href="{% url 'index' %}">Principal</a></li>
+<li><a href="{% url 'index_financeiro' %}">Financeiro</a></li>
+<li><a href="{% url 'index_rh' %}">RH</a></li>
+<li class="active"><a href="{% url 'index_estoque' %}">Estoque/Compras</a></li>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        {% block sidebar_links %}
+        <li><a href="{% url 'ingrediente_list' %}">Produtos</a></li>
+        <li><a href="{% url 'inventario_list' %}">Estoque</a></li>
+        <li><a href="{% url 'listaCompras_list' %}">Compras</a></li>
+        {% endblock %}
+      </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Bem Vindo ao Estoque/Compras</h1>
+{% endblock %}

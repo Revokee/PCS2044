@@ -127,12 +127,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'cliente',
+    'clientes',
+    'cardapio',
+    'formFeedback',
     'rh',
-    'financeiro',
     'address',
-    'feedback',
     'pedido',
+    'financeiro',
     'tastypie', # RESTful api building
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

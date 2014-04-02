@@ -1,0 +1,89 @@
+{% extends "index_rh.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		Criar Cargo - Pizza5
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Novo Cargo</h1>
+	<hr>
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.nome_cargo.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.nome_cargo.label}}</p>
+					{{form.nome_cargo|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.nivel.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.nivel.label}}</p>
+					{{form.nivel|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.salario.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.salario.label}}</p>
+					{{form.salario|add_class:"form-input"}}
+				</div>
+			</div>
+
+			
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

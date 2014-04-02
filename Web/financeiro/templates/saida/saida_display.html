@@ -1,0 +1,77 @@
+{% extends "index_financeiro.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	{% if is_detail %}
+		Detalhes de Saída Financeira - Pizza5
+	{% else %}
+		Remover Saída Financeira - Pizza5
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/financeiro/entrada_delete.css" %}">
+{% endblock %}
+
+{% block content %}
+	
+	{% if not is_detail %}
+		<h1>Remover Saída</h1>
+		<hr>
+		<p>Tem certeza que deseja remover essa Saída ?</p>
+	{% else %}
+		<h1>Detalhes de Saída</h1>	
+	{% endif %}
+
+	<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Valor</p>
+				{{object.valor}}
+			</div>
+			<div class="field">
+				<p class="field-label">Data de Saida</p>
+				{{object.data_saida}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Destino</p>
+				{{object.destino}}
+			</div>	
+			<div class="field">
+				<p class="field-label">Responsável</p>
+				{{object.responsavel}}
+			</div>	
+		</div>
+		<div class="field-line">
+			<div class="field single-child">
+				<p class="field-label">Descrição</p>
+				{{object.descricao}}
+			</div>	
+		</div>
+
+	</div>	
+
+	<br>
+
+	{% if is_detail %}
+		<a href="{% url 'saida_list' %}" type="button" class="btn btn-lg btn-success">Voltar</a>
+	{% else %}
+		<form method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+		</form>
+	{% endif %}
+
+
+{% endblock %}

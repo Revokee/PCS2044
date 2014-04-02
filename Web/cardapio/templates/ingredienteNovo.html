@@ -1,0 +1,42 @@
+{% extends "indexCardapio.html" %}
+
+		{% load staticfiles %}
+
+		{% block stylesheets %}
+			{{ block.super }}
+
+			<link href="{% static "css/rh/rh_list.css" %}" rel="stylesheet">
+
+		{% endblock %}
+
+		{% block title %}
+				CooPizza - Novo Ingrediente
+		{% endblock %}
+
+		{% block content %}
+
+		<h1>Ingrediente</h1>
+		<br>
+		<div class="form">
+			<form method="post" action="{% url 'ingredienteCadastrar' %}">
+				{% csrf_token%}
+				<ul>
+				<ul>
+					<li>
+						<label>Nome:</label>
+						<input type="text" name="nome" value="" /> 
+					</li>
+					<li>
+						<label>Marca:</label>
+						<input type="text" name="marca" value="" />
+					</li>
+					<li>
+						<label>Descrição:</label>
+						<textarea name="descricao" rows="10" cols="50"></textarea>
+					</li
+					<br>
+						<input type="submit" value="Cadastrar"/>
+				</ul>
+		</div>
+		{% endblock %}
+

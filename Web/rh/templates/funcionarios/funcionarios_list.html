@@ -1,0 +1,66 @@
+{% extends "index_rh.html" %}
+		
+		{% load staticfiles %}
+
+		{% block stylesheets %}
+			{{ block.super }}
+
+			<link href="{% static "css/rh/rh_list.css" %}" rel="stylesheet">
+		
+		{% endblock %}
+
+		{% block title %}
+				Funcionários - Pizza5
+		{% endblock %}
+
+		{% block content %}
+
+		<div class="above-table">
+	    
+	    <div class="element title">
+		    <h2>Funcionários</h2>
+		  </div>  
+		  
+		  <div class="element">
+		    <!-- add -->
+		    <a type="button" href="{% url 'funcionario_create' %}" class="btn btn-lg btn-success btn-add">
+		    	Adicionar
+		    </a>
+		  </div>
+    
+    </div>
+
+    <!-- tabela de entradas -->
+    <table class="table table-striped table-hover">
+    	<tr>
+    		<th>Nome</th>
+    		<th>CPF</th>
+    		<th>Cargo</th>
+    		<th></th>
+    	</tr>
+        
+      {% for funcionario in lista_funcionarios %}
+      	<tr>
+        	<td>{{ funcionario.nome }}</td>
+        	<td>{{ funcionario.cpf }}</td>
+        	<td>{{ funcionario.contrato.cargo }}</td>
+        	<td>
+                <!-- detail -->
+                <a type="button" class="btn btn-small btn-info" href="{% url 'funcionario_detail' funcionario.id %}">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </a>
+        		<!-- edit -->
+        		<a type="button" class="btn btn-small btn-primary" href="{% url 'funcionario_update' funcionario.id %}">
+  					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+				<!-- delete -->
+        		<a type="button" class="btn btn-small btn-danger" href="{% url 'funcionario_delete' funcionario.id %}">
+  					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+        	</td>
+        </tr>	
+      {% endfor %}
+    
+    </table>
+
+    {% endblock %}

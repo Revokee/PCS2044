@@ -1,0 +1,68 @@
+{% extends "index_rh.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	{% if is_detail %}
+		Detalhes do Cargo - Pizza5
+	{% else %}
+		Remover Cargo - Pizza5
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_delete.css" %}">
+{% endblock %}
+
+{% block content %}
+	
+	{% if not is_detail %}
+		<h1>Remover Cargo</h1>
+		<hr>
+		<p>Tem certeza que deseja remover esse Cargo ?</p>
+	{% else %}
+		<h1>Detalhes do Cargo</h1>	
+	{% endif %}
+
+
+	<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Nome</p>
+				{{object.nome_cargo}}
+			</div>
+			<div class="field">
+				<p class="field-label">Nível</p>
+				{{object.nivel}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field single-child">
+				<p class="field-label">Salario</p>
+				{{object.salario}}
+			</div>	
+		</div>
+
+	</div>	
+
+	<br>
+
+	{% if is_detail %}
+		<a href="{% url 'cargos_list' %}" type="button" class="btn btn-lg btn-success">Voltar</a>
+	{% else %}
+		<form method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+		</form>
+	{% endif %}
+
+
+{% endblock %}

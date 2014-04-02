@@ -8,9 +8,9 @@ class Detalhes(models.Model):
 	#Endereco de Entrega
 	order = models.ForeignKey('pedido.Order')
 	#Para quem deve ser entregue
-	cliente = models.ForeignKey('cliente.Usuario')
+	#cliente = models.ForeignKey('cliente.Usuario')
 	#Pizzaria dona da entrega
-	pizzaria = models.ForeignKey('cliente.Pizzaria')
+	#pizzaria = models.ForeignKey('cliente.Pizzaria')
 
 class Order(models.Model):
 	rua = models.CharField(max_length=1024)

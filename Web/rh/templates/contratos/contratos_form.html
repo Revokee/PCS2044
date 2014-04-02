@@ -1,0 +1,168 @@
+{% extends "index_rh.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_create.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		Criar Contrato - Pizza5
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Novo Contrato</h1>
+	<hr>
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.funcionario.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.cargo.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.funcionario.label}}</p>
+					{{form.funcionario|add_class:"form-input"}}	
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.cargo.label}}</p>
+					{{form.cargo|add_class:"form-input"}}
+				</div>
+			</div>
+			
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_contratacao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.turno.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.data_contratacao.label}}</p>
+					{{form.data_contratacao|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.turno.label}}</p>
+					{{form.turno|add_class:"form-input"}}
+				</div>
+			</div>
+			
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.nome_contratante.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.status_contrato.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.nome_contratante.label}}</p>
+					{{form.nome_contratante|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.status_contrato.label}}</p>
+					{{form.status_contrato|add_class:"form-input"}}
+				</div>
+			</div>
+
+
+			<div class="form-line error-line">
+				<div class="form-element single-child">
+					<ul class="form-errors">
+						{% for error in form.observacoes.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element single-child">
+					<p class="form-label">{{form.observacoes.label}}</p>
+					{{form.observacoes|add_class:"form-textarea"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_demissao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.motivo_demissao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.data_demissao.label}}</p>
+					{{form.data_demissao|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.motivo_demissao.label}}</p>
+					{{form.motivo_demissao|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-btn-holder">
+				{% if form.instance.pk == None %}
+					<!-- create button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+				{% else %}
+					<!-- edit button -->
+					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+				{% endif %}
+			</div>	
+
+	</form>
+
+{% endblock content %}

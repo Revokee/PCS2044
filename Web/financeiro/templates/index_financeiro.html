@@ -14,7 +14,7 @@
       <ul class="nav nav-sidebar">
         {% block sidebar_links %}
         <li><a href="{% url 'entrada_list' %}">Entradas</a></li>
-        <li class="disabled"><a href="">Saídas</a></li>
+        <li><a href="{% url 'saida_list' %}">Saídas <span class="label label-danger">Novo</span></a></li>
         <li class="disabled"><a href="">Caixa</a></li>
         {% endblock %}
       </ul>
@@ -22,5 +22,98 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="page-header">Bem Vindo ao Financeiro</h1>
+<h1 class="page-header">Financeiro</h1>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Maiores Entradas do Mês</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+				    	<tr>
+				    		<th>Origem</th>
+				    		<th>Valor</th>
+				    	</tr>
+			    	</thead>
+			    	<tr>
+			    		<td>Lucas</td>
+			    		<td>55.00</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Gustavo</td>
+			    		<td>10.00</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Marcelo</td>
+			    		<td>8.00</td>
+			    	</tr>
+			    </table>
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Saldo do Mês</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+			    	<tr>
+			    		<td>Entradas</td>
+			    		<td>{{ soma_entradas }}</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Saídas</td>
+			    		<td>{{ soma_saidas }}</td>
+			    	</tr>
+			    	<tbody>
+			    		<tr>
+			    			<th>Saldo</th>
+			    			<th>{{ saldo_do_mes }}</th>
+			    		</tr>
+		    		</tbody>
+			    </table>
+			</div>
+		</div>
+  	</div>
+</div>
+<div class="row">
+  	<div class="col-md-3">
+  		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Título do Painel</h3>
+			</div>
+			<div class="panel-body">
+				Conteúdo do Painel
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-3">
+  		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Título do Painel</h3>
+			</div>
+			<div class="panel-body">
+				Conteúdo do Painel
+			</div>
+		</div>
+  	</div>
+  	<div class="col-md-6">
+  		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Título do Painel</h3>
+			</div>
+			<div class="panel-body">
+				Conteúdo do Painel
+			</div>
+		</div>
+  	</div>
+</div>
+
+
+  
+</div>
 {% endblock %}

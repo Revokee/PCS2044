@@ -1,0 +1,82 @@
+{% extends "index_rh.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+	{% if is_detail %}
+		Detalhes do Funcionário - Pizza5
+	{% else %}
+		Remover Funcionário - Pizza5
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ block.super }}
+	<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_delete.css" %}">
+{% endblock %}
+
+{% block content %}
+
+	{% if not is_detail %}
+		<h1>Remover Funcionário</h1>
+		<hr>
+		<p>Tem certeza que deseja remover esse Funcionário ?</p>
+	{% else %}
+		<h1>Detalhes do Funcionário</h1>	
+	{% endif %}
+
+
+	<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Nome</p>
+				{{object.nome}}
+			</div>
+			<div class="field">
+				<p class="field-label">Cargo</p>
+				{{object.contrato.cargo}}
+			</div>
+			<div class="field">
+				<p class="field-label">CPF</p>
+				{{object.cpf}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Endereço</p>
+				{{object.endereco}}
+			</div>	
+			<div class="field">
+				<p class="field-label">Telefone</p>
+				{{object.telefone}}
+			</div>	
+		</div>
+		<div class="field-line">
+			<div class="field single-child">
+				<p class="field-label">Data contratação</p>
+				{{object.contrato.data_contratacao}}
+			</div>	
+		</div>
+
+	</div>	
+
+	<br>
+
+	{% if is_detail %}
+		<a href="{% url 'funcionarios_list' %}" type="button" class="btn btn-lg btn-success">Voltar</a>
+	{% else %}
+		<form method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+		</form>
+	{% endif %}
+
+
+{% endblock %}

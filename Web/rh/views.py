@@ -1,108 +1,86 @@
-# -*- coding: utf-8 -*-
-from forms import *
-from django import forms
-from django.views.generic import ListView, CreateView, UpdateView
-from django.contrib import messages
-from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
-from django.template import Context, loader
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
-from rh.forms import *
-from rh.models import *
+from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
-#Funcao para criar um novo entregador
-def create_funcionario(request):
-	if request.method=='GET':
-		create_funcionario_form = CreateFuncionarioForm()
-		return render_to_response('novo_funcionario.html', locals(), context_instance=RequestContext(request))
-	else:
-		create_funcionario_form = CreateFuncionarioForm(request.POST)
-		if create_funcionario_form.is_valid():
-			new_funcionario = create_funcionario_form.save(commit=False)
-			#Turnaround para nao ter q trabalhar com modelos relacionados
-			new_funcionario.endereco_id = 1
-			new_funcionario.pizzaria_id = 1
-			new_funcionario.contrato_id_id = 1
-			new_funcionario.save() 
-			messages.success(request, 'Entregador Cadastrado com sucesso')
-			return HttpResponseRedirect('/funcionarios/')
-		messages.info(request, 'Formulário Não OK')
-		return render_to_response('novo_funcionario.html', locals(), context_instance=RequestContext(request))
-
-#Funcao para editar a posicao de um entregador
-def edit_funcionario(request, funcionario_id):
-	funcionario = Funcionario.objects.get(id=funcionario_id)
-	if request.method=='GET':
-		edit_funcionario_form = EditFuncionarioForm(instance=funcionario)
-		return render_to_response('editar_funcionario.html', locals(),context_instance=RequestContext(request)) 
-	elif request.method=='POST':
-		edit_funcionario_form = EditFuncionarioForm(request.POST,instance=funcionario)
-		if edit_funcionario_form.is_valid():
-			edit_funcionario_form.save()
-			messages.success(request,'Funcionário atualizado com sucesso')
-			return HttpResponseRedirect('/funcionarios/')
-		else:
-			messages.warning(request, 'Formulário Inválido')
-			return render_to_response('editar_funcionario.html', locals(),context_instance=RequestContext(request)) 
-
-
-#Funcao para listar todos os entregadores
-def index(request):
-	funcionarios = Funcionario.objects.values()
-	return render_to_response('funcionarios.html', locals(), context_instance=RequestContext(request))
-
-#Funcao para localizar um entregador no mapa
-def funcionario_detail(request, funcionario_id):
-	funcionario = Funcionario.objects.get(id=funcionario_id)
-	return render_to_response('mapas.html', locals(),context_instance=RequestContext(request))
-
-#Funcao para remover um entregador
-def delete_funcionario(request, funcionario_id):
-	funcionario = Funcionario.objects.get(pk=funcionario_id)
-	funcionario.delete()
-	messages.warning(request,'Funcionário Deletado com sucesso')
-	return HttpResponseRedirect('/funcionarios/')# Create your views here.
-
-
-#Funcoes do Grupo do Rodrigo
+from pizza5.rh.models import Funcionario
+from pizza5.rh.models import Cargo, Contrato, Ferias, Licencas, Historico_Pagamentos
+from django.core.urlresolvers import reverse_lazy
 
 # CRUD funcionario
 class FuncionarioList(ListView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_list.html'
     context_object_name = 'lista_funcionarios'
+    success_url = reverse_lazy('funcionarios_list')
 
 class FuncionarioCreate(CreateView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_form.html'
-    fields = ['nome','sexo','endereco','telefone']
+    fields = ['nome','sexo','endereco','telefone', 'cpf']
+    success_url = reverse_lazy('funcionarios_list')
 
 class FuncionarioUpdate(UpdateView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_form.html'
-    fields = ['endereco','telefone']
+    fields = ['nome', 'cpf', 'endereco','telefone']
+    success_url = reverse_lazy('funcionarios_list')
+
+class FuncionarioDelete(DeleteView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_display.html'
+    success_url = reverse_lazy('funcionarios_list')
+
+class FuncionarioDetail(DetailView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_display.html'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FuncionarioDetail, self).get_context_data(**kwargs)
+        # Add in flag to indicate DetailView
+        context['is_detail'] = True 
+        return context  
 
 # CRUD cargo
 class CargoList(ListView):
     model = Cargo
     template_name = 'cargos/cargos_list.html'
     context_object_name = 'lista_cargos'
+    success_url = reverse_lazy('cargos_list')
 
 class CargoCreate(CreateView):
     model = Cargo
     template_name = 'cargos/cargos_form.html'
     fields = ['nome_cargo','nivel','salario']
+    success_url = reverse_lazy('cargos_list')
 
 class CargoUpdate(UpdateView):
     model = Cargo
     template_name = 'cargos/cargos_form.html'
     fields = ['nome_cargo','nivel','salario']
+    success_url = reverse_lazy('cargos_list')
+
+class CargoDelete(DeleteView):
+    model = Cargo
+    template_name = 'cargos/cargos_display.html'
+    success_url = reverse_lazy('cargos_list')
+
+class CargoDetail(DetailView):
+    model = Cargo
+    template_name = 'cargos/cargos_display.html'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(CargoDetail, self).get_context_data(**kwargs)
+        # Add in flag to indicate DetailView
+        context['is_detail'] = True 
+        return context
 
 # CRUD contrato
 class ContratoList(ListView):
     model = Contrato
     template_name = 'contratos/contratos_list.html'
     context_object_name = 'lista_contratos'
+    success_url = reverse_lazy('contratos_list')
 
 class ContratoCreate(CreateView):
     model = Contrato
@@ -110,6 +88,7 @@ class ContratoCreate(CreateView):
     fields = ['funcionario','cargo','data_contratacao','turno',
     'nome_contratante','observacoes','status_contrato',
     'data_demissao','motivo_demissao']
+    success_url = reverse_lazy('contratos_list')
 
 class ContratoUpdate(UpdateView):
     model = Contrato
@@ -117,41 +96,124 @@ class ContratoUpdate(UpdateView):
     fields = ['funcionario','cargo','data_contratacao','turno',
     'nome_contratante','observacoes','status_contrato',
     'data_demissao','motivo_demissao']
+    success_url = reverse_lazy('contratos_list')
+
+class ContratoDelete(DeleteView):
+    model = Contrato
+    template_name = 'contratos/contratos_display.html'
+    success_url = reverse_lazy('contratos_list')
+
+class ContratoDetail(DetailView):
+    model = Contrato
+    template_name = 'contratos/contratos_display.html'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ContratoDetail, self).get_context_data(**kwargs)
+        # Add in flag to indicate DetailView
+        context['is_detail'] = True 
+        return context
 
 # CRUD ferias
 class FeriasList(ListView):
     model = Ferias
     template_name = 'ferias/ferias_list.html'
     context_object_name = 'lista_ferias'
+    success_url = reverse_lazy('ferias_list')
 
 class FeriasCreate(CreateView):
     model = Ferias
     template_name = 'ferias/ferias_form.html'
     fields = ['funcionario','ano','data_inicio_ferias', 'numero_dias']
+    success_url = reverse_lazy('ferias_list')
 
 class FeriasUpdate(UpdateView):
     model = Ferias
     template_name = 'ferias/ferias_form.html'
     fields = ['ano','data_inicio_ferias', 'numero_dias']
+    success_url = reverse_lazy('ferias_list')
+
+class FeriasDelete(DeleteView):
+    model = Ferias
+    template_name = 'ferias/ferias_display.html'
+    success_url = reverse_lazy('ferias_list')
+
+class FeriasDetail(DetailView):
+    model = Ferias
+    template_name = 'ferias/ferias_display.html'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FeriasDetail, self).get_context_data(**kwargs)
+        # Add in flag to indicate DetailView
+        context['is_detail'] = True 
+        return context
 
 # CRUD licenca
 class LicencasList(ListView):
     model = Licencas
     template_name = 'licencas/licencas_list.html'
     context_object_name = 'lista_licencas'
+    success_url = reverse_lazy('licencas_list')
 
 class LicencasCreate(CreateView):
     model = Licencas
     template_name = 'licencas/licencas_form.html'
     fields = ['funcionario','data_inicio_licenca','numero_dias', 'remunerado', 'motivo']
+    success_url = reverse_lazy('licencas_list')
 
 class LicencasUpdate(UpdateView):
     model = Licencas
     template_name = 'licencas/licencas_form.html'
     fields = ['data_inicio_licenca','numero_dias', 'remunerado', 'motivo']
+    success_url = reverse_lazy('licencas_list')
+
+class LicencasDelete(DeleteView): 
+    model = Licencas
+    template_name = 'licencas/licencas_display.html'
+    success_url = reverse_lazy('licencas_list')
+
+class LicencasDetail(DetailView):
+    model = Licencas
+    template_name = 'licencas/licencas_display.html'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(LicencasDetail, self).get_context_data(**kwargs)
+        # Add in flag to indicate DetailView
+        context['is_detail'] = True 
+        return context
 
 # CRUD historico
 class Historico_PagamentosList(ListView):
     model = Historico_Pagamentos
     template_name = 'historico_pagamentos_list.html'
     context_object_name = 'lista_historico_pagamentos'
+
+# ***********************
+# ** INDEX Inteligente **
+# ***********************
+
+def IndexInteligente(request):
+    entradas = Entrada.objects.all()
+    mes_atual = datetime.datetime.now().strftime("%m")
+
+    entradas_do_mes = Entrada.objects.filter(data_entrada__month=mes_atual)
+    soma_entradas = entradas_do_mes.annotate(soma_entradas=Sum('valor'))
+    saidas_do_mes = Saida.objects.filter(data_saida__month=mes_atual)
+    soma_saidas = saidas_do_mes.annotate(soma_saidas=Sum('valor'))
+    saldo_do_mes = soma_entradas.filter(soma_entradas) - soma_saidas 
+
+    Saida.objects.all().aggregate(Max('price'))
+    saldo_do_mes.order_by('-data_saida').values('destino','valor').aggregate(Max('valor'))
+
+    #def getGastoesDoMes():
+    entradas_do_mes = Entrada.objects.filter(data_entrada__month=mes_atual)
+    entradas_do_mes.values('origem','valor').order_by('-valor')[:5]
+    #entradas_do_mes.order_by('-data_entrada').values('origem','valor').aggregate(Max('valor'))
+
+    #def getClientesDoMes():
+    saidas_do_mes = Saida.objects.filter(data_saida__month=mes_atual)
+    #saidas_do_mes.order_by('-data_saida').values('destino','valor').aggregate(Max('valor'))
+
+    render(request, 'indexfinanceiro.html', {"soma_entradas": soma_entradas, "soma_saidas": soma_saidas, "saldo_do_mes": saldo_do_mes})

@@ -1,0 +1,65 @@
+{% extends "index_estoque.html" %}
+		
+		{% load staticfiles %}
+
+		{% block stylesheets %}
+			{{ block.super }}
+
+			<link href="{% static "css/estoque/estoque_list.css" %}" rel="stylesheet">
+		
+		{% endblock %}
+
+		{% block title %}
+				Ingredientes do Estoque - Pizza5
+		{% endblock %}
+
+		{% block content %}
+
+		<div class="above-table">
+	    
+	    <div class="element title">
+		    <h2>Ingredientes</h2>
+		  </div>  
+		  
+		  <div class="element">
+		    <!-- add -->
+		    <a type="button" href="{% url 'ingrediente_create' %}" class="btn btn-lg btn-success btn-add">
+		    	Adicionar
+		    </a>  
+		  </div>
+    
+    </div>
+
+    <!-- tabela de ingredientes -->
+    <table class="table table-striped table-hover">
+    	<tr>
+    		<th>Id</th>
+    		<th>Nome</th>
+    		<th>Marca</th>
+    		<th>Descrição</th>
+    		<th></th>
+    	</tr>
+        
+      {% for ingrediente in lista_ingredientes %}
+      	<tr>
+        	<td>{{ ingrediente.id }}</td>       	
+        	<td>{{ ingrediente.nome }}</td>
+        	<td>{{ ingrediente.marca }}</td>
+        	<td>{{ ingrediente.descricao }}</td>
+        	<td>
+        		<!-- edit -->
+        		<a type="button" class="btn btn-small btn-primary" href="{% url 'ingrediente_update' ingrediente.id %}">
+  					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+				<!-- delete -->
+        		<a type="button" class="btn btn-small btn-danger" href="{% url 'ingrediente_delete' ingrediente.id %}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+        	</td>
+        </tr>	
+      {% endfor %}
+    
+    </table>
+
+    {% endblock %}
+
