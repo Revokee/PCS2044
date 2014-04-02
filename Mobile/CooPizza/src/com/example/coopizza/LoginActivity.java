@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +22,8 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
+	
+	private final String TAG = "CooPizza.Login";
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -216,7 +220,7 @@ public class LoginActivity extends Activity {
 			}
 
 			// TODO: register the new account here.
-			return true;
+			return false;
 		}
 
 		@Override
@@ -225,7 +229,14 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				try {
+					Intent listIntent = new Intent(LoginActivity.this, MainActivity.class);
+					startActivity(listIntent);
+					
+				} catch (Exception e) {
+					Log.e(TAG, e.toString());
+				}
+				//finish();
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

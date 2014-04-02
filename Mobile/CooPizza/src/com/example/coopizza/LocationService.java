@@ -64,6 +64,7 @@ public class LocationService extends Service {
 	  public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
 		Log.e(TAG,"onStartCommand");
+		//sendLocation(mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
 	    return Service.START_NOT_STICKY;
 	  }
 	
