@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^financeiro/', include('financeiro.urls')),
     url(r'^rh/', include('rh.urls')),
     url(r'^estoque/', include('estoque.urls')),
+    url(r'^cardapio/', include('cardapio.urls')),
     
     #URLS login
     url(r'^login', 'login.views.login'),
