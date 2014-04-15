@@ -13,13 +13,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE':'django.db.backends.sqlite3',
         'NAME':'pcs2044.sqlite3',
-        #'NAME': 'pcs2044-dev',                      # Or path to database file if using sqlite3.
-        #'USER': 'pcs2044',                      # Not used with sqlite3.
+        #'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        #'USER': 'coopizza',                      # Not used with sqlite3.
+        #'NAME':'coopizza',
         #'PASSWORD': 'pcs2044',                  # Not used with sqlite3.
-        #'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        #'HOST': '10.0.0.6',                      # Set to empty string for localhost. Not used with sqlite3.
         #'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'rh',
     'address',
     'pedido',
+    'entrega',
     'financeiro',
     'tastypie', # RESTful api building
     # Uncomment the next line to enable admin documentation:

@@ -14,7 +14,7 @@
 	             <i class="icon-angle-right"></i>
 	          </li>
 	          <li>
-	             <a href="/pedidos">Pedidos</a>
+	             <a href="/pedido/index">Pedidos</a>
 	             <i class="icon-angle-right"></i>
 	          </li>
 	          <li><a href="#">Cadastrados</a></li>
@@ -58,13 +58,26 @@
                             <td>{{pedido.id}}</td>
                             <td>{{pedido.rua}}</td>
                             <td>{{pedido.numero}}</td>
+                            <td>{{pedido.complemento}}</td>
                             <td>{{pedido.cidade}}</td>
-		                        <td>{{pedido.latitude}}</td>
-		                        <td>{{pedido.longitude}}</td>
+		            <td>{{pedido.latitude}}</td>
+		            <td>{{pedido.longitude}}</td>
+			    {% if pedido.entrega != None %}
+                              <td>
+                                Entrega: <span class="label label-sm">{{pedido.entrega}}</span>
+                              </td>
+			    {% endif %}
                             {%if pedido.entregue%}
                               <td>
                                 <span class="label label-sm label-success">Entregue</span>
                               </td>
+			    {% else %}
+                                <td>
+                                  <a href="/pedido/fechar/{{pedido.id}}" class="btn green btn-xs">
+                                    <i class="icon-long-arrow-down"></i> Entregar
+                                  </a>
+                               </td>
+			    {%endif%}
                               {%if pedido.pago%}
                                 <td>
                                   <span class="label label-sm label-success">Pago</span>
@@ -75,27 +88,15 @@
                                   </span>
                                 </td>
                                 <td>
-                                  <a href="/pagar_pedido/{{pedido.id}}" class="btn green btn-xs">
+                                  <a href="/pedido/pagar/{{pedido.id}}" class="btn green btn-xs">
                                     <i class=" icon-long-arrow-down"></i> Pagar
                                   </a>
                                 </td>                                
                               {%endif%}
-                              {%else%}
                                 <td>
-                                  <span class="label label-sm label-danger">Pendente
-                                  </span>
-                                </td>
-                                <td>
-                                  <a href="/fechar_pedido/{{pedido.id}}" class="btn green btn-xs">
-                                    <i class="icon-long-arrow-down"></i> Entregar
-                                  </a>
-                               </td>
-                                <td>
-                                  <a href="/deletar_pedido/{{pedido.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar
+                                  <a href="/pedido/deletar/{{pedido.id}}" class="btn btn-sm red"><i class="icon-remove"></i> Deletar
                                   </a>
                                 </td>
-		              	    	  {%endif%}
-		                	 </tr>
                        {%empty%}
 	                       <tr>
 	                          <td>Nao</td>

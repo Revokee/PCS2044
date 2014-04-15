@@ -10,7 +10,7 @@ import lxml.html
 #Clustering
 import math # math needed for sqrt
 
-class OrderController:
+class EntregaController:
 	def __init__(self, home):
 		self.home = unidecode(unicode(home, 'utf-8'))
 

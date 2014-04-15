@@ -14,7 +14,7 @@
                      <i class="icon-angle-right"></i>
                   </li>
                   <li>
-                     <a href="/pedidos">Pedidos</a>
+                     <a href="/pedido/index">Pedidos</a>
                      <i class="icon-angle-right"></i>
                   </li>
                   <li><a href="#">Cadastrar Pedido</a></li>
@@ -30,9 +30,9 @@
 				</div>
 			</div> 
 				<div class="portlet-body form">
-					<form method="POST" action="/pedidos/novo" class="horizontal" >
+					<form method="POST" action="/pedido/novo" class="horizontal" >
 						<div class="form-body">
-							{%for field in create_order_form%}
+							{%for field in form%}
 								<div class="form-group">
 									</br><!--:before-->
 									<label class="col-md-3 control-label">
@@ -40,15 +40,14 @@
 									</label>
 									<div class="col-md-3">
 										{{field|addcss:"form-control"}}
-		                            </div>
-		                        	</br>
-		                            <!--:after-->
+		                            				</div>
+		                        				</br><!--:after-->
 								</div>	
 							{%endfor%}	
 						</div>
 						<div class="form-actions fluid">
                          	<div class="col-md-offset-3 col-md-9">
-                             	<button type="submit" class="btn red">Cadastrar</button>                              
+                             		<button type="submit" class="btn red">Cadastrar</button>                              
                         	</div>
                         </div>
 					</form>

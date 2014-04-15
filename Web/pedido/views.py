@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from django import forms
 from django.contrib import messages
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
@@ -7,89 +10,69 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from pedido.forms import *
 from pedido.models import *
+from entrega.models import *
 from pygeocoder import Geocoder
-import pedido.controller as Ordenar
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import permission_required, login_required
 
-# Funcao para cadastrar um pedido
+def _parse_address(form):
+	return form.cleaned_data['rua'] + ',' + unicode(form.cleaned_data['numero']) + ',' + form.cleaned_data['cidade']
+
+# Funcao para cadastrar uma entrega
 @csrf_exempt 
-def create_pedido(request):
+def novo(request):
 	if request.method=='GET':
-		create_order_form = CreateOrderForm()
+		form = PedidoForm()
 		return render_to_response('novo_pedido.html', locals(), context_instance=RequestContext(request))
 	else:
-		create_order_form = CreateOrderForm(request.POST)
-		if create_order_form.is_valid():
-			new_pedido = create_order_form.save(commit=False)
-			address = ''+create_order_form.cleaned_data['rua']+','+str(create_order_form.cleaned_data['numero'])+','+create_order_form.cleaned_data['cidade']
+		form = PedidoForm(request.POST)
+		if form.is_valid():
+			address = _parse_address(form)
 			results = Geocoder.geocode(address)
 			latitude, longitude = results[0].coordinates
-			new_pedido.latitude = latitude
-			new_pedido.longitude = longitude
-			new_pedido.entregue = False
-			new_pedido.pago = False
-			new_pedido.save()
+			pedido = form.save(commit=False)
+			pedido.latitude = latitude
+			pedido.longitude = longitude
+			pedido.entregue = False
+			pedido.pago = False
+			#pedido.Entrega = Entrega.objects.get(pk=0)
+			pedido.save()
 			messages.success(request, 'Pedido Cadastrado com sucesso')
-			return HttpResponseRedirect('/pedidos/')
+			return HttpResponseRedirect('/pedido/')
 		messages.info(request, 'Formulario Nao OK')
 		return render_to_response('novo_pedido.html', locals(), context_instance=RequestContext(request))
 
 #Funcao para remover um pedido
-def delete_pedido(request, pedido_id):
-	pedido = Order.objects.get(pk=pedido_id)
+def deletar(request, pedido_id):
+	pedido = Pedido.objects.get(pk=pedido_id)
 	pedido.delete()
 	messages.warning(request,'Pedido Deletado com sucesso')
-	return HttpResponseRedirect('/pedidos/')
+	return HttpResponseRedirect('/pedido/')
 
 #Atualiza o pedido para entregue = True
-def fechar_pedido(request, pedido_id):
-	pedido = Order.objects.get(pk=pedido_id)
+def fechar(request, pedido_id):
+	pedido = Pedido.objects.get(pk=pedido_id)
 	pedido.entregue = True
 	pedido.save()
 	messages.success(request, 'Pedido entregue')
-	return HttpResponseRedirect('/pedidos/')
+	return HttpResponseRedirect('/pedido/')
 
 #Atualiza o pedido para pago = True
-def pagar_pedido(request, pedido_id):
-	pedido = Order.objects.get(pk=pedido_id)
+def pagar(request, pedido_id):
+	pedido = Pedido.objects.get(pk=pedido_id)
 	pedido.pago = True
 	pedido.save()
 	messages.success(request, 'Pedido entregue')
-	return HttpResponseRedirect('/pedidos/')
+	return HttpResponseRedirect('/pedido/')
 
 #Funcao para listar todos os pedidos
 def index(request):
 	if request.user.is_authenticated():
 		if request.user.has_perm('pedido.change_order'):
-			pedidos = Order.objects.values().order_by('-id')
+			pedidos = Pedido.objects.values().order_by('-id')
 			return render_to_response('pedidos.html', locals(), context_instance=RequestContext(request))
 		else:
 			return render_to_response('index.html', locals(), context_instance=RequestContext(request))
 	else:
 		return render_to_response('login.html', locals(), context_instance=RequestContext(request))
-
-
-#Funcao de planejamento de pedidos
-def planejamento(request):
-	pedidos = Order.objects.values()
-	entregas = []
-	addresses = []
-	for pedido in pedidos:
-		if pedido["entregue"]== False:
-			entregas.append(pedido)
-	if len(entregas) > 0:
-		for entrega in entregas:
-			addresses.append(entrega["rua"] + ", " + str(entrega["numero"]) + ", " + entrega["cidade"])
-		#Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
-		rotas = Ordenar.OrderController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
-		planejamento = []
-		for address in rotas["addresses"]:
-			results = Geocoder.geocode(address)
-			latitude, longitude = results[0].coordinates
-			planejamento.append((address, latitude, longitude))
-		return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
-	else:
-		messages.warning(request, 'Nao ha entregas para serem feitas')
-		return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
