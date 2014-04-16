@@ -21,11 +21,11 @@ def login(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			if user.is_active:
-				nextUrl = request.GET.get('next', 'index.html')
+				nextUrl = request.POST.get('next', '/index')
 				django_login(request, user)
 				messages.success(request,'Bem vindo ao CooPizza!')
-				return render_to_response(nextUrl, locals(), context_instance=RequestContext(request))
 				# Redirect to a success page.
+				return HttpResponseRedirect(nextUrl)
 			else:
 				messages.warning(request, 'Conta desativada')
 				return render_to_response('login_account_disabled.html', locals(), context_instance=RequestContext(request))
