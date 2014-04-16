@@ -1,0 +1,14 @@
+Entrega:
+	- Lista de Pedido
+	- Id
+
+Pedido:
+	- Valor
+	- Id
+	- Cliente
+	- Endereço
+	- Latitude
+	- Longitude
+	- Descrição
+	- Observação
+	- Ordem

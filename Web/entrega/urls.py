@@ -6,6 +6,6 @@ urlpatterns = patterns('',
     url(r'^planejamento$','entrega.views.planejamento'),
     url(r'^planejamento$','entrega.views.planejamento'),
     url(r'^login$', 'entrega.mobile.login'),
-    url(r'^push_location$', 'entrega.mobile.push_location'),
+    url(r'^push_posicao$', 'entrega.mobile.push_posicao'),
 
 )

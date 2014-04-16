@@ -7,6 +7,7 @@ class Entrega(models.Model):
 	entregador = models.ForeignKey('entrega.Entregador')
 
 class Entregador(Funcionario):
+	password = models.CharField(max_length=128)
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
 	disponivel = models.BooleanField(default=False)
