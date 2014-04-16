@@ -15,6 +15,8 @@
 
 		{% block content %}
 
+        {% include 'mensagens.html' %}
+
 		<div class="above-table">
 	    
 	    <div class="element title">
@@ -50,11 +52,11 @@
                     <span class="glyphicon glyphicon-th-list"></span>
                 </a>
         		<!-- edit -->
-        		<a type="button" class="btn btn-small btn-primary" href="{% url 'cargo_update' cargo.id %}">
+        		<a type="button" class="btn btn-small btn-primary" href="{% url 'cargo_update' cargo.id %}" data-toggle="tooltip" data-placement="top" title="Editar">
   					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
 				<!-- delete -->
-        		<a type="button" class="btn btn-small btn-danger" href="{% url 'cargo_delete' cargo.id %}">
+        		<a type="button" class="btn btn-small btn-danger" href="{% url 'cargo_delete' cargo.id %}" data-toggle="tooltip" data-placement="top" title="Remover">
   					<span class="glyphicon glyphicon-remove"></span>
 				</a>
         	</td>

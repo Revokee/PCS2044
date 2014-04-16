@@ -126,14 +126,25 @@
 			</div>
 			
 			<div class="form-btn-holder">
-				{% if form.instance.pk == None %}
-					<!-- create button -->
-					<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
-				{% else %}
-					<!-- edit button -->
-					<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
-				{% endif %}
-			</div>	
+			<table>
+				<td>
+					<tr>
+					
+						{% if form.instance.pk == None %}
+							<!-- create button -->
+							<input class="btn btn-lg btn-success form-btn" type="submit" value="Criar">
+						{% else %}
+							<!-- edit button -->
+							<input class="btn btn-lg btn-success form-btn" type="submit" value="Editar">
+						{% endif %}
+					
+					</tr>
+					<tr>&nbsp;
+						<a href="{% url 'saida_list' %}" type="button" class="btn btn-lg btn-default form-btn">Voltar</a>
+					</tr>
+				</td>
+			</table>
+		</div>	
 
 	</form>
 

@@ -8,6 +8,7 @@ from tastypie.api import Api
 from api import *
 from estoque.api import *
 
+
 # RESTful api
 api = Api(api_name='rest')
 api.register(IngredienteResource())

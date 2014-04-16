@@ -15,20 +15,17 @@ urlpatterns = patterns('',
     #url(r'^entregadores/deletar/(?P<funcionario_id>[0-9]+)/$','rh.views.delete_funcionario'),
     #url(r'^entregadores/$','rh.views.index'),
     
-    #URLS de Pedidos
-    url(r'^pedidos/novo$','pedido.views.create_pedido'),
-    url(r'^pedidos.json$','pedido.json.pedidos'),
-    url(r'^pedidos','pedido.views.index'),
-    url(r'^deletar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.delete_pedido'),
-    url(r'^pagar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.pagar_pedido'),
-    url(r'^fechar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.fechar_pedido'),
-    url(r'^planejamento/$','pedido.views.planejamento'),
     url(r'^clustering/$','pedido.views.clustering'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     url(r'^financeiro/', include('financeiro.urls')),
     url(r'^rh/', include('rh.urls')),
     url(r'^estoque/', include('estoque.urls')),
+    url(r'^cardapio/', include('cardapio.urls')),
+    url(r'^promocao/', include('promocao.urls')),
+    url(r'entrega/', include('entrega.urls')),
+    url(r'pedido/', include('pedido.urls')),
+
     
     #URLS login
     #url(r'^login/(?P<data=>$)', 'login.views.login'),

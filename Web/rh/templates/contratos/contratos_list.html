@@ -15,6 +15,8 @@
 
 		{% block content %}
 
+        {% include 'mensagens.html' %}
+
 		<div class="above-table">
 	    
 	    <div class="element title">
@@ -22,12 +24,11 @@
 		  </div>  
 		  
 		  <div class="element">
-		    <!-- add -->
+		    <!-- contratar -->
 		    <a type="button" href="{% url 'contrato_create' %}" class="btn btn-lg btn-success btn-add">
-		    	Adicionar
+		    	Contratar
 		    </a>
 		  </div>
-    
     </div>
 
     <!-- tabela de entradas -->
@@ -54,13 +55,16 @@
                     <span class="glyphicon glyphicon-th-list"></span>
                 </a>
         		<!-- edit -->
-        		<a type="button" class="btn btn-small btn-primary" href="{% url 'contrato_update' contrato.id %}">
+        		<a type="button" class="btn btn-small btn-primary" href="{% url 'contrato_update' contrato.id %}" data-toggle="tooltip" data-placement="top" title="Editar">
   					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
 				<!-- delete -->
-        		<a type="button" class="btn btn-small btn-danger" href="{% url 'contrato_delete' contrato.id %}">
+        		<a type="button" class="btn btn-small btn-danger" href="{% url 'contrato_delete' contrato.id %}" data-toggle="tooltip" data-placement="top" title="Remover">
   					<span class="glyphicon glyphicon-remove"></span>
 				</a>
+                <a type="button" href="{% url 'contrato_demissao' contrato.id %}" class="btn btn-small btn-danger">
+                Demitir
+                </a>
         	</td>
         </tr>	
       {% endfor %}

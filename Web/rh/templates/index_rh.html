@@ -15,10 +15,10 @@
         {% block sidebar_links %}
         <li><a href="{% url 'funcionarios_list' %}">Funcionários</a></li>
         <li><a href="{% url 'cargos_list' %}">Cargos</a></li>
-        <li><a href="{% url 'contratos_list' %}">Contratações <span class="label label-danger">Novo</span></a></li>
+        <li><a href="{% url 'contratos_list' %}">Contratações </a></li>
         <li><a href="{% url 'ferias_list' %}">Férias <span class="label label-danger">Novo</span></a></li>
         <li><a href="{% url 'licencas_list' %}">Licenças <span class="label label-danger">Novo</span></a></li>
-        <li class="disabled"><a href="">Historico Pagamento</a></li>
+        <li><a href="{% url 'folha_pagamento' %}">Folha de Pagamento <span class="label label-danger">Novo</span></a></li>
         {% endblock %}
       </ul>
     </div>
