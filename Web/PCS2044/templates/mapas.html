@@ -29,7 +29,7 @@
                <!-- BEGIN BASIC PORTLET-->
                <div class="portlet solid blue">
                   <div class="portlet-title">
-                     <div class="caption"><i class="icon-reorder"></i>Localização do {{funcionario.nome}} às {{funcionario.atualizado_em|date:'G:i'}}</div>
+                     <div class="caption"><i class="icon-reorder"></i>Localização do {{funcionario.nome}} às {{funcionario.entregador.atualizado_em|date:'G:i'}}</div>
                      <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
                         <a href="javascript:;" class="reload"></a>
@@ -43,6 +43,8 @@
                <!-- END BASIC PORTLET-->
             </div>       
          </div>
+
+         {{funcionario.contrato.cargo}}
          <!-- END PAGE CONTENT-->
       <script type="text/javascript"
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCm7rYia73cSfqcl5bBtRsk9fjU-E8B5ak&sensor=false">

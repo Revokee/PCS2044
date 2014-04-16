@@ -1,5 +1,7 @@
 {%for funcionario in funcionarios%}
+	{%if funcionario.contrato.cargo|stringformat:"s" == "Entregador"%}
 	<li>
-		<a href="/funcionarios/mapa/{{funcionario.id}}">{{funcionario.nome}}</a>
+		<a href="/entregadores/mapa/{{funcionario.id}}">{{funcionario.nome}}</a>
 	</li>
+	{%endif%}
 {%endfor%}

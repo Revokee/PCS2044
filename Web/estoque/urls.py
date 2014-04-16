@@ -43,6 +43,4 @@ urlpatterns = patterns('',
     # APIs - Inventario
     url(r'^api/', include(api.urls)),
 
-    # Urls - Custom
-    url(r'^teste/$', 'pizza5.estoque.views.current_datetime')
 )

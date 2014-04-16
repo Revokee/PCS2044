@@ -11,11 +11,11 @@ urlpatterns = patterns('',
     #URLS de Entregadores
     #url(r'^entregadores/novo$','rh.views.create_funcionario'),
     #url(r'^entregadores/editar/(?P<funcionario_id>[0-9]+)/$','rh.views.edit_funcionario'),
-    #url(r'^entregadores/mapa/(?P<funcionario_id>[0-9]+)/$','rh.views.funcionario_detail'),
+    url(r'^entregadores/mapa/(?P<funcionario_id>[0-9]+)/$','rh.views.funcionario_detail'),
     #url(r'^entregadores/deletar/(?P<funcionario_id>[0-9]+)/$','rh.views.delete_funcionario'),
     #url(r'^entregadores/$','rh.views.index'),
     
-    url(r'^clustering/$','pedido.views.clustering'),
+    #url(r'^clustering/$','pedido.views.clustering'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     url(r'^financeiro/', include('financeiro.urls')),
