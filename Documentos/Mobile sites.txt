@@ -1,3 +1,8 @@
 Site de API de localização
 http://developer.android.com/google/play-services/location.html
 
+Google Maps
+http://www.youtube.com/watch?v=awX5T-EwLPc
+
+Google API Console
+https://console.developers.google.com/project/595066668749/apiui/credential

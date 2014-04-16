@@ -222,10 +222,11 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001d;
     }
     public static final class id {
-        public static final int action_settings=0x7f05000a;
+        public static final int action_settings=0x7f05000b;
+        public static final int bIniciarEntrega=0x7f050008;
+        public static final int bProximo=0x7f05000a;
         public static final int buttonList=0x7f050006;
         public static final int buttonRoute=0x7f050007;
-        public static final int header=0x7f050008;
         public static final int hybrid=0x7f050004;
         public static final int listView1=0x7f050005;
         public static final int map=0x7f050009;
@@ -345,9 +346,11 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int hello_world=0x7f06001d;
+        public static final int iniciar_entrega=0x7f060022;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f06001a;
+        public static final int proximo=0x7f060023;
         public static final int show_list=0x7f06001f;
         public static final int show_route=0x7f06001e;
         public static final int title_activity_list=0x7f060020;

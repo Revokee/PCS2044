@@ -41,15 +41,37 @@ package com.example.coopizza;
 //}
 
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.R.string;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-public class RouteActivity extends Activity {
+public class RouteActivity extends FragmentActivity implements LocationListener {
+	
+	private GoogleMap googlemap;
+	int iniciar = 0;
+//	Button b1=(Button)findViewById(R.id.bIniciarEntrega);
+//	Button b2=(Button)findViewById(R.id.bProximo);
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -57,13 +79,91 @@ public class RouteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// Set content view
 		setContentView(R.layout.activity_route);
+		
+//		bProximo.setEnabled(false);
+		
+		InitMap();
+		addMarkerToMap(37.0000000, -122.0000000, "Cassius", "Hollywood Ave");
+		addMarkerToMap(38.0000000, -125.0000000, "Eduardo", "Whatever");
 	}
 	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.activity_route, container, false);
-    }
+	public void onClick_Iniciar_Entrega () {
+		iniciar = 1;
+		// Mostrar o primeiro endereco
+	}
+	
+	public void onClick_Proximo() {
+		
+	}
+	
+	
+	private void addMarkerToMap(double latitude, double longitude, String nome, String endereco) {
+		LatLng pos = new LatLng(latitude, longitude);
+		
+		googlemap.addMarker(new MarkerOptions()
+				.title(nome)
+				.snippet(endereco)
+				.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+				.position(pos)
+				);
+				
+		
+	}
+	
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//            Bundle savedInstanceState) {
+//            // Inflate the layout for this fragment
+//            return inflater.inflate(R.layout.activity_route, container, false);
+//	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+	
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("GPS is Enabled");
+		builder.setCancelable(false);
+		builder.setPositiveButton("Enabled GPS", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				Intent startGps = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(startGps);
+			}
+		});
+		builder.setNegativeButton("Leave GPS off", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+		
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+	
+	}
+	
+	private void InitMap(){
+		SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+		googlemap = mf.getMap();
+		
+		googlemap.setMyLocationEnabled(true);
+		googlemap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+	}
+	
 
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {

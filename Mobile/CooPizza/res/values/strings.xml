@@ -8,5 +8,7 @@
     <string name="show_list">Lista de Entregas</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_route">CooPizza</string>
+    <string name="iniciar_entrega">Iniciar Entrega</string>
+    <string name="proximo">Proximo</string>
 
 </resources>
