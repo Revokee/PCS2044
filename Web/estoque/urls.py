@@ -8,16 +8,15 @@ from tastypie.api import Api
 from api import *
 from estoque.api import *
 
-
 # RESTful api
 api = Api(api_name='rest')
 api.register(IngredienteResource())
 
 urlpatterns = patterns('',
-	# root url for the financeiro app
+    # root url for the financeiro app
     url(r'^$', TemplateView.as_view(template_name="../templates/index_estoque.html"), name="index_estoque"),
 
-	# Urls - Ingrediente
+    # Urls - Ingrediente
     url(r'^ingrediente/lista_ingrediente/$', IngredienteList.as_view(), name='ingrediente_list'),
     url(r'^ingrediente/cria_ingrediente/$', IngredienteCreate.as_view(), name='ingrediente_create'),
     url(r'^ingrediente/edita_ingrediente/(?P<pk>\d+)$', IngredienteUpdate.as_view(), name='ingrediente_update'),
@@ -42,5 +41,8 @@ urlpatterns = patterns('',
     # url(r'^inventario/remove_inventario/(?P<pk>\d+)$', InventarioDelete.as_view(), name='inventario_delete')
 
     # APIs - Inventario
-    url(r'^api/', include(api.urls))
+    url(r'^api/', include(api.urls)),
+
+    # Urls - Custom
+    url(r'^teste/$', 'pizza5.estoque.views.current_datetime')
 )

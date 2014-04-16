@@ -14,7 +14,7 @@ class CORSResource(Resource):
     def create_response(self, *args, **kwargs):
         response = super(CORSResource, self).create_response(*args, **kwargs)
         response['Access-Control-Allow-Origin'] = '*'
-        response['Access-Control-Allow-Headers'] = 'Content-Type'
+        response['Access-Control-Allow-Headers'] = "Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type"
         return response
  
     def method_check(self, request, allowed=None):
@@ -56,8 +56,8 @@ class BaseModelResource(CORSResource, ModelResource):
 # common user resource
 # TODO: define fields to show
 class UserResource(BaseModelResource):
-		class Meta:
-				queryset = User.objects.all()
-				resource_name = 'user'
-				fields = ['username','email'] 
-				allowed_methods = ['get']
+	class Meta:
+		queryset = User.objects.all()
+		resource_name = 'user'
+		fields = ['username','email'] 
+		allowed_methods = ['get']

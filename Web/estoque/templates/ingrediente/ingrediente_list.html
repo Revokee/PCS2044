@@ -35,7 +35,6 @@
     <!-- tabela de ingredientes -->
     <table class="table table-striped table-hover">
     	<tr>
-    		<th>Id</th>
     		<th>Nome</th>
     		<th>Marca</th>
     		<th>Descrição</th>
@@ -43,8 +42,7 @@
     	</tr>
         
       {% for ingrediente in lista_ingredientes %}
-      	<tr>
-        	<td>{{ ingrediente.id }}</td>       	
+      	<tr>     	
         	<td>{{ ingrediente.nome }}</td>
         	<td>{{ ingrediente.marca }}</td>
         	<td>{{ ingrediente.descricao }}</td>

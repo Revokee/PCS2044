@@ -38,6 +38,23 @@
 						{% endfor %}
 					</ul>
 				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.embalagem.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.embalagem.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
 			</div>
 
 			<div class="form-line">
@@ -46,8 +63,32 @@
 					{{form.ingrediente|add_class:"form-input"}}	
 				</div>
 				<div class="form-element">
-					<p class="form-label">{{form.medida.label}}</p>
+					<p class="form-label">{{form.medida.label}} (Ex: 100g, 10g)</p>
 					{{form.medida|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.embalagem.label}}</p>
+					{{form.embalagem|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.descricao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.descricao.label}}</p>
+					{{form.descricao|add_class:"form-textarea"}}	
 				</div>
 			</div>
 			

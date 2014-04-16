@@ -2,6 +2,11 @@ from django.shortcuts import render
 from estoque.models import Ingrediente, Inventario, ListaCompras, MedidaIngrediente
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+
+from django.http import HttpResponse
+import datetime
+
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
 # CRUD Ingrediente
@@ -47,14 +52,14 @@ class MedidaList(ListView):
 class MedidaCreate(SuccessMessageMixin, CreateView):
 	model = MedidaIngrediente
 	template_name = 'medida/medida_form.html'
-	fields = ['ingrediente','medida']
+	fields = ['ingrediente','medida','embalagem','descricao']
 	success_url = reverse_lazy('medida_list')
 	success_message = "Medida criada com sucesso."
 
 class MedidaUpdate(SuccessMessageMixin, UpdateView):
 	model = MedidaIngrediente
 	template_name = 'medida/medida_form.html'
-	fields = ['ingrediente', 'medida']
+	fields = ['ingrediente', 'medida','embalagem','descricao']
 	success_url = reverse_lazy('medida_list')
 	success_message = "Medida editada com sucesso."
 
@@ -116,4 +121,11 @@ class ListaComprasCreate(SuccessMessageMixin, CreateView):
 	template_name = 'listaCompras/listaCompras_form.html'
 	fields = ['ingrediente','quantidade']
 	success_url = reverse_lazy('listaCompras_list')
+
+# Custom views
+def current_datetime(request):
+	template_name = 'inventario/inventario_list.html'
+	now = datetime.datetime.now()
+	return HttpResponse()
+
 	success_message = "Lista de Compras criada com sucesso."

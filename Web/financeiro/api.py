@@ -9,15 +9,34 @@ from django.contrib.auth.models import User
 # ** Utils Methods **
 # *******************
 
+def get_value_by_key(object, key):
+		try:
+				return object[key]
+		except Exception, e:
+				return None
+
+
+USER_API_URL_PATTERN = '/api/rest/user/%s/'
+FORMA_PAGAMENTO_API_URL_PATTERN = '/financeiro/api/rest/forma_pagamento/%s/'
+
 # find user by username and create tastypie resource url with user's id
 def get_user_url_by_username(username):
 		responsavel = User.objects.get(username = str(username))
-		return '/api/rest/user/' + str(responsavel.id) + "/"
+		return USER_API_URL_PATTERN % str(responsavel.id)
 
 # find formapagamento by username and create tastypie resource url with formapagamento's id
 def get_forma_pagamento_url_by_codigo(codigo):
 		forma_pagamento = FormaPagamento.objects.get(codigo = str(codigo))
-		return '/financeiro/api/rest/forma_pagamento/' + str(forma_pagamento.id) + "/"		
+		return FORMA_PAGAMENTO_API_URL_PATTERN % str(forma_pagamento.id)
+
+def adequate_resource(resource):
+		responsavel = get_value_by_key(resource, 'responsavel')
+		if(responsavel is not None):
+				resource['responsavel'] = get_user_url_by_username(responsavel)
+		
+		forma_pagamento = get_value_by_key(resource, 'forma_pagamento')
+		if(forma_pagamento is not None):
+				resource['forma_pagamento'] = get_forma_pagamento_url_by_codigo(forma_pagamento)					
 
 # *****************
 # ** Entrada api **
@@ -41,8 +60,8 @@ class EntradaResource(BaseModelResource):
 				authorization = Authorization()
 
 		def obj_create(self, bundle, **kwargs):
-				bundle.data['responsavel'] = get_user_url_by_username(bundle.data['responsavel'])
-				bundle.data['forma_pagamento'] = get_forma_pagamento_url_by_codigo(bundle.data['forma_pagamento'])
+				adequate_resource(bundle.data)			
+				print(bundle)
 				# returns the created resource
 				return super(EntradaResource, self).obj_create(bundle, **kwargs)		
 
@@ -61,6 +80,7 @@ class SaidaResource(BaseModelResource):
 				authorization = Authorization()
 		
 		def obj_create(self, bundle, **kwargs):
-				bundle.data['responsavel'] = get_user_url_by_username(str(bundle.data['responsavel']))
+				adequate_resource(bundle.data)			
+				print(bundle)
 				# returns the created resource
 				return super(SaidaResource, self).obj_create(bundle, **kwargs)						

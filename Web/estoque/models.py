@@ -15,9 +15,15 @@ class Ingrediente(models.Model):
 class MedidaIngrediente(models.Model):
     ingrediente = models.ForeignKey(Ingrediente, blank=False)
     medida = models.CharField(max_length=30)
+    descricao = models.CharField(max_length=300, default="-")
+    EMBALAGEM_TIPO  = (
+        ('LATA', 'Lata'),
+        ('PACOTE', 'Pacote'),
+    )
+    embalagem = models.CharField(max_length=9, choices=EMBALAGEM_TIPO)
 
     def __unicode__(self):
-        return self.medida
+        return self.embalagem + self.medida
 
 class Inventario(models.Model):
     ingrediente = models.ForeignKey(Ingrediente, unique=True)

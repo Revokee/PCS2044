@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from tastypie.api import Api
-from api import *
+from PCS2044.api import *
 from financeiro.views import *
 from django.views.generic import TemplateView
 from financeiro.api import *

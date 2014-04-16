@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-
 from rh.models import Funcionario
 from rh.models import Cargo, Contrato, Ferias, Licencas, Historico_Pagamentos
 from django.core.urlresolvers import reverse_lazy
@@ -10,6 +9,13 @@ from django.db.models import Max, Sum
 import datetime
 
 # CRUD funcionario
+class FuncionarioUpdate(SuccessMessageMixin, UpdateView):
+    model = Funcionario
+    template_name = 'funcionarios/funcionarios_form.html'
+    fields = ['nome', 'cpf', 'endereco','telefone']
+    success_url = reverse_lazy('funcionarios_list')
+    success_message = 'Funcionario editado com sucesso.'
+
 class FuncionarioList(ListView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_list.html'
@@ -23,35 +29,28 @@ class FuncionarioCreate(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('funcionarios_list')
     success_message = 'Funcionario criado com sucesso.'
 
-class FuncionarioUpdate(SuccessMessageMixin, UpdateView):
-    model = Funcionario
-    template_name = 'funcionarios/funcionarios_form.html'
-    fields = ['nome', 'cpf', 'endereco','telefone']
-    success_url = reverse_lazy('funcionarios_list')
-    success_message = 'Funcionario editado com sucesso.'
-
 class FuncionarioDelete(DeleteView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_display.html'
     success_url = reverse_lazy('funcionarios_list')
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+def get(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    context = self.get_context_data(object=self.object)
 
-        messages.success(request, 'Funcionario removido com sucesso.')
-        return self.render_to_response(context)
+    messages.success(request, 'Funcionario removido com sucesso.')
+    return self.render_to_response(context)
 
 class FuncionarioDetail(DetailView):
     model = Funcionario
     template_name = 'funcionarios/funcionarios_display.html'
-    
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(FuncionarioDetail, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        context['is_detail'] = True 
-        return context  
+
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(FuncionarioDetail, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    context['is_detail'] = True 
+    return context  
 
 
 # CRUD cargo
@@ -80,23 +79,23 @@ class CargoDelete(DeleteView):
     template_name = 'cargos/cargos_display.html'
     success_url = reverse_lazy('cargos_list')
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+def get(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    context = self.get_context_data(object=self.object)
 
-        messages.success(request, 'Cargo removido com sucesso.')
-        return self.render_to_response(context)
+    messages.success(request, 'Cargo removido com sucesso.')
+    return self.render_to_response(context)
 
 class CargoDetail(DetailView):
     model = Cargo
     template_name = 'cargos/cargos_display.html'
-    
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(CargoDetail, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        context['is_detail'] = True 
-        return context
+
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(CargoDetail, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    context['is_detail'] = True 
+    return context
 
 # CRUD contrato
 class ContratoList(ListView):
@@ -128,23 +127,23 @@ class ContratoDelete(DeleteView):
     template_name = 'contratos/contratos_display.html'
     success_url = reverse_lazy('contratos_list')
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+def get(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    context = self.get_context_data(object=self.object)
 
-        messages.success(request, 'Contrato removido com sucesso.')
-        return self.render_to_response(context)
+    messages.success(request, 'Contrato removido com sucesso.')
+    return self.render_to_response(context)
 
 class ContratoDetail(DetailView):
     model = Contrato
     template_name = 'contratos/contratos_display.html'
-    
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(ContratoDetail, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        context['is_detail'] = True 
-        return context
+
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(ContratoDetail, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    context['is_detail'] = True 
+    return context
 
 class ContratoUpdateParaDemissao(SuccessMessageMixin, UpdateView):
     model = Contrato
@@ -180,23 +179,23 @@ class FeriasDelete(DeleteView):
     template_name = 'ferias/ferias_display.html'
     success_url = reverse_lazy('ferias_list')
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+def get(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    context = self.get_context_data(object=self.object)
 
-        messages.success(request, 'Ferias removidas com sucesso.')
-        return self.render_to_response(context)
+    messages.success(request, 'Ferias removidas com sucesso.')
+    return self.render_to_response(context)
 
 class FeriasDetail(DetailView):
     model = Ferias
     template_name = 'ferias/ferias_display.html'
-    
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(FeriasDetail, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        context['is_detail'] = True 
-        return context
+
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(FeriasDetail, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    context['is_detail'] = True 
+    return context
 
 # CRUD licenca
 class LicencasList(ListView):
@@ -224,23 +223,23 @@ class LicencasDelete(DeleteView):
     template_name = 'licencas/licencas_display.html'
     success_url = reverse_lazy('licencas_list')
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+def get(self, request, *args, **kwargs):
+    self.object = self.get_object()
+    context = self.get_context_data(object=self.object)
 
-        messages.success(request, 'Licenca removida com sucesso.')
-        return self.render_to_response(context)
+    messages.success(request, 'Licenca removida com sucesso.')
+    return self.render_to_response(context)
 
 class LicencasDetail(DetailView):
     model = Licencas
     template_name = 'licencas/licencas_display.html'
-    
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(LicencasDetail, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        context['is_detail'] = True 
-        return context
+
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(LicencasDetail, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    context['is_detail'] = True 
+    return context
 
 # CRUD historico
 class Historico_PagamentosList(ListView):
@@ -257,21 +256,21 @@ class FolhaPagamento(ListView):
     context_object_name = 'lista_funcionarios'
     success_url = reverse_lazy('folha_pagamento')
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(FolhaPagamento, self).get_context_data(**kwargs)
-        # Add in flag to indicate DetailView
-        allFuncionarios = Funcionario.objects.all()
-        funcionariosComContratoValido   = allFuncionarios.filter(contrato__status_contrato='VALIDO_OK')
-        mes_atual = datetime.datetime.now().strftime("%m")
-        licencasDoMes = Licencas.objects.filter(data_inicio_licenca__month=mes_atual)
-        for func in funcionariosComContratoValido:
-            licencaFunc = Licencas.objects.filter(funcionario=func)
-            if licencaFunc.count() > 0:
-                if licencaFunc[0].data_inicio_licenca.strftime("%m") == mes_atual and not licencaFunc[0].remunerado:
-                    func.contrato.cargo.salario = int(func.contrato.cargo.salario) - ((int(func.contrato.cargo.salario)/30)*licencaFunc[0].numero_dias)
+def get_context_data(self, **kwargs):
+    # Call the base implementation first to get a context
+    context = super(FolhaPagamento, self).get_context_data(**kwargs)
+    # Add in flag to indicate DetailView
+    allFuncionarios = Funcionario.objects.all()
+    funcionariosComContratoValido   = allFuncionarios.filter(contrato__status_contrato='VALIDO_OK')
+    mes_atual = datetime.datetime.now().strftime("%m")
+    licencasDoMes = Licencas.objects.filter(data_inicio_licenca__month=mes_atual)
+    for func in funcionariosComContratoValido:
+        licencaFunc = Licencas.objects.filter(funcionario=func)
+        if licencaFunc.count() > 0:
+            if licencaFunc[0].data_inicio_licenca.strftime("%m") == mes_atual and not licencaFunc[0].remunerado:
+                func.contrato.cargo.salario = int(func.contrato.cargo.salario) - ((int(func.contrato.cargo.salario)/30)*licencaFunc[0].numero_dias)
 
-        soma_salarios = funcionariosComContratoValido.aggregate(soma=Sum('contrato__cargo__salario'))
-        context['soma_salarios'] = soma_salarios['soma'] 
-        context['funcValido'] = funcionariosComContratoValido 
-        return context
+    soma_salarios = funcionariosComContratoValido.aggregate(soma=Sum('contrato__cargo__salario'))
+    context['soma_salarios'] = soma_salarios['soma'] 
+    context['funcValido'] = funcionariosComContratoValido 
+    return context

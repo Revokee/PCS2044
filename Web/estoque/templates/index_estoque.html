@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_styled.html" %}
 
 {% block title %}Estoque/Compras - Pizza5{% endblock %}
 
@@ -14,6 +14,7 @@
       <ul class="nav nav-sidebar">
         {% block sidebar_links %}
         <li><a href="{% url 'ingrediente_list' %}">Produtos</a></li>
+        <li><a href="{% url 'medida_list' %}">Medida</a></li>
         <li><a href="{% url 'inventario_list' %}">Estoque</a></li>
         <li><a href="{% url 'listaCompras_list' %}">Compras</a></li>
         {% endblock %}

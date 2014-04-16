@@ -42,7 +42,7 @@ class EntregaController:
 			addresses[i] = unidecode(addresses[i])
 		download = True
 		if download:	
-			display = Display(visible=1, size=(1,1))
+			display = Display(visible=0, size=(800,600))
 			display.start()
 			driver = self._get_webdriver()
 			url = "http://www.routexl.com/?q="
@@ -61,7 +61,7 @@ class EntregaController:
 		else:
 			page = open("testpage").read()
 		#print page
-		html = lxml.hr in longstml.fromstring(page)
+		html = lxml.html.fromstring(page)
 		route = {"time": None, "distance": None, "addresses": []}
 		for element in html.xpath('//div[@id="route-canvas"]//b'):
 			#print element.text
