@@ -17,12 +17,14 @@ urlpatterns = patterns('',
     
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
-    url(r'entrega/', include('entrega.urls')),
-    url(r'pedido/', include('pedido.urls')),
     url(r'^financeiro/', include('financeiro.urls')),
     url(r'^rh/', include('rh.urls')),
     url(r'^estoque/', include('estoque.urls')),
     url(r'^cardapio/', include('cardapio.urls')),
+    url(r'^promocao/', include('promocao.urls')),
+    url(r'entrega/', include('entrega.urls')),
+    url(r'pedido/', include('pedido.urls')),
+
     
     #URLS login
     url(r'^login', 'login.views.login'),

@@ -38,18 +38,12 @@
 				    		<th>Valor</th>
 				    	</tr>
 			    	</thead>
+			    	{% for origem in entradas_por_origem %}
 			    	<tr>
-			    		<td>Lucas</td>
-			    		<td>55.00</td>
+			    		<td>{{ origem.origem }}</td>
+			    		<td>R$ {{ origem.soma }}</td>
 			    	</tr>
-			    	<tr>
-			    		<td>Gustavo</td>
-			    		<td>10.00</td>
-			    	</tr>
-			    	<tr>
-			    		<td>Marcelo</td>
-			    		<td>8.00</td>
-			    	</tr>
+			    	{% endfor %}
 			    </table>
 			</div>
 		</div>
@@ -63,16 +57,16 @@
 				<table class="table">
 			    	<tr>
 			    		<td>Entradas</td>
-			    		<td>{{ soma_entradas }}</td>
+			    		<td>R$ {{ soma_entradas }}</td>
 			    	</tr>
 			    	<tr>
 			    		<td>Saídas</td>
-			    		<td>{{ soma_saidas }}</td>
+			    		<td>R$ {{ soma_saidas }}</td>
 			    	</tr>
 			    	<tbody>
 			    		<tr>
 			    			<th>Saldo</th>
-			    			<th>{{ saldo_do_mes }}</th>
+			    			<th>R$ {{ saldo_do_mes }}</th>
 			    		</tr>
 		    		</tbody>
 			    </table>
@@ -81,39 +75,62 @@
   	</div>
 </div>
 <div class="row">
-  	<div class="col-md-3">
+  	<div class="col-md-12">
   		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title">Título do Painel</h3>
+				<h3 class="panel-title">Últimas Entradas</h3>
 			</div>
 			<div class="panel-body">
-				Conteúdo do Painel
+				<table class="table table-hover">
+					<thead>
+				    	<tr>
+				    		<th>Valor</th>
+				    		<th>Data</th>
+				    		<th>Origem</th>
+				    		<th></th>
+				    	</tr>
+			    	</thead>
+			    	{% for entrada in ultimas_entradas %}
+			    	<tr>
+			    		<td>R$ {{ entrada.valor }}</td>
+			    		<td>{{ entrada.data_entrada }}</td>
+			    		<td>{{ entrada.origem }}</td>
+			    		<td></td>
+			    	</tr>
+			    	{% endfor %}
+			    </table>
 			</div>
 		</div>
   	</div>
-  	<div class="col-md-3">
+</div>
+<div class="row">
+  	<div class="col-md-12">
   		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title">Título do Painel</h3>
+				<h3 class="panel-title">Últimas Saídas</h3>
 			</div>
 			<div class="panel-body">
-				Conteúdo do Painel
-			</div>
-		</div>
-  	</div>
-  	<div class="col-md-6">
-  		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">Título do Painel</h3>
-			</div>
-			<div class="panel-body">
-				Conteúdo do Painel
+				<table class="table table-hover">
+					<thead>
+				    	<tr>
+				    		<th>Valor</th>
+				    		<th>Data</th>
+				    		<th>Origem</th>
+				    		<th></th>
+				    	</tr>
+			    	</thead>
+			    	{% for saida in ultimas_saidas %}
+			    	<tr>
+			    		<td>R$ {{ saida.valor }}</td>
+			    		<td>{{ saida.data_saida }}</td>
+			    		<td>{{ saida.origem }}</td>
+			    		<td></td>
+			    	</tr>
+			    	{% endfor %}
+			    </table>
 			</div>
 		</div>
   	</div>
 </div>
 
-
-  
-</div>
 {% endblock %}

@@ -1,34 +1,46 @@
-{% extends "indexCardapio.html" %}
-
-		{% load staticfiles %}
-
-		{% block stylesheets %}
-			{{ block.super }}
-
-			<link href="{% static "css/rh/rh_list.css" %}" rel="stylesheet">
-
-		{% endblock %}
-
-		{% block title %}
-				CooPizza - Ingrediente
-		{% endblock %}
-
-		{% block content %}
-
-		<h1>Cadastrar Ingrediente</h1>
-		  <div class="element">
-		    <!-- add -->
-		    <a type="button" href="{% url 'ingredienteNovo' %}" class="btn btn-lg btn-success btn-add">
-		    	<span class="glyphicon glyphicon-plus"></span>
-		    </a>
-		  </div>
+{% extends "base.html" %}
+{% load extra_order %}
+	{% block content %}
+	<div class="row">
+            <div class="col-md-12">
+               <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+               <h3 class="page-title">
+                  Ingrediente <small>novo</small>
+               </h3>
+               <ul class="page-breadcrumb breadcrumb">
+                  <li>
+                     <i class="icon-home"></i>
+                     <a href="/">Home</a> 
+                     <i class="icon-angle-right"></i>
+                  </li>
+                  <li>
+                     <a href="/cardapio/ingrediente">Ingrediente</a>
+                     <i class="icon-angle-right"></i>
+                  </li>
+               </ul>
+               <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+         </div>
+			<div class="tab-content">
+				<h4>Cadastrar Ingrediente</h4>
+			    <!-- add -->
+			    <a type="button" href="{% url 'ingredienteNovo' %}" class="btn btn-lg btn-success btn-add">
+			    	<span class="glyphicon glyphicon-plus"></span>
+			    </a>
+			</div>
+			<div class="portlet box">
 		<h1>Consultar Ingrediente</h1>
-		<div class="form">
+		<div class="portlet-body form">
       		<form method="post" action="{% url 'ingredienteConsulta' %}">
         		{% csrf_token %}
-        		<label for="name">nome</label>
-        		<input type="text" id="nome" name="nome" size="100" />
-        		<input type="submit" value="Consultar"/>
-      		</form>
-    		</div>
-		{% endblock %}
+        		<div class="col-md-4 fluid" style="padding-top:20px">	
+        			<input type="text" id="nome" name="nome" class="form-control" />
+        		</div>
+      			<div class="form-actions fluid">
+                    <button type="submit" class="btn red">Consultar</button>
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

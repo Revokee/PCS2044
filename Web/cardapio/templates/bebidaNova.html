@@ -1,36 +1,58 @@
-{% extends "indexCardapio.html" %}
-
-		{% load staticfiles %}
-
-		{% block stylesheets %}
-			{{ block.super }}
-
-			<link href="{% static "css/rh/rh_list.css" %}" rel="stylesheet">
-
-		{% endblock %}
-
-		{% block title %}
-				CooPizza - Nova Bebida
-		{% endblock %}
-
-		{% block content %}
-
-		<h1>Bebida</h1>
-		<br>
-		<div class="form">
-			<form method="post" action="{% url 'bebidaCadastrar' %}">
-				{% csrf_token%}
-				<ul>
-					<li>
-						<label>Nome:</label>
-						<input type="text" name="nome" value="" /> 
-					</li>
-					<li>
-						<label>Preço:</label>
-						<input type="number" name="preco" step="0.01" min ="0" value="" /> 
-					</li>
-					<br>
-						<input type="submit" value="Cadastrar"/>
-				</ul>
+{% extends "base.html" %}
+{% load extra_order %}
+	{% block content %}
+	<div class="row">
+            <div class="col-md-12">
+               <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+               <h3 class="page-title">
+                  Bebida <small>nova</small>
+               </h3>
+               <ul class="page-breadcrumb breadcrumb">
+                  <li>
+                     <i class="icon-home"></i>
+                     <a href="/">Home</a> 
+                     <i class="icon-angle-right"></i>
+                  </li>
+                  <li>
+                     <a href="/cardapio/bebida">Cardapio</a>
+                     <i class="icon-angle-right"></i>
+                  </li>
+                  <li><a href="#">Cadastrar Bebida</a></li>
+               </ul>
+               <!-- END PAGE TITLE & BREADCRUMB-->
+            </div>
+         </div>
+         <div class="tab-content">
+			<div class="portlet box red">
+				<div class="portlet-title">
+					<div class="caption">
+						Cadastrar Bebida
+					</div>
+				</div> 
+				<div class="portlet-body form">
+					<form method="post" action="{% url 'bebidaCadastrar' %}" class="form-horizontal">
+					{% csrf_token%}
+						<div class="form-group">
+							<label class="col-md-3 control-label">
+								Nome
+							</label>
+							<div class="col-md-4">
+								<input type="text" name="nome" value="" class="form-control"/> 
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Preço:</label>
+							<div class="col-md-4">	
+								<input type="number" name="preco" step="0.01" min ="0" value="" class="form-control"/> 
+							</div>
+						</div>		
+						<div class="form-actions fluid">
+                         	<div class="col-md-offset-3 col-md-9">
+                             		<button type="submit" class="btn red">Cadastrar</button>                              
+                        	</div>
+	                    </div>
+					</form>
+				</div>
+			</div>
 		</div>
 		{% endblock %}

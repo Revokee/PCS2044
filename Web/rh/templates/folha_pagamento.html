@@ -1,0 +1,48 @@
+{% extends "index_rh.html" %}
+		
+		{% load staticfiles %}
+
+		{% block stylesheets %}
+			{{ block.super }}
+
+			<link href="{% static "css/rh/rh_list.css" %}" rel="stylesheet">
+		
+		{% endblock %}
+
+		{% block title %}
+				Folha Pagamento - Pizza5
+		{% endblock %}
+
+		{% block content %}
+
+        {% include 'mensagens.html' %}
+
+		<div class="above-table">
+	    
+	    <div class="element title">
+		    <h2>Folha Pagamento</h2>
+		  </div>  
+    
+        </div>
+
+    <!-- tabela de entradas -->
+    <table class="table table-striped table-hover">
+    	<tr>
+    		<th>Nome do Funcionário</th>
+    		<th>Pagamento do Mês</th>
+    	</tr>       
+      {% for funcionario in funcValido %}
+      	<tr>
+        	<td>{{ funcionario.nome }}</td>
+        	<td>
+                {{ funcionario.contrato.cargo.salario }}
+            </td>
+        </tr>	
+      {% endfor %}
+        <tr>
+            <th>Total</th>
+            <th>{{ soma_salarios }} </th>
+        </tr>  
+    </table>
+
+    {% endblock %}

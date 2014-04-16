@@ -42,7 +42,7 @@ class EntregaController:
 			addresses[i] = unidecode(addresses[i])
 		download = True
 		if download:	
-			display = Display(visible=0, size=(800, 600))
+			display = Display(visible=1, size=(1,1))
 			display.start()
 			driver = self._get_webdriver()
 			url = "http://www.routexl.com/?q="
@@ -53,7 +53,7 @@ class EntregaController:
 			print url
 			driver.get(url)
 			try:
-				WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, 'performance')))
+				WebDriverWait(driver, 360).until(EC.presence_of_element_located((By.ID, 'performance')))
 			except Exception:
 				print "failed (timeout)"
 				return None

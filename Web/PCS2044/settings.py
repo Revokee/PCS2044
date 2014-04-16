@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'cardapio',
     'formFeedback',
     'rh',
+    'promocao',
     'address',
     'pedido',
     'entrega',

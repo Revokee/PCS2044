@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load extra_order %}
+	{% block content %}
+	<div class="row">
+	    <div class="col-md-12">
+	       <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+	       <h3 class="page-title">
+	          Promocoes <small>cadastradas</small>
+	       </h3>
+	       <ul class="page-breadcrumb breadcrumb">
+	          <li>
+	             <i class="icon-home"></i>
+	             <a href="/">Home</a> 
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li>
+	             <a href="/promocoes/listar">Promocoes</a>
+	             <i class="icon-angle-right"></i>
+	          </li>
+	          <li><a href="#">Cadastradas</a></li>
+	       </ul>
+	       {%if messages%}
+            {%for message in messages%}
+                <div  class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %}
+         {% endif %}
+	       <!-- END PAGE TITLE & BREADCRUMB-->
+	    </div>
+	 </div>
+     <div class="row">
+        <div class="col-md-12">
+           <!-- BEGIN SAMPLE TABLE PORTLET-->
+           <div class="portlet box purple">
+              <div class="portlet-title">
+                 <div class="caption"><i class="icon-comments"></i>Promocoes</div>
+              </div>
+              <div class="portlet-body">
+                 <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                    <thead>
+                       <tr>
+                          <th>#</th>
+                          <th></th>
+                          <th></th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                    	{% for promocao in latest_promo_list %}
+                    		<tr>
+                            	<td>{{promocao.id}}</td>
+ 								<td>{{ promocao.nome }}</td>
+ 								<td>
+ 									<a href="/promocao/{{ promocao.id }}/" class="btn green btn-xs">
+                                    <i class="icon-long-arrow-down"></i> Visualizar
+                                  </a>
+                              	</td>
+                              </tr>
+						{%empty%}
+	                       <tr>
+	                          <td>Nao</td>
+	                          <td>ha</td>
+	                          <td>dados</td>
+	                          <td><span class="label label-sm label-danger">Blocked</span></td>
+	                       </tr>
+                       {%endfor%}
+                    </tbody>
+                    </table>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+    <a href="{% url 'promoIndex' %}">Voltar</a>
+{%endblock%}

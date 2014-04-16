@@ -4,12 +4,14 @@ from rh.views import *
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
-	url(r'^$', TemplateView.as_view(template_name="../templates/index_rh.html"), name="index_rh"),
+    url(r'^$', TemplateView.as_view(template_name="../templates/index_rh.html"), name="index_rh"),
     url(r'^funcionarios/lista_funcionarios/$', FuncionarioList.as_view(), name='funcionarios_list') ,
     url(r'^funcionarios/cria_funcionario/$', FuncionarioCreate.as_view(), name='funcionario_create'),
     url(r'^funcionarios/edita_funcionario/(?P<pk>\d+)$', FuncionarioUpdate.as_view(), name='funcionario_update'),
     url(r'^funcionarios/remove_funcionario/(?P<pk>\d+)$', FuncionarioDelete.as_view(), name='funcionario_delete'),
     url(r'^funcionarios/detalha_funcionario/(?P<pk>\d+)$', FuncionarioDetail.as_view(), name='funcionario_detail'),
+
+    url(r'^folhaPagamento/$', FolhaPagamento.as_view(), name='folha_pagamento') ,
 
     url(r'^cargos/lista_cargos/$', CargoList.as_view(), name='cargos_list') ,
     url(r'^cargos/cria_cargo/$', CargoCreate.as_view(), name='cargo_create'),
@@ -22,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^contratos/edita_contrato/(?P<pk>\d+)$', ContratoUpdate.as_view(), name='contrato_update'),
     url(r'^contratos/remove_contrato/(?P<pk>\d+)$', ContratoDelete.as_view(), name='contrato_delete'),
     url(r'^contratos/detalha_contrato/(?P<pk>\d+)$', ContratoDetail.as_view(), name='contrato_detail'),
+    url(r'^contratos/demissao_contrato/(?P<pk>\d+)$', ContratoUpdateParaDemissao.as_view(), name='contrato_demissao'),
 
     url(r'^ferias/lista_ferias/$', FeriasList.as_view(), name='ferias_list') ,
     url(r'^ferias/cria_ferias/$', FeriasCreate.as_view(), name='ferias_create'),

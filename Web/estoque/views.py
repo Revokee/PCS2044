@@ -2,6 +2,7 @@ from django.shortcuts import render
 from estoque.models import Ingrediente, Inventario, ListaCompras, MedidaIngrediente
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 # CRUD Ingrediente
 class IngredienteList(ListView):
@@ -10,22 +11,31 @@ class IngredienteList(ListView):
     context_object_name = 'lista_ingredientes'
     success_url = reverse_lazy('ingrediente_list')
 
-class IngredienteCreate(CreateView):
+class IngredienteCreate(SuccessMessageMixin, CreateView):
 	model = Ingrediente
 	template_name = 'ingrediente/ingrediente_form.html'
 	fields = ['nome','marca','descricao']
 	success_url = reverse_lazy('ingrediente_list')
+	success_message = "Ingrediente criado com sucesso."
 
-class IngredienteUpdate(UpdateView):
+class IngredienteUpdate(SuccessMessageMixin, UpdateView):
 	model = Ingrediente
 	template_name = 'ingrediente/ingrediente_form.html'
 	fields = ['nome', 'marca', 'descricao']
 	success_url = reverse_lazy('ingrediente_list')
+	success_message = "Ingrediente editado com sucesso."
 
-class IngredienteDelete(DeleteView):
+class IngredienteDelete(SuccessMessageMixin, DeleteView):
     model = Ingrediente
     template_name = 'ingrediente/ingrediente_delete.html'
     success_url = reverse_lazy('ingrediente_list')
+
+    def get(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		context = self.get_context_data(object=self.object)
+
+		messages.success(request, 'Ingrediente removido com sucesso.')
+		return self.render_to_response(context)
 
 # CRUD MedidaIngrediente
 class MedidaList(ListView):
@@ -34,22 +44,31 @@ class MedidaList(ListView):
     context_object_name = 'lista_medida'
     success_url = reverse_lazy('medida_list')
 
-class MedidaCreate(CreateView):
+class MedidaCreate(SuccessMessageMixin, CreateView):
 	model = MedidaIngrediente
 	template_name = 'medida/medida_form.html'
 	fields = ['ingrediente','medida']
 	success_url = reverse_lazy('medida_list')
+	success_message = "Medida criada com sucesso."
 
-class MedidaUpdate(UpdateView):
+class MedidaUpdate(SuccessMessageMixin, UpdateView):
 	model = MedidaIngrediente
 	template_name = 'medida/medida_form.html'
 	fields = ['ingrediente', 'medida']
 	success_url = reverse_lazy('medida_list')
+	success_message = "Medida editada com sucesso."
 
-class MedidaDelete(DeleteView):
+class MedidaDelete(SuccessMessageMixin, DeleteView):
     model = MedidaIngrediente
     template_name = 'medida/medida_delete.html'
     success_url = reverse_lazy('medida_list')
+
+    def get(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		context = self.get_context_data(object=self.object)
+
+		messages.success(request, 'Medida removida com sucesso.')
+		return self.render_to_response(context)
 
 
 # CRUD Inventario
@@ -59,22 +78,31 @@ class InventarioList(ListView):
     context_object_name = 'lista_inventario'
     success_url = reverse_lazy('inventario_list')
 
-class InventarioCreate(CreateView):
+class InventarioCreate(SuccessMessageMixin, CreateView):
 	model = Inventario
 	template_name = 'inventario/inventario_form.html'
 	fields = ['ingrediente','quantidade']
 	success_url = reverse_lazy('inventario_list')
+	success_message = "Inventario criado com sucesso."
 
-class InventarioUpdate(UpdateView):
+class InventarioUpdate(SuccessMessageMixin, UpdateView):
 	model = Inventario
 	template_name = 'inventario/inventario_form.html'
 	fields = ['ingrediente','quantidade']
 	success_url = reverse_lazy('inventario_list')
+	success_message = "Inventario editado com sucesso."
 
-class InventarioDelete(DeleteView):
+class InventarioDelete(SuccessMessageMixin, DeleteView):
     model = Inventario
     template_name = 'inventario/inventario_delete.html'
     success_url = reverse_lazy('inventario_list')
+
+    def get(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		context = self.get_context_data(object=self.object)
+
+		messages.success(request, 'Inventario removido com sucesso.')
+		return self.render_to_response(context)
 
 # CRUD ListaCompras
 class ListaComprasList(ListView):
@@ -83,8 +111,9 @@ class ListaComprasList(ListView):
     context_object_name = 'lista_listaCompras'
     success_url = reverse_lazy('listaCompras_list')
 
-class ListaComprasCreate(CreateView):
+class ListaComprasCreate(SuccessMessageMixin, CreateView):
 	model = ListaCompras
 	template_name = 'listaCompras/listaCompras_form.html'
 	fields = ['ingrediente','quantidade']
 	success_url = reverse_lazy('listaCompras_list')
+	success_message = "Lista de Compras criada com sucesso."

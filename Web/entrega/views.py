@@ -28,7 +28,9 @@ def planejamento(request):
 		for entrega in entregas:
 			addresses.append(entrega["rua"] + ", " + str(entrega["numero"]) + ", " + entrega["cidade"])
 		#Entrega.EntregaController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)["addresses"]
+		print "Passou aqui - 1"
 		rotas = Entrega.EntregaController("Rua Apeninos, 990, Sao Paulo").bestRoute(addresses)
+		print "Passou aqui - 2"
 		planejamento = []
 		for address in rotas["addresses"]:
 			results = Geocoder.geocode(address)

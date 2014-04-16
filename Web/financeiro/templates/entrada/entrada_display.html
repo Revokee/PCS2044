@@ -68,14 +68,22 @@
 
 	<br>
 
-	{% if is_detail %}
-		<a href="{% url 'entrada_list' %}" type="button" class="btn btn-lg btn-success">Voltar</a>
-	{% else %}
-		<form method="POST">
-			{% csrf_token %}
-			<input type="submit" value="Remover" class="btn btn-lg btn-danger">
-		</form>
-	{% endif %}
+	<table>
+		<td>
+			<tr>
+				{% if not is_detail %}
+					<form method="POST">
+						{% csrf_token %}
+						<input type="submit" value="Remover" class="btn btn-lg btn-danger">
+					</form>
+					&nbsp;
+				{% endif %}
+			</tr>
+			<tr>
+				<a href="{% url 'saida_list' %}" type="button" class="btn btn-lg btn-default">Voltar</a>
+			</tr>
+		</td>
+	</table>
 
 
 {% endblock %}

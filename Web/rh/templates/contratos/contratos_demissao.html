@@ -1,0 +1,116 @@
+{% extends "index_rh.html" %}
+
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+		{{ block.super }}
+		<link rel="stylesheet" type="text/css" href="{% static "css/rh/rh_demissao.css" %}">
+		
+{% endblock stylesheets %}
+
+{% block title %}
+		Demitir Funcionário - Pizza5
+{% endblock title %}
+
+
+{% block content %}
+	
+	<h1>Novo Contrato</h1>
+	<hr>
+
+<div class="object-box">
+		<div class="field-line">
+			<div class="field single-child">	
+				<p class="field-label">Id</p>
+				{{object.id}}
+			</div>
+				
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Nome Funcionário</p>
+				{{object.funcionario}}
+			</div>
+			<div class="field">
+				<p class="field-label">Cargo</p>
+				{{object.cargo}}
+			</div>
+		</div>
+		<div class="field-line">
+			<div class="field">	
+				<p class="field-label">Data Contratação</p>
+				{{object.data_contratacao}}
+			</div>	
+			<div class="field">
+				<p class="field-label">Status</p>
+				{{object.status_contrato}}
+			</div>	
+	</div>	
+
+	<form method="POST">
+		{% csrf_token %}
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.observacoes.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.status_contrato.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.observacoes.label}}</p>
+					{{form.observacoes|add_class:"form-textarea"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.status_contrato.label}}</p>
+					{{form.status_contrato|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-line error-line">
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.data_demissao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="form-element">
+					<ul class="form-errors">
+						{% for error in form.motivo_demissao.errors %}
+							<li>{{error}}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="form-line">
+				<div class="form-element">
+					<p class="form-label">{{form.data_demissao.label}}</p>
+					{{form.data_demissao|add_class:"form-input"}}
+				</div>
+				<div class="form-element">
+					<p class="form-label">{{form.motivo_demissao.label}}</p>
+					{{form.motivo_demissao|add_class:"form-input"}}
+				</div>
+			</div>
+
+			<div class="form-btn-holder">
+				<input class="btn btn-danger form-btn" type="submit" value="Salvar Dados da Demissão">
+			</div>	
+
+	</form>
+
+{% endblock content %}
