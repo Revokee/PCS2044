@@ -29,7 +29,7 @@ public class LoginActivity extends Activity {
 	 * TODO: remove after connecting to a real authentication system.
 	 */
 	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+			"lucas@coopizza.com:aaaa", "tiago@coopizza.com:bbbb" };
 
 	/**
 	 * The default email to populate the email field with.
@@ -220,7 +220,7 @@ public class LoginActivity extends Activity {
 				}
 			}
 //aqui
-			return true;
+			return false;
 		}
 
 		@Override

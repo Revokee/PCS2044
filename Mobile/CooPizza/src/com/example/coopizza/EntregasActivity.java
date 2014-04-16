@@ -75,10 +75,7 @@ public class EntregasActivity extends Activity {
 	          int position, long id) {
 	        final String item = (String) parent.getItemAtPosition(position);
 	        
-	        Toast.makeText(getApplicationContext(),
-	        	      "Click ListItem Number " + position + "  Item " + item, Toast.LENGTH_LONG)
-	        	      .show();
-	        sharedEntrega((Entrega)listaEntregas.get((int)position));
+	        //sharedEntrega((Entrega)listaEntregas.get((int)position));
 	        startMainActivity((Entrega)listaEntregas.get((int)position));
 	        
 	      }
@@ -109,8 +106,8 @@ public class EntregasActivity extends Activity {
 	private void buscarEntregas(){
 		
 		Log.e("Entregas", "buscar Entregas");
-		Pedido pedido1 = new Pedido("Pedido 2", "Maria", "Rua Valson Lopes 70 ap 200", "Pizza Mussarela + Coca Cola");
-		Pedido pedido2 = new Pedido("Pedido 2", "Joao", "Rua Consolacao 100 ap 11", "Pizza 4 Queijos + Coca Cola");
+		Pedido pedido1 = new Pedido("Pedido 2", "Maria", "Rua Valson Lopes 70 ap 200", "Pizza Mussarela + Coca Cola", "R$35");
+		Pedido pedido2 = new Pedido("Pedido 2", "Joao", "Rua Consolacao 100 ap 11", "Pizza 4 Queijos + Coca Cola", "R$35");
 		Entrega entrega1 = new Entrega("Entrega 1");
 		Entrega entrega2 = new Entrega("Entrega 2");
 		
@@ -127,7 +124,7 @@ public class EntregasActivity extends Activity {
 	
 	private void sharedEntrega(Entrega entrega)
 	{	
-		SharedPreferences  mPrefs = getSharedPreferences("EntregaObjeto", 0);
+		SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
 		Editor prefsEditor = mPrefs.edit();
 	    Gson gson = new Gson();
 	    String json = gson.toJson(entrega);

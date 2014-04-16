@@ -12,12 +12,13 @@ public class Pedido {
 	private double longitude;
 	private int ordemEntrega;
 	
-	public Pedido(String pedido, String cliente, String endereco, String produtos)
+	public Pedido(String pedido, String cliente, String endereco, String produtos, String valor)
 	{
 		this.nomePedido = pedido;
 		this.nomeCliente = cliente;
 		this.endereco = endereco;
 		this.produtos = produtos;
+		this.valor = valor;
 	}
 	
 	public String getNomeCliente() {

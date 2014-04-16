@@ -11,25 +11,25 @@
     tools:context=".MainActivity" >
     
     <Button
-        android:id="@+id/buttonList"
+        android:id="@+id/buttonFinalizarEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:background="@android:drawable/btn_default"
-        android:text="@string/show_list" />
+        android:text="Finalizar Entrega" />
 
     <Button
-        android:id="@+id/buttonRoute"
+        android:id="@+id/buttonList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonList"
+        android:layout_above="@+id/buttonFinalizarEntrega"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="23dp"
         android:background="@android:drawable/btn_default"
-        android:text="@string/show_route" />
+        android:text="@string/show_list" />
 
     <TextView
         android:id="@+id/textViewEntrega"

@@ -36,22 +36,23 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		// Get Entrega
-		//entrega = retreiveEntrega();
 		
+		//entrega = retreiveEntrega();		
 		//Log.e("Main", "buscar Entregas" + " - " + entrega.getNome());
+		
 		// Initialize UI elements
 		final Button listBtn = (Button) findViewById(R.id.buttonList);
-		final Button routeBtn = (Button) findViewById(R.id.buttonRoute);
+		final Button routeBtn = (Button) findViewById(R.id.buttonFinalizarEntrega);
 		final TextView tituloEntrega = (TextView) findViewById(R.id.textViewEntrega);
 		
-		String teste = "Teste";
+		String teste = "Entrega 1";
 		tituloEntrega.setText(teste);
 		
 		// Link UI elements to actions in code	
 		listBtn.setOnClickListener(new Button.OnClickListener() {			
 			@Override
 			public void onClick(View v) {				
-				//startListActivity();				
+				startListActivity();				
 			}		
 			
 		});
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
 		routeBtn.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//startRouteActivity();
+				startRouteActivity();
 			}
 		});
 		
@@ -96,12 +97,12 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	//Start the RouteActivity
+	//Start the EntregasActivity
 	
 	private void startRouteActivity() {
 		try {
-			Intent routeIntent = new Intent(this, RouteActivity.class);
-			startActivity(routeIntent);
+			Intent entregasIntent = new Intent(this, EntregasActivity.class);
+			startActivity(entregasIntent);
 			
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -112,7 +113,7 @@ public class MainActivity extends Activity {
 	
 	private Entrega retreiveEntrega()
 	{
-		SharedPreferences  mPrefs = getSharedPreferences("EntregaObjeto", 0);
+		SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
 		Gson gson = new Gson();
 		String json = mPrefs.getString("Entrega", "");
 		Entrega entrega = gson.fromJson(json, Entrega.class);

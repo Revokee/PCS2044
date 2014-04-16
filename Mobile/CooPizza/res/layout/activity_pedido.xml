@@ -9,23 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PedidoActivity" >
 
-    <Button
-        android:id="@+id/buttonRoute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonEntregada"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="23dp"
-        android:background="@android:drawable/btn_default"
-        android:text="Entrega Realizada" />
-
     <TextView
         android:id="@+id/textViewEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonRoute"
+        android:layout_alignLeft="@+id/buttonEntregaRealizada"
         android:layout_alignParentTop="true"
         android:layout_marginTop="19dp"
         android:text="Large Text"
@@ -86,23 +74,45 @@
         android:layout_below="@+id/TextView03"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-    <TextView 
-        android:id="@+id/TextView04" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignLeft="@+id/TextViewProdutos" 
-        android:layout_below="@+id/TextViewProdutos" 
-        android:layout_marginTop="27dp" 
-        android:text="Valor:" 
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-    
-    <TextView android:id="@+id/TextViewValor" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignLeft="@+id/TextViewProdutos" 
-        android:layout_below="@+id/TextView04" 
-        android:text="Small Text" 
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/TextViewValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextViewProdutos"
+        android:layout_below="@+id/TextView04"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextViewValor"
+        android:layout_below="@+id/TextViewProdutos"
+        android:layout_marginTop="19dp"
+        android:text="Valor:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonEntregaRealizada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextViewValor"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/TextViewValor"
+        android:layout_marginTop="30dp"
+        android:background="@android:drawable/btn_default"
+        android:text="Entrega Realizada" />
+
+    <Button
+        android:id="@+id/buttonRouteEntrega"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextViewValor"
+        android:layout_alignRight="@+id/buttonEntregaRealizada"
+        android:layout_below="@+id/buttonEntregaRealizada"
+        android:background="@android:drawable/btn_default"
+        android:text="Rota de Entrega" />
 
 </RelativeLayout>

@@ -126,5 +126,7 @@ public class LocationService extends Service {
         );
 		Log.e(TAG, message);
 		//TODO Implementar função de mandar as cordenadas para o banco de dados
+		
+		//NetworkTask networktask = new NetworkTask().execute("teste");
 	}
 }

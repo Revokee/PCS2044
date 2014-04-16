@@ -12,5 +12,7 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_entregas">Entregas</string>
     <string name="title_activity_pedido">Pedido</string>
+    <string name="iniciar_entrega">Iniciar Entrega</string>
+    <string name="proximo">Próximo</string>
 
 </resources>
