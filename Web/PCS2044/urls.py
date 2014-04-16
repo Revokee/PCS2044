@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^pagar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.pagar_pedido'),
     url(r'^fechar_pedido/(?P<pedido_id>[0-9]+)/$', 'pedido.views.fechar_pedido'),
     url(r'^planejamento/$','pedido.views.planejamento'),
+    url(r'^clustering/$','pedido.views.clustering'),
     #URLS paginas estaticas
     url(r'^', include('staticPages.urls', namespace="staticPages")),
     url(r'^financeiro/', include('financeiro.urls')),
@@ -30,7 +31,8 @@ urlpatterns = patterns('',
     url(r'^estoque/', include('estoque.urls')),
     
     #URLS login
-    url(r'^login', 'login.views.login'),
+    #url(r'^login/(?P<data=>$)', 'login.views.login'),
+    url(r'^login$', 'login.views.login'),
     url(r'^logout', 'login.views.logout'),
     # Examples:
     # url(r'^$', 'PCS2044.views.home', name='home'),
