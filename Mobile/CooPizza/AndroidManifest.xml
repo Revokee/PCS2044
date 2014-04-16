@@ -5,12 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -29,18 +31,21 @@
             android:name="com.example.coopizza.RouteActivity"
             android:label="@string/title_activity_route" >
         </activity>
+        <!--
         <activity
             android:name="com.example.coopizza.GetLocationActivity"
             android:label="@string/title_activity_get_location" >
-        </activity>
+        </activity>
+        -->
         <!--
            <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+           android:value="@integer/google_play_services_version" />
         -->
         <activity
             android:name="com.example.coopizza.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" ><intent-filter>
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -53,6 +58,29 @@
             android:exported="false"
             android:process=":location_service" >
         </service>
+        <!--
+        <activity
+            android:name="com.example.coopizza.ItemListActivity"
+            android:label="@string/title_item_list" >
+        </activity>
+        <activity
+            android:name="com.example.coopizza.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName="com.example.coopizza.ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.coopizza.ItemListActivity" />
+        </activity>
+        -->
+        <activity
+            android:name="com.example.coopizza.EntregasActivity"
+            android:label="@string/title_activity_entregas" >
+        </activity>
+        
+        <activity
+            android:name="com.example.coopizza.PedidoActivity"
+            android:label="@string/title_activity_pedido" >
+        </activity>
     </application>
 
 </manifest>

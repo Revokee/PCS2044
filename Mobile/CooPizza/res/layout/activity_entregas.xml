@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical"
+    tools:context="com.example.coopizza.EntregasActivity"
+    android:background="@drawable/background_claro" >
+
+    	<TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Qual entrega a ser realizada?"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:gravity="center_vertical|center_horizontal"/>
+    
+        <ListView
+        android:id="@+id/listEntregas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    	</ListView>
+    	
+
+        
+</LinearLayout>

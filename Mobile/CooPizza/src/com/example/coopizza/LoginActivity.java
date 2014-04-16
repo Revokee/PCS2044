@@ -55,6 +55,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Login");
 
 		setContentView(R.layout.activity_login);
 
@@ -218,9 +219,8 @@ public class LoginActivity extends Activity {
 					return pieces[1].equals(mPassword);
 				}
 			}
-
-			// TODO: register the new account here.
-			return false;
+//aqui
+			return true;
 		}
 
 		@Override
@@ -230,8 +230,8 @@ public class LoginActivity extends Activity {
 
 			if (success) {
 				try {
-					Intent listIntent = new Intent(LoginActivity.this, MainActivity.class);
-					startActivity(listIntent);
+					Intent entregasIntent = new Intent(LoginActivity.this, EntregasActivity.class);
+					startActivity(entregasIntent);
 					
 				} catch (Exception e) {
 					Log.e(TAG, e.toString());

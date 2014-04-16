@@ -1,9 +1,9 @@
 1- Arrumar processo de negocio
 2- Definir pontos de integração com a aplicacão principal 
-	. Autenticação no sistema
-	. Pegar lista de pedidos de entrega e escolher qual pedido a ser entregado
+	. Autenticação no sistema OK
+	. Pegar lista de pedidos de entrega e escolher qual pedido a ser entregado +-
 	. Pegar dados da entrega, localizações de entrega e lista de pedidos
-	. Transmitir informação de localização
+	. Transmitir informação de localização 
 	. Transmitir aviso de entrega realizada
 
 3- Definir forma de integração, definir serviço.
