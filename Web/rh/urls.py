@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from rh.views import FuncionarioList, FuncionarioCreate, FuncionarioUpdate, CargoList, ContratoList, FeriasList, LicencasList, Historico_PagamentosList
 from rh.views import *
 from django.views.generic import TemplateView
 
