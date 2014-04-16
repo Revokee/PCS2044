@@ -38,3 +38,8 @@ def planejamento(request):
 	else:
 		messages.warning(request, 'Nao há entregas para serem feitas')
 		return render_to_response('planejamento.html', locals(), context_instance=RequestContext(request))
+
+def clustering(request):
+	pedidos = Pedido.objects.values()
+	clusters = Entrega.EntregaController("").clustering(pedidos)
+	return render_to_response('clustering.html', locals(), context_instance=RequestContext(request))

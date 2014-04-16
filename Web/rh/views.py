@@ -116,6 +116,14 @@ class ContratoCreate(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('contratos_list')
     success_message = 'Contrato criado com sucesso.'
 
+    def form_valid(self, form):
+        print form.instance
+        if form.instance["cargo"] == 'Entregador':
+            e = Entregador(funcionario_ptr_id=self.id)
+            e.save()
+        return super(ContratoCreate, self).form_valid(form)
+            #return render_to_response('contratos/contrato_list.html', locals(), context_instance=RequestContext(request))
+
 class ContratoUpdate(SuccessMessageMixin, UpdateView):
     model = Contrato
     template_name = 'contratos/contratos_form.html'

@@ -91,26 +91,76 @@ class EntregaController:
 		arc = math.acos(cos)		
 		return arc*6373
 
-	def clustering(self, lats, longs):
+	def clustering(self, pedidos):
+		lats = [pedido["latitude"] for pedido in pedidos]
+		longs = [pedido["longitude"] for pedido in pedidos]
+		#lasf = pedidos[0]["latitude"]
+		#print lasf
 		raio = 3
 		qtEnd = len(lats)
+		#print qtEnd
 		i = 0
+		clusters = []
 		distancias = []
 		distanciasPorEnd = []
-		print qtEnd
-		while i < qtEnd:
+		#print qtEnd
+		#Calcula distancias uma a uma entre cada pedido
+		
+
+		for pedido in pedidos:
 			j = 0
 			distancias = []
-			while j < qtEnd-1:
-				if i != j:
-					distancias.insert(j,self.calculaDistancia(lats[i],lats[j+1],longs[i],longs[j+1]))
-				else:
-					distancias.insert(j,0)
+			while j < len(pedidos):
+				distancias.insert(j,self.calculaDistancia(lats[i],lats[j],longs[i],longs[j]))
 				j=j+1
 			distanciasPorEnd.append(distancias)
 			i=i+1
-		return distanciasPorEnd
-    	# Multiplica-se o arco pelo raio da terra em km para obter a distancia nesta unidade de medida
-	
+		
+		#for distancias in distanciasPorEnd:
+			#print distancias
 
-	
+		pedidosRestantes = []
+		todosPedidos =[]
+		
+		for pedido in pedidos:
+			todosPedidos.append(pedido)
+
+		for pedido in pedidos:
+			pedidosRestantes.append(pedido)
+
+		#print 'pedidoRestante'
+		#for pedidoRestante in pedidosRestantes:
+			#print pedidoRestante
+		#print 'pedidoRestante'
+
+		allClusters = []
+		cluster = []
+		cluster.append(todosPedidos[0])
+		pedidosRestantes.remove(todosPedidos[0])
+		#for cl in cluster:
+		#	print cl
+		for distanciaPorEnd in distanciasPorEnd:
+			#dentro de uma lista da (lista de listas)
+			j = 0
+			for distancia in distanciaPorEnd:
+				#print 'raio '+str(raio) + ' distancia '+str(distancia)+' todosPedidos['+str(j)+']'+ str(todosPedidos[j])
+				#print ''
+				if(distancia < raio and distancia != 0 and (todosPedidos[j] in pedidosRestantes)):
+					#print 'entrou'
+					cluster.append(todosPedidos[j])
+					pedidosRestantes.remove(todosPedidos[j])
+				j += 1
+			if cluster:
+				allClusters.append(cluster)
+				cluster = []
+		i = 0		
+		#for cls in allClusters:
+			#print ''
+			#msg = 'Cluster ' + str(i)
+			#print msg
+			#print cls
+
+		return allClusters
+
+
+
