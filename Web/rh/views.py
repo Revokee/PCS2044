@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
+from django.template import RequestContext
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from rh.models import Funcionario
+from entrega.models import Entregador
 from rh.models import Cargo, Contrato, Ferias, Licencas, Historico_Pagamentos
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
@@ -255,6 +258,11 @@ class FolhaPagamento(ListView):
     template_name = 'folha_pagamento.html'
     context_object_name = 'lista_funcionarios'
     success_url = reverse_lazy('folha_pagamento')
+
+#Funcao para localizar um entregador no mapa
+def funcionario_detail(request, funcionario_id):
+    funcionario = Entregador.objects.get(funcionario_ptr_id=funcionario_id)
+    return render_to_response('mapas.html', locals(),context_instance=RequestContext(request))
 
 def get_context_data(self, **kwargs):
     # Call the base implementation first to get a context
