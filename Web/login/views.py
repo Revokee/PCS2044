@@ -21,7 +21,7 @@ def login(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			if user.is_active:
-				nextUrl = request.GET.get('next', '/index')
+				nextUrl = request.GET.get('next', 'index.html')
 				django_login(request, user)
 				messages.success(request,'Bem vindo ao CooPizza!')
 				return render_to_response(nextUrl, locals(), context_instance=RequestContext(request))
